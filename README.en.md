@@ -24,6 +24,14 @@
   <a href="reports/project-audit.md">Audit report</a>
 </p>
 
+## Why This Project Exists
+
+When running a content account, the exhausting part is often not one single creative task. It is the small daily transfer work: opening different platforms for topics, saving web pages, RSS items, PDFs, images, and spreadsheets, then syncing metrics, materials, and follow-up tasks into Feishu/Lark.
+
+Each step is simple on its own, but together they fragment attention. Materials end up scattered across downloads, chats, and browser bookmarks. Metric review turns into copy-paste. A topic can move from search to fetch to cleanup to archive before anyone has really judged whether it is worth doing.
+
+I built this project to put those repeated transfers into a local, previewable workflow: dry-run first, then decide whether to fetch, convert, analyze, and write to Feishu/Lark. People keep the judgment, taste, and creative choices; scripts handle the repeated movement that should not consume attention every day.
+
 A local automation toolkit that connects content ingestion, search collection, material analysis, analytics dashboards, and Feishu/Lark archiving. It uses Python scripts to orchestrate RSS/API inputs, optional search backends, file-to-Markdown conversion, LLM extraction, and `lark-cli` writes to Bitable, Docs, and bot notifications.
 
 Please read [DISCLAIMER.md](DISCLAIMER.md) before using this project. This project is for learning and research only. Any crawling, web fetching, or platform data collection must comply with applicable law, platform Terms of Service, and robots.txt.
