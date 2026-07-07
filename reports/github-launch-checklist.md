@@ -1,7 +1,9 @@
-# GitHub Launch Checklist
+# GitHub Launch Notes
 
-## Ready
+## Published
 
+- Repository: `https://github.com/mianbaofang/media-automation-lark`
+- Release: `https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0`
 - Bilingual README: `README.md`, `README.en.md`
 - Bilingual crawler/web-fetching disclaimer: `DISCLAIMER.md`
 - Release draft: `RELEASE.md`
@@ -14,7 +16,7 @@
 - Project audit report: `reports/project-audit.md`
 - Lightweight README demo GIF: `assets/media-automation-lark-demo.gif`
 - HyperFrames promo source: `hyperframes/media-automation-lark-timeline/`
-- Music-backed MP4 export: `C:\Users\Ethan\Desktop\media-automation-lark-timeline-music.mp4`
+- Music-backed MP4: attached to the `v0.1.0` GitHub Release
 - Tests: `python -m pytest tests`
 
 ## Recommended GitHub Repository Settings
@@ -24,12 +26,7 @@
 - First release title: `v0.1.0 - Local Media Automation for Feishu/Lark`
 - Website/social preview: use `assets/media-automation-lark-demo.gif` or `media-automation-skill-workflow.png`
 
-## Needs Your Decision
-
-- Decide whether to publish the desktop MP4 as a GitHub release asset. The README uses the lighter GIF preview.
-- Initialize Git and connect the remote when you are ready to publish.
-
-## Final Local Commands
+## Published Commands
 
 ```bash
 python -m pytest tests
@@ -41,4 +38,5 @@ git remote add origin <your-repo-url>
 git push -u origin main
 git tag v0.1.0
 git push origin v0.1.0
+gh release create v0.1.0 <mp4-file> --title "v0.1.0 - Local Media Automation for Feishu/Lark" --notes-file RELEASE.md
 ```

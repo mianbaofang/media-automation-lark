@@ -27,7 +27,7 @@ Media Automation Lark ships the first public-ready version of the Feishu/Lark me
 - `python scripts/collector.py --offline-demo --category-map "AI:大模型,LLM,Agent;产品:增长" --output-dir output_demo --no-archive --no-notify --no-polish` generated a local Markdown demo.
 - `python scripts/env-check.py --gen-config` now targets the project root.
 - `npx hyperframes lint`, `npx hyperframes validate`, and `npx hyperframes inspect` passed for `hyperframes/media-automation-lark-timeline`.
-- `npx hyperframes render --quality high` exported `media-automation-lark-timeline-music.mp4` to the Desktop; `ffprobe` reported 36.032 seconds.
+- `npx hyperframes render --quality high` produced the music-backed MP4; it is attached to the `v0.1.0` GitHub Release. `ffprobe` reported 36.032 seconds.
 - `ffmpeg` generated `assets/media-automation-lark-demo.gif` for the README preview.
 
 ## Known Risks

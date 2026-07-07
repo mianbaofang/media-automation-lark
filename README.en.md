@@ -117,8 +117,10 @@ This project builds on the following open-source projects and tool ecosystems:
 
 ## Status
 
-Prepared as `v0.1.0`. Verification command: `python -m pytest tests`.
+Current public version: [`v0.1.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0).
 
-The music-backed HyperFrames MP4 has been exported to the Desktop as `media-automation-lark-timeline-music.mp4`.
+- Verification: `python -m pytest tests`, 11 tests passed.
+- Animation: the README uses a lightweight GIF preview; the music-backed MP4 is attached to the `v0.1.0` GitHub Release.
+- Source: the HyperFrames timeline source lives in `hyperframes/media-automation-lark-timeline/`.
 
 License: MIT, see [LICENSE](LICENSE).

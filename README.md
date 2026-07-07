@@ -142,8 +142,10 @@ reports/                 审查记录和发布前检查
 
 ## 状态
 
-当前版本按 `v0.1.0` 准备公开发布。测试命令：`python -m pytest tests`。
+当前公开版本：[`v0.1.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0)。
 
-配乐版 HyperFrames MP4 已导出到桌面：`media-automation-lark-timeline-music.mp4`。
+- 验证：`python -m pytest tests`，11 个测试通过。
+- 动画：README 使用轻量 GIF 预览；配乐版 MP4 已作为 `v0.1.0` Release 附件发布。
+- 源码：HyperFrames 时间流短片保留在 `hyperframes/media-automation-lark-timeline/`。
 
 开源协议：MIT，详见 [LICENSE](LICENSE)。
