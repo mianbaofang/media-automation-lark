@@ -13,6 +13,8 @@
   ·
   <a href="DISCLAIMER.md">Disclaimer</a>
   ·
+  <a href="ACKNOWLEDGEMENTS.md">Acknowledgements</a>
+  ·
   <a href="RELEASE.md">Release notes</a>
   ·
   <a href="CHANGELOG.md">Changelog</a>
@@ -127,10 +129,11 @@ This project builds on the following open-source projects and tool ecosystems:
 - Changelog: `CHANGELOG.md`
 - Contributing guide: `CONTRIBUTING.md`
 - Security policy: `SECURITY.md`
+- Acknowledgements: `ACKNOWLEDGEMENTS.md`
 - License: `LICENSE`
 - Issue / PR templates: `.github/`
 - Launch checklist: `reports/github-launch-checklist.md`
-- Acknowledgements: see the README section above
+- Acknowledgements: `ACKNOWLEDGEMENTS.md`
 - HyperFrames timeline video source: `hyperframes/media-automation-lark-timeline/`
 - MiniMax CLI background music: `hyperframes/media-automation-lark-timeline/assets/audio/minimax-bgm.mp3`
 - README demo GIF: `assets/media-automation-lark-demo.gif`

@@ -13,6 +13,8 @@
   ·
   <a href="DISCLAIMER.md">免责声明</a>
   ·
+  <a href="ACKNOWLEDGEMENTS.md">致谢</a>
+  ·
   <a href="RELEASE.md">发布说明</a>
   ·
   <a href="CHANGELOG.md">更新日志</a>
@@ -152,10 +154,11 @@ reports/                 审查记录和发布前检查
 - 变更日志：`CHANGELOG.md`
 - 贡献指南：`CONTRIBUTING.md`
 - 安全说明：`SECURITY.md`
+- 致谢：`ACKNOWLEDGEMENTS.md`
 - 开源协议：`LICENSE`
 - Issue / PR 模板：`.github/`
 - 发布检查清单：`reports/github-launch-checklist.md`
-- 致谢清单：见 README「致谢」
+- 致谢清单：`ACKNOWLEDGEMENTS.md`
 - HyperFrames 时间流短片源码：`hyperframes/media-automation-lark-timeline/`
 - MiniMax CLI 配乐：`hyperframes/media-automation-lark-timeline/assets/audio/minimax-bgm.mp3`
 - README 动图预览：`assets/media-automation-lark-demo.gif`
