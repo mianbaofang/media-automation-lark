@@ -1,0 +1,52 @@
+{
+  "feishu": {
+    "app_token": "basetoken_from_url",
+    "table_id": "tbl_content_archive",
+    "archive_table_id": "tbl_content_archive",
+    "metrics_table_id": "tbl_metrics",
+    "materials_table_id": "tbl_materials",
+    "chat_id": "oc_xxxx",
+    "lark_cli_path": "lark-cli",
+    "data_flag": "--data"
+  },
+  "llm": {
+    "env_key": "LARK_LLM_API_KEY",
+    "api_key": "@env:LARK_LLM_API_KEY",
+    "api_base": "https://api.openai.com/v1",
+    "model": "gpt-4o-mini",
+    "vision_model": "",
+    "timeout": 60
+  },
+  "platforms": {
+    "weibo": {
+      "api_base": "https://api.weibo.com/2",
+      "api_key": "@env:WEIBO_API_KEY",
+      "uid": ""
+    },
+    "bilibili": {
+      "api_base": "https://api.bilibili.com",
+      "api_key": "@env:BILI_API_KEY",
+      "mid": ""
+    }
+  },
+  "search": {
+    "queries": [
+      "LLM 应用落地",
+      "Agent 工作流"
+    ],
+    "category_map": "AI:大模型,LLM,Agent;产品:增长,PM,运营;技术:Python,架构,RAG",
+    "default_category": "综合",
+    "backends": "",
+    "rss_urls": []
+  },
+  "text": {
+    "polish": true,
+    "polish_body": false
+  },
+  "paths": {
+    "output_dir": "./output"
+  },
+  "notify": {
+    "enabled": true
+  }
+}

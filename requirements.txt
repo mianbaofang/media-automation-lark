@@ -1,0 +1,12 @@
+# 自媒体自动化工作流（飞书 CLI 版）— Python 依赖
+# 安装：pip install -r requirements.txt
+# 场景 C 文件入库需要 markitdown[all]（含 pdf/docx/pptx/xlsx/epub 等转换器）
+
+requests
+feedparser
+beautifulsoup4
+pandas
+openpyxl
+python-docx
+PyPDF2
+markitdown[all]

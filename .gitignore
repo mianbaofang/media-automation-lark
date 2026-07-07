@@ -1,0 +1,27 @@
+# Local secrets and user config
+.env
+.env.*
+config.json
+
+# Runtime outputs
+output/
+output_*/
+reports/*.tmp
+hyperframes/**/renders/
+hyperframes/**/snapshots/
+
+# Python cache and test cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+
+# Virtual environments
+.venv/
+venv/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

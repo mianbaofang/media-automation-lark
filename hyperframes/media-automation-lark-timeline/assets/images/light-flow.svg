@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">media-automation-lark workflow animation</title>
+  <desc id="desc">Workflow from raw sources through automation to Feishu, Markdown archive, dashboards, and team notifications.</desc>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    .bg { fill: #f7f8fb; }
+    .lane { fill: #ffffff; stroke: #d8dde8; stroke-width: 1.5; }
+    .box { fill: #ffffff; stroke: #26324a; stroke-width: 2; rx: 8; }
+    .boxA { fill: #eef6ff; }
+    .boxB { fill: #fff7e8; }
+    .boxC { fill: #eefaf2; }
+    .boxD { fill: #f6f0ff; }
+    .title { font: 700 25px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #121826; }
+    .label { font: 700 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #121826; }
+    .small { font: 500 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #526079; }
+    .line { fill: none; stroke: #8a96ad; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 9 12; animation: dash 1.8s linear infinite; }
+    .dot { fill: #3370ff; animation: pulse 1.8s ease-in-out infinite; }
+    .dot.two { animation-delay: .35s; fill: #20a162; }
+    .dot.three { animation-delay: .7s; fill: #f59e0b; }
+    .spin { transform-origin: 600px 182px; animation: spin 5s linear infinite; }
+    .fade { animation: fade 2.8s ease-in-out infinite; }
+    @keyframes dash { to { stroke-dashoffset: -42; } }
+    @keyframes pulse {
+      0%, 100% { opacity: .25; transform: scale(.82); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fade {
+      0%, 100% { opacity: .45; }
+      50% { opacity: 1; }
+    }
+  </style>
+
+  <rect class="bg" width="1200" height="360" rx="0"/>
+  <text class="title" x="60" y="55">Media Automation Lark</text>
+  <text class="small" x="60" y="82">RSS/API, search, files, and metrics flow into Feishu records, docs, Markdown archives, and dashboards.</text>
+
+  <rect class="lane" x="44" y="112" width="1112" height="190" rx="10"/>
+
+  <rect class="box boxA" x="82" y="146" width="170" height="92"/>
+  <text class="label" x="112" y="184">Sources</text>
+  <text class="small" x="112" y="210">RSS · API · Search</text>
+
+  <rect class="box boxB" x="336" y="146" width="180" height="92"/>
+  <text class="label" x="372" y="184">Python</text>
+  <text class="small" x="368" y="210">scripts + backends</text>
+
+  <g class="spin">
+    <circle cx="600" cy="182" r="35" fill="#ffffff" stroke="#26324a" stroke-width="2"/>
+    <path d="M600 152 L608 178 L635 178 L613 194 L621 220 L600 204 L579 220 L587 194 L565 178 L592 178 Z" fill="#3370ff" opacity=".9"/>
+  </g>
+  <text class="small fade" x="563" y="262">dedupe · polish · retry</text>
+
+  <rect class="box boxC" x="684" y="146" width="185" height="92"/>
+  <text class="label" x="735" y="184">Feishu</text>
+  <text class="small" x="716" y="210">Bitable · Docs · IM</text>
+
+  <rect class="box boxD" x="946" y="146" width="165" height="92"/>
+  <text class="label" x="982" y="184">Outputs</text>
+  <text class="small" x="980" y="210">MD · XLSX · HTML</text>
+
+  <path class="line" d="M252 192 C292 192 296 192 336 192"/>
+  <path class="line" d="M516 192 C548 192 552 192 565 192"/>
+  <path class="line" d="M635 192 C652 192 656 192 684 192"/>
+  <path class="line" d="M869 192 C906 192 910 192 946 192"/>
+
+  <circle class="dot" cx="286" cy="192" r="7"/>
+  <circle class="dot two" cx="546" cy="192" r="7"/>
+  <circle class="dot three" cx="910" cy="192" r="7"/>
+
+  <text class="small" x="88" y="278">Less tool switching, source trace kept, outputs ready for review and team use.</text>
+</svg>

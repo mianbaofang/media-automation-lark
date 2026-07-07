@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Media Automation Lark Skill Flow</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Microsoft YaHei"; src: local("Microsoft YaHei"); }
+      @font-face { font-family: "Noto Sans SC"; src: local("Noto Sans SC"); }
+      @font-face { font-family: "Consolas"; src: local("Consolas"); }
+
+      :root {
+        --paper: #f5f1e9;
+        --ink: #111827;
+        --muted: #526071;
+        --line: #d4cabd;
+        --blue: #2563eb;
+        --green: #0f8f61;
+        --amber: #b76700;
+        --red: #b83b35;
+        --violet: #6751c8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(17, 24, 39, 0.055) 1px, transparent 1px) 0 0 / 72px 72px,
+          linear-gradient(0deg, rgba(17, 24, 39, 0.045) 1px, transparent 1px) 0 0 / 72px 72px,
+          radial-gradient(circle at 88% 12%, rgba(37, 99, 235, 0.08), transparent 32%),
+          var(--paper);
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .scene {
+        opacity: 0;
+        padding: 62px 82px 72px;
+      }
+
+      .frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 730px 1fr;
+        gap: 58px;
+        align-items: center;
+      }
+
+      .frame.reverse {
+        grid-template-columns: 1fr 720px;
+      }
+
+      .meta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 19px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .meta strong {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        color: var(--ink);
+      }
+
+      .meta strong::before {
+        content: "";
+        width: 46px;
+        height: 3px;
+        background: currentColor;
+      }
+
+      .copy {
+        position: relative;
+        z-index: 2;
+        padding-top: 48px;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 15px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        background: #fffdf8;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .kicker i {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      h1,
+      h2 {
+        margin-top: 32px;
+        font-size: 86px;
+        line-height: 1.02;
+        letter-spacing: 0;
+        font-weight: 900;
+      }
+
+      h1 span,
+      h2 span {
+        display: block;
+      }
+
+      .lead {
+        margin-top: 28px;
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 30px;
+        line-height: 1.52;
+        font-weight: 600;
+      }
+
+      .bullets {
+        display: grid;
+        gap: 16px;
+        margin-top: 34px;
+        max-width: 680px;
+      }
+
+      .bullet {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 16px;
+        align-items: start;
+        font-size: 26px;
+        line-height: 1.35;
+        font-weight: 750;
+      }
+
+      .bullet i {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #def6e8;
+        color: #0a6f49;
+        border: 2px solid #0a6f49;
+        font-style: normal;
+        font-size: 23px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .chip {
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        padding: 10px 16px;
+        background: #fffdf8;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .visual {
+        position: relative;
+        z-index: 1;
+        justify-self: stretch;
+        align-self: center;
+      }
+
+      .image-card {
+        position: relative;
+        width: 100%;
+        height: 690px;
+        border: 3px solid var(--ink);
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fffdf8;
+        box-shadow: 18px 18px 0 rgba(17, 24, 39, 0.17);
+      }
+
+      .image-card img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .image-card.compact {
+        height: 690px;
+      }
+
+      .image-card.env-card img {
+        object-position: center 58%;
+      }
+
+      .overlay-panel {
+        position: absolute;
+        left: 30px;
+        bottom: 30px;
+        width: 430px;
+        padding: 22px;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        background: #fffdf8;
+        box-shadow: 8px 8px 0 rgba(17, 24, 39, 0.12);
+      }
+
+      .overlay-panel strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 25px;
+      }
+
+      .overlay-panel span {
+        display: block;
+        color: #344052;
+        font-size: 18px;
+        line-height: 1.45;
+        font-weight: 650;
+      }
+
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 36px;
+        max-width: 700px;
+      }
+
+      .flow-card {
+        min-height: 136px;
+        padding: 22px;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        background: #fffdf8;
+        box-shadow: 7px 7px 0 rgba(17, 24, 39, 0.12);
+      }
+
+      .flow-card strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 29px;
+      }
+
+      .flow-card span {
+        color: var(--muted);
+        font-size: 19px;
+        line-height: 1.42;
+        font-weight: 650;
+      }
+
+      .terminal {
+        position: absolute;
+        right: 34px;
+        top: 34px;
+        width: 440px;
+        padding: 22px;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        background: #fffdf8;
+        box-shadow: 8px 8px 0 rgba(17, 24, 39, 0.12);
+        font-family: Consolas, "Microsoft YaHei", monospace;
+        font-size: 20px;
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .ok { color: var(--green); }
+      .warn { color: var(--amber); }
+      .danger { color: var(--red); }
+
+      .rail {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 82px;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 10px;
+        align-items: end;
+      }
+
+      .step {
+        position: relative;
+        height: 52px;
+        padding-top: 17px;
+        border-top: 3px solid var(--line);
+        color: #62594d;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .step::before {
+        content: "";
+        position: absolute;
+        top: -9px;
+        left: 0;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--line);
+      }
+
+      .step.active {
+        color: var(--ink);
+        border-color: var(--blue);
+      }
+
+      .step.active::before {
+        top: -12px;
+        width: 21px;
+        height: 21px;
+        background: var(--blue);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="media-automation-lark"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="36"
+    >
+      <audio
+        id="bgm"
+        src="assets/audio/minimax-bgm.mp3"
+        data-start="0"
+        data-duration="36"
+        data-track-index="0"
+        data-volume="0.58"
+      ></audio>
+
+      <section id="s1" class="clip scene" data-start="0" data-duration="4.5" data-track-index="1">
+        <div class="frame">
+          <div class="meta"><strong>Time Cost</strong><span>01 / 08</span></div>
+          <div class="copy">
+            <div class="kicker"><i></i>内容运营最贵的，不是工具</div>
+            <h1><span>贵在每天</span><span>反复搬运</span></h1>
+            <p class="lead">网页、搜索结果、素材文件、平台数据来回复制。真正被吃掉的，是选题判断和复盘时间。</p>
+            <div class="chips">
+              <span class="chip">少复制</span>
+              <span class="chip">少漏项</span>
+              <span class="chip">少等人</span>
+              <span class="chip">多留痕</span>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/generated/01-content-archive.png" alt="content archive automation visual" />
+              <div class="overlay-panel">
+                <strong>先把输入接住</strong>
+                <span>文章、素材、指标先进统一流程，再决定写入飞书还是只保留本地结果。</span>
+              </div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step active">Start</div><div class="step">Check</div><div class="step">Uses</div><div class="step">Search</div>
+            <div class="step">Assets</div><div class="step">Signal</div><div class="step">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s2" class="clip scene" data-start="4.5" data-duration="4.5" data-track-index="2">
+        <div class="frame reverse">
+          <div class="meta"><strong>One Run</strong><span>02 / 08</span></div>
+          <div class="visual">
+            <div class="image-card compact env-card">
+              <img src="assets/images/generated/02-environment-check-4x3.png" alt="environment detection visual" />
+              <div class="terminal">
+                <span class="ok">OK</span> Python / Node<br />
+                <span class="ok">OK</span> anysearch / tavily<br />
+                <span class="warn">ASK</span> lark-cli auth<br />
+                <span class="ok">READY</span> config template<br />
+                <span class="ok">DRY</span> run before write
+              </div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="kicker"><i></i>一次运行，先做检查</div>
+            <h2><span>别让人等脚本</span><span>脚本先自查</span></h2>
+            <div class="bullets">
+              <div class="bullet"><i>1</i><span>依赖、搜索后端、飞书授权先检查，缺什么直接提示。</span></div>
+              <div class="bullet"><i>2</i><span>能先预演的步骤先预演，避免把错误结果写进团队空间。</span></div>
+              <div class="bullet"><i>3</i><span>本地结果先生成，用户确认后再同步到飞书。</span></div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step active">Check</div><div class="step">Uses</div><div class="step">Search</div>
+            <div class="step">Assets</div><div class="step">Signal</div><div class="step">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s3" class="clip scene" data-start="9" data-duration="4.5" data-track-index="3">
+        <div class="frame">
+          <div class="meta"><strong>Use Cases</strong><span>03 / 08</span></div>
+          <div class="copy">
+            <div class="kicker"><i></i>四个高频场景</div>
+            <h2><span>把日常琐事</span><span>变成固定按钮</span></h2>
+            <div class="flow-grid">
+              <div class="flow-card"><strong>内容归档</strong><span>新文章自动进表，不靠手工登记</span></div>
+              <div class="flow-card"><strong>数据看板</strong><span>指标当天汇总，复盘不用等周报</span></div>
+              <div class="flow-card"><strong>素材整理</strong><span>文件转成可搜索、可复用的素材</span></div>
+              <div class="flow-card"><strong>搜索采集</strong><span>链接变资料包，选题有出处</span></div>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/light-flow.svg" alt="workflow matrix visual" />
+              <div class="overlay-panel">
+                <strong>少切工具，少丢上下文</strong>
+                <span>同一批输入，从采集到归档走同一条线，后面查得到。</span>
+              </div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step">Check</div><div class="step active">Uses</div><div class="step">Search</div>
+            <div class="step">Assets</div><div class="step">Signal</div><div class="step">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s4" class="clip scene" data-start="13.5" data-duration="4.5" data-track-index="4">
+        <div class="frame reverse">
+          <div class="meta"><strong>Search Collector</strong><span>04 / 08</span></div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/generated/02-search-markdown.png" alt="search to markdown visual" />
+              <div class="overlay-panel">
+                <strong>链接只是起点</strong>
+                <span>真正有用的是正文、分类、摘要和可以复查的来源。</span>
+              </div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="kicker"><i></i>选题研究少走回头路</div>
+            <h2><span>搜索结果</span><span>直接变资料包</span></h2>
+            <div class="bullets">
+              <div class="bullet"><i>✓</i><span>按关键词抓正文，重复页面会被过滤。</span></div>
+              <div class="bullet"><i>✓</i><span>结果按主题分组，自动生成索引。</span></div>
+              <div class="bullet"><i>✓</i><span>写作、复盘、团队共享都从同一份资料开始。</span></div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step">Check</div><div class="step">Uses</div><div class="step active">Search</div>
+            <div class="step">Assets</div><div class="step">Signal</div><div class="step">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s5" class="clip scene" data-start="18" data-duration="4.5" data-track-index="5">
+        <div class="frame">
+          <div class="meta"><strong>Material Manager</strong><span>05 / 08</span></div>
+          <div class="copy">
+            <div class="kicker"><i></i>素材不该只躺在文件夹里</div>
+            <h2><span>旧素材</span><span>重新变值钱</span></h2>
+            <div class="bullets">
+              <div class="bullet"><i>✓</i><span>PDF、Office、网页和图片统一转成可读内容。</span></div>
+              <div class="bullet"><i>✓</i><span>摘要、标签、行动项自动补齐。</span></div>
+              <div class="bullet"><i>✓</i><span>下一次选题时，不用重新翻一遍文件夹。</span></div>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/generated/03-material-library.png" alt="material library visual" />
+              <div class="overlay-panel">
+                <strong>素材开始产生复利</strong>
+                <span>一次整理，后面的选题、脚本、复盘都能继续用。</span>
+              </div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step">Check</div><div class="step">Uses</div><div class="step">Search</div>
+            <div class="step active">Assets</div><div class="step">Signal</div><div class="step">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s6" class="clip scene" data-start="22.5" data-duration="4.5" data-track-index="6">
+        <div class="frame reverse">
+          <div class="meta"><strong>Metrics Dashboard</strong><span>06 / 08</span></div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/generated/04-dashboard.png" alt="dashboard visual" />
+              <div class="overlay-panel">
+                <strong>先看到趋势</strong>
+                <span>看板不等人工整理，数据先变成能讨论的画面。</span>
+              </div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="kicker"><i></i>复盘越快，调整越早</div>
+            <h2><span>当天看数据</span><span>当天调内容</span></h2>
+            <div class="bullets">
+              <div class="bullet"><i>✓</i><span>阅读、互动、涨粉数据集中看。</span></div>
+              <div class="bullet"><i>✓</i><span>互动率、趋势和平台分布自动计算。</span></div>
+              <div class="bullet"><i>✓</i><span>需要时推送到飞书群，减少反复问数。</span></div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step">Check</div><div class="step">Uses</div><div class="step">Search</div>
+            <div class="step">Assets</div><div class="step active">Signal</div><div class="step">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s7" class="clip scene" data-start="27" data-duration="4.5" data-track-index="7">
+        <div class="frame">
+          <div class="meta"><strong>Control</strong><span>07 / 08</span></div>
+          <div class="copy">
+            <div class="kicker"><i></i>自动化也要让人安心</div>
+            <h2><span>先预览</span><span>再同步</span></h2>
+            <div class="bullets">
+              <div class="bullet"><i>✓</i><span>不安全地址不请求，减少误触和异常结果。</span></div>
+              <div class="bullet"><i>✓</i><span>采集、解析、写入分开执行，哪一步失败一眼能看出。</span></div>
+              <div class="bullet"><i>✓</i><span>先看本地预览，再决定要不要写进飞书。</span></div>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/generated/05-control-preview.png" alt="control preview visual" />
+              <div class="overlay-panel">
+                <strong>少一点惊吓</strong>
+                <span>自动化不是黑盒，用户要能随时知道它跑到哪一步。</span>
+              </div>
+            </div>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step">Check</div><div class="step">Uses</div><div class="step">Search</div>
+            <div class="step">Assets</div><div class="step">Signal</div><div class="step active">Control</div><div class="step">Team</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s8" class="clip scene" data-start="31.5" data-duration="4.5" data-track-index="8">
+        <div class="frame reverse">
+          <div class="meta"><strong>Team Loop</strong><span>08 / 08</span></div>
+          <div class="visual">
+            <div class="image-card">
+              <img src="assets/images/generated/06-team-loop.png" alt="team output visual" />
+              <div class="overlay-panel">
+                <strong>人只看结果</strong>
+                <span>资料、素材、指标和通知都沉到飞书，团队不用追问文件在哪。</span>
+              </div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="kicker"><i></i>把时间还给判断</div>
+            <h2><span>少做搬运</span><span>多做决策</span></h2>
+            <div class="chips">
+              <span class="chip">资料包</span>
+              <span class="chip">素材摘要</span>
+              <span class="chip">指标看板</span>
+              <span class="chip">飞书通知</span>
+              <span class="chip">本地留底</span>
+            </div>
+            <p class="lead">新人能接手，老素材能复用，负责人不用等人整理。省下来的时间，才是这个工具的价值。</p>
+          </div>
+          <div class="rail">
+            <div class="step">Start</div><div class="step">Check</div><div class="step">Uses</div><div class="step">Search</div>
+            <div class="step">Assets</div><div class="step">Signal</div><div class="step">Control</div><div class="step active">Team</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const sceneIds = ["#s1", "#s2", "#s3", "#s4", "#s5", "#s6", "#s7", "#s8"];
+      const sceneLength = 4.5;
+      const q = (selector) => Array.from(document.querySelectorAll(selector));
+      const fromToIf = (selector, fromVars, toVars, at) => {
+        const targets = q(selector);
+        if (targets.length) tl.fromTo(targets, fromVars, toVars, at);
+      };
+
+      sceneIds.forEach((id, index) => {
+        const start = index * sceneLength;
+        tl.set(id, { opacity: 1 }, start);
+        if (index === 0) {
+          tl.set(q(`${id} h1, ${id} .lead, ${id} .chips, ${id} .image-card`), { y: 0, opacity: 1 }, start);
+        } else {
+          fromToIf(`${id} h1, ${id} h2`, { y: 48, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "power3.out" }, start + 0.18);
+          fromToIf(`${id} .lead, ${id} .chips, ${id} .bullets, ${id} .flow-grid`, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.58, ease: "power3.out" }, start + 0.46);
+          fromToIf(`${id} .image-card`, { y: 34, scale: 0.985, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.68, ease: "power3.out" }, start + 0.34);
+        }
+        fromToIf(`${id} .kicker`, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.46, ease: "power2.out" }, start + 0.08);
+        fromToIf(`${id} .overlay-panel, ${id} .terminal, ${id} .flow-card, ${id} .bullet, ${id} .chip`, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, stagger: 0.035, ease: "power2.out" }, start + 0.76);
+        fromToIf(`${id} .step`, { y: 12, opacity: 0.45 }, { y: 0, opacity: 1, duration: 0.32, stagger: 0.014, ease: "power2.out" }, start + 0.1);
+        tl.to(id, { opacity: 0, duration: 0.22, ease: "power2.inOut" }, start + sceneLength - 0.22);
+      });
+
+      tl.fromTo("#bgm", { volume: 0 }, { volume: 0.58, duration: 1.1, ease: "power2.out" }, 0);
+      tl.to("#bgm", { volume: 0, duration: 1.3, ease: "power2.inOut" }, 34.5);
+
+      window.__timelines["media-automation-lark"] = tl;
+    </script>
+  </body>
+</html>

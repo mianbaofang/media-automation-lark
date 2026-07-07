@@ -1,0 +1,23 @@
+# ============ 自媒体自动化工作流 · 定时任务示例 ============
+# 用法：crontab -e 后粘贴下面需要的行；路径请改为实际绝对路径。
+# 建议统一用 python3 绝对路径，并在 crontab 顶部设置环境变量与编码。
+
+# ---- 通用环境（crontab 顶部）----
+SHELL=/bin/bash
+PYTHONIOENCODING=utf-8
+PATH=/usr/local/bin:/usr/bin:/bin
+# 密钥从环境注入（不要写明文）：在 crontab 里 export，或用 systemd 的 EnvironmentFile
+LARK_LLM_API_KEY=********
+WEIBO_API_KEY=********
+
+# ---- 场景 A：每天 23:00 抓取 RSS 并归档到飞书 ----
+0 23 * * * /usr/bin/python3 /path/to/scripts/content-archiver.py --rss-url "https://example.com/feed.xml" >> /var/log/media/archiver.log 2>&1
+
+# ---- 场景 B：每天 08:30 采集多平台数据并刷新看板 ----
+30 8 * * * /usr/bin/python3 /path/to/scripts/data-collector.py --source /path/to/metrics.json --push >> /var/log/media/collector.log 2>&1
+
+# ---- 场景 C：每小时检查一次待归档素材队列 ----
+0 * * * * /usr/bin/python3 /path/to/scripts/material-manager.py --queue /path/to/queue.json >> /var/log/media/material.log 2>&1
+
+# ---- 每日 09:00 推送昨日汇总到飞书群 ----
+0 9 * * * /usr/bin/python3 /path/to/scripts/data-collector.py --report-yesterday --chat-id oc_xxxx >> /var/log/media/report.log 2>&1

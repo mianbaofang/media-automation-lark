@@ -1,0 +1,10 @@
+Create a 4:3 horizontal product illustration for a software automation skill.
+
+Scene: a clean operations desk with three connected panels:
+1. "local environment check" shown as abstract green status lights and dependency cards,
+2. "configuration template" shown as safe placeholder fields with no real secrets,
+3. "dry run before writing" shown as a preview path into a Feishu/Lark table.
+
+Style: modern editorial tech illustration, polished but practical, warm off-white background, dark ink lines, blue and green accents, dense but readable composition, no empty center space. Match a 1920x1080 HyperFrames presentation, with clear horizontal framing.
+
+Important: no readable text, no logos, no brand marks, no secret keys, no watermarks.
