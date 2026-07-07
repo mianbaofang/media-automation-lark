@@ -1,14 +1,36 @@
 # Media Automation Lark / 自媒体自动化工作流（飞书 CLI 版）
 
-![workflow](assets/media-automation-lark-flow.svg)
+<p align="center">
+  <a href="https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0">
+    <img src="assets/media-automation-lark-demo.gif" alt="Media Automation Lark 产品预览动画" width="100%">
+  </a>
+</p>
+
+<p align="center">
+  <a href="README.en.md">English</a>
+  ·
+  <a href="SKILL.md">Skill</a>
+  ·
+  <a href="DISCLAIMER.md">免责声明</a>
+  ·
+  <a href="RELEASE.md">发布说明</a>
+  ·
+  <a href="CHANGELOG.md">更新日志</a>
+  ·
+  <a href="SECURITY.md">安全说明</a>
+  ·
+  <a href="reports/project-audit.md">审查报告</a>
+</p>
 
 把内容抓取、搜索采集、素材分析、数据看板和飞书归档串成一套可定时运行的本地自动化工作流。项目使用 Python 脚本编排 RSS/API、搜索后端、文件转 Markdown、LLM 结构化提取和 `lark-cli` 写入飞书多维表格、云文档与机器人通知。
 
 > 使用前请先阅读 [免责声明 / Disclaimer](DISCLAIMER.md)。本项目仅供学习和研究，任何网页获取、搜索采集或平台数据抓取都必须遵守法律、平台 ToS 和 robots.txt。
 
-## 产品预览
+## 工作流概览
 
-![Media Automation Lark demo](assets/media-automation-lark-demo.gif)
+<p align="center">
+  <img src="assets/media-automation-lark-flow.svg" alt="Media Automation Lark workflow" width="100%">
+</p>
 
 这条链路面向内容团队的日常成本：把搜索、抓取、素材入库、数据复盘和飞书同步收进一个可预览、可空跑、可定时的流程里。人只处理判断和取舍，重复搬运交给脚本。
 

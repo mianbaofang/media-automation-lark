@@ -1,14 +1,36 @@
 # Media Automation Lark
 
-![workflow](assets/media-automation-lark-flow.svg)
+<p align="center">
+  <a href="https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0">
+    <img src="assets/media-automation-lark-demo.gif" alt="Media Automation Lark product preview animation" width="100%">
+  </a>
+</p>
+
+<p align="center">
+  <a href="README.md">中文 README</a>
+  ·
+  <a href="SKILL.md">Skill</a>
+  ·
+  <a href="DISCLAIMER.md">Disclaimer</a>
+  ·
+  <a href="RELEASE.md">Release notes</a>
+  ·
+  <a href="CHANGELOG.md">Changelog</a>
+  ·
+  <a href="SECURITY.md">Security</a>
+  ·
+  <a href="reports/project-audit.md">Audit report</a>
+</p>
 
 A local automation toolkit that connects content ingestion, search collection, material analysis, analytics dashboards, and Feishu/Lark archiving. It uses Python scripts to orchestrate RSS/API inputs, optional search backends, file-to-Markdown conversion, LLM extraction, and `lark-cli` writes to Bitable, Docs, and bot notifications.
 
 Please read [DISCLAIMER.md](DISCLAIMER.md) before using this project. This project is for learning and research only. Any crawling, web fetching, or platform data collection must comply with applicable law, platform Terms of Service, and robots.txt.
 
-## Product Preview
+## Workflow Overview
 
-![Media Automation Lark demo](assets/media-automation-lark-demo.gif)
+<p align="center">
+  <img src="assets/media-automation-lark-flow.svg" alt="Media Automation Lark workflow" width="100%">
+</p>
 
 The workflow is designed around daily content-ops cost: search, fetch, material intake, metric review, and Feishu/Lark sync are handled as a previewable, dry-runnable, schedulable loop. People keep the judgment work; scripts take the repeated transfer work.
 
