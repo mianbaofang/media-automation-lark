@@ -2,10 +2,22 @@
 
 ## Unreleased
 
+## v0.2.0 - 2026-07-08
+
 ### Added
 
 - Agent-launchable local browser control panel: `scripts/panel-agent.py` opens `http://127.0.0.1:8787` for environment checks, a safe sample run, webpage/file intake, topic-based public search collection, RSS dry-run, dashboard preview, and Feishu opt-in writes.
 - Polished the panel into a browser workbench with a plain-language six-task flow, source/ranking controls for search collection, folded internal execution details, and next-step prompts after each run.
+
+### Improved
+
+- Topic collection can now filter by public source scope and rank by public hotness signals, relevance, category match, or author/account match.
+- Panel search now produces a fast candidate index first, so users can judge results before deeper fetching or Feishu writes.
+
+### Fixed
+
+- Search collection no longer fails just because the optional RSS parser dependency is missing.
+- Search backend subprocess output is decoded as UTF-8 on Windows to avoid garbled Chinese output and dropped results.
 
 ## v0.1.0 - 2026-07-07
 

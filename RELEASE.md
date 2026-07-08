@@ -1,43 +1,37 @@
-# v0.1.0 - Local Media Automation for Feishu/Lark
+# v0.2.0 - Agent Control Panel for Media Automation Lark
 
-Media Automation Lark ships the first public-ready version of the Feishu/Lark media automation workflow: content archiving, analytics, material management, search collection, runtime backend detection, and documentation that makes safe usage explicit.
-
-> Current `main` also includes an Agent-launchable local browser control panel. Users can ask their Agent to open the Media Automation Lark panel; the Agent entrypoint is `scripts/panel-agent.py start --open`, and the default URL is `http://127.0.0.1:8787`. The panel now behaves like a plain-language local workbench: check readiness, try a safe sample run, organize webpages/files, collect public topics with source and ranking controls, archive RSS, preview dashboards, and opt into Feishu writes only after review.
+Media Automation Lark v0.2.0 turns the project from a script-first toolkit into an Agent-launchable local workbench. Users can ask an Agent to open the panel, preview results locally, and only write to Feishu/Lark after checking the output.
 
 ## New
 
-- Added four runnable workflows: RSS/API content archiving, platform metric dashboards, multimodal material management, and search-to-categorized-Markdown collection.
-- Added pluggable search/fetch backend detection for `anysearch`, `tavily`, `autocli`, `agent-reach`, `multi-search-engine`, and built-in HTTP fallback.
-- Added Feishu/Lark integration through `lark-cli` for Bitable records, Docs, and bot notifications.
-- Added root-level `config.json.example` with env-based secret placeholders.
-- Added bilingual README files, acknowledgements, release notes, changelog, contributing guide, security policy, issue/PR templates, launch checklist, and a bilingual disclaimer.
-- Added MIT license for public open-source release consistency.
-- Added a lightweight README demo GIF derived from the HyperFrames promo video.
-- Added an 8-page HyperFrames timeline video source with MiniMax CLI-generated instrumental background music.
+- Added an Agent-facing panel launcher: `scripts/panel-agent.py start --open` starts the local browser panel and returns `http://127.0.0.1:8787`.
+- Added a plain-language local control panel with six tasks: environment check, safe sample run, webpage/file intake, topic search collection, RSS archiving, and dashboard preview.
+- Added source-scope and ranking controls for topic collection, including public web, WeChat public pages, Bilibili, Zhihu, Xiaohongshu, Douyin, and custom source filters.
+- Added user-facing result summaries for every panel action, with generated files linked directly and internal stdout/stderr folded under "details for Agent debugging".
 
 ## Improved
 
-- Hardened crawler-facing URL inputs in `content-archiver.py` with SSRF filtering for RSS/API URLs.
-- Made `data-collector.py --platform` actually limit automatic platform fetching.
-- Moved generated config templates to the project root to match setup docs.
-- Added `.gitignore` rules for local secrets, runtime outputs, Python caches, and editor noise.
-- Corrected the Tavily install URL shown by the backend installer.
+- Search collection now defaults to a fast candidate-index workflow in the panel, so users can inspect results before deciding whether to fetch full pages or write to Feishu.
+- README and Skill docs now describe the beginner path: ask an Agent to open the panel instead of asking end users to memorize commands.
+- Search result ranking now records public ranking notes in the generated index, so users can see whether ordering came from visible hotness signals, relevance, category match, or author/account match.
+
+## Fixed
+
+- Fixed topic search being blocked by the optional RSS parser dependency when users were not using RSS.
+- Fixed Windows subprocess text decoding for search backends by reading tool output as UTF-8 with replacement fallback.
 
 ## Verification
 
-- `python -m pytest tests` passed: 11 tests.
-- `python scripts/collector.py --offline-demo --category-map "AI:大模型,LLM,Agent;产品:增长" --output-dir output_demo --no-archive --no-notify --no-polish` generated a local Markdown demo.
-- `python scripts/env-check.py --gen-config` now targets the project root.
-- `npx hyperframes lint`, `npx hyperframes validate`, and `npx hyperframes inspect` passed for `hyperframes/media-automation-lark-timeline`.
-- `npx hyperframes render --quality high` produced the music-backed MP4; it is attached to the `v0.1.0` GitHub Release. `ffprobe` reported 36.032 seconds.
-- `ffmpeg` generated `assets/media-automation-lark-demo.gif` for the README preview.
+- `python -m pytest tests` passed: 20 tests.
+- `git diff --check` passed.
+- Browser validation covered panel result pages for material intake, empty search input, real topic search, empty RSS input, real RSS dry-run, and dashboard generation.
+- The active local panel was verified at `http://127.0.0.1:8787`.
 
 ## Known Risks
 
-- `lark-cli`, Feishu table schemas, and platform API credentials must be configured locally before live writes.
-- Bilibili public endpoints may change or rate-limit access; use `--source` imports when platform fetching fails.
+- Live Feishu/Lark writes still require local `lark-cli` login, matching table fields, and user-managed permissions.
+- Public platform search results may be sparse, rate-limited, or noisy. The panel shows a local index first so users can judge quality before deeper collection.
 - Search/crawling behavior remains the user's legal responsibility. Read `DISCLAIMER.md` before use.
-- Public release uses the MIT license. Users must still follow the crawler/web-fetching disclaimer.
 
 ## Upgrade
 
@@ -50,4 +44,8 @@ copy config.json.example config.json
 python -m pytest tests
 ```
 
-Then fill `config.json`, install/auth `lark-cli`, and dry-run one workflow before live use.
+For non-technical users, ask an Agent to open the Media Automation Lark panel and check the environment first.
+
+## Full Changelog
+
+- https://github.com/mianbaofang/media-automation-lark/compare/v0.1.0...v0.2.0

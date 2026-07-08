@@ -1,7 +1,7 @@
 # Media Automation Lark
 
 <p align="center">
-  <a href="https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0">
+  <a href="https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.2.0">
     <img src="assets/media-automation-lark-demo.gif" alt="Media Automation Lark product preview animation" width="100%">
   </a>
 </p>
@@ -159,10 +159,10 @@ This project builds on the following open-source projects and tool ecosystems:
 
 ## Status
 
-Current public version: [`v0.1.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0).
+Current public version: [`v0.2.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.2.0).
 
 - Verification: `python -m pytest tests`.
-- Animation: the README uses a lightweight GIF preview; the music-backed MP4 is attached to the `v0.1.0` GitHub Release.
+- Animation: the README uses a lightweight GIF preview; the music-backed MP4 is attached to the `v0.2.0` GitHub Release.
 - Source: the HyperFrames timeline source lives in `hyperframes/media-automation-lark-timeline/`.
 
 License: MIT, see [LICENSE](LICENSE).

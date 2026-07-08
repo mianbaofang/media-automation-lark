@@ -1,7 +1,7 @@
 # Media Automation Lark / 自媒体自动化工作流（飞书 CLI 版）
 
 <p align="center">
-  <a href="https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0">
+  <a href="https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.2.0">
     <img src="assets/media-automation-lark-demo.gif" alt="Media Automation Lark 产品预览动画" width="100%">
   </a>
 </p>
@@ -184,10 +184,10 @@ reports/                 审查记录和发布前检查
 
 ## 状态
 
-当前公开版本：[`v0.1.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0)。
+当前公开版本：[`v0.2.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.2.0)。
 
 - 验证：`python -m pytest tests`。
-- 动画：README 使用轻量 GIF 预览；配乐版 MP4 已作为 `v0.1.0` Release 附件发布。
+- 动画：README 使用轻量 GIF 预览；配乐版 MP4 已作为 `v0.2.0` Release 附件发布。
 - 源码：HyperFrames 时间流短片保留在 `hyperframes/media-automation-lark-timeline/`。
 
 开源协议：MIT，详见 [LICENSE](LICENSE)。
