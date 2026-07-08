@@ -65,7 +65,7 @@ def find_skill(name: str) -> Optional[Path]:
 
 def run(cmd, timeout=60, **kw):
     try:
-        return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, **kw)
+        return subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout, **kw)
     except subprocess.TimeoutExpired:
         return subprocess.CompletedProcess(cmd, 124, "", "timeout")
     except FileNotFoundError:

@@ -30,7 +30,7 @@
 
 这些动作单独看都不复杂，但一天下来会把判断力切碎。素材可能散在下载目录、聊天记录和浏览器收藏里；数据复盘要来回复制；一个选题从搜索、抓取、整理到归档，常常还没开始判断价值，就已经花掉很多耐心。
 
-我做这个项目，是想把这些重复转移收进一个本地可控的流程：先空跑预览，再决定是否抓取、转换、分析和写入飞书。人保留判断、取舍和创意，脚本负责那些每天都要重复、但不该占用注意力的部分。
+我做这个项目，是想把这些重复转移收进一个本地可控的流程：先在本地预览，再决定是否抓取、转换、分析和写入飞书。人保留判断、取舍和创意，脚本负责那些每天都要重复、但不该占用注意力的部分。
 
 把内容抓取、搜索采集、素材分析、数据看板和飞书归档串成一套可定时运行的本地自动化工作流。项目使用 Python 脚本编排 RSS/API、搜索后端、文件转 Markdown、LLM 结构化提取和 `lark-cli` 写入飞书多维表格、云文档与机器人通知。
 
@@ -42,7 +42,7 @@
   <img src="assets/media-automation-lark-flow.svg" alt="Media Automation Lark workflow" width="100%">
 </p>
 
-这条链路面向内容团队的日常成本：把搜索、抓取、素材入库、数据复盘和飞书同步收进一个可预览、可空跑、可定时的流程里。人只处理判断和取舍，重复搬运交给脚本。
+这条链路面向内容团队的日常成本：把搜索、抓取、素材入库、数据复盘和飞书同步收进一个可预览、可定时的流程里。人只处理判断和取舍，重复搬运交给脚本。
 
 ## 能做什么
 
@@ -77,15 +77,21 @@ lark-cli config init
 lark-cli auth login --recommend
 ```
 
-## 先跑一个离线演示
+## 新手入口：让 Agent 打开面板
 
-不联网、不写飞书，只验证分类和 Markdown 生成：
+普通用户不用记脚本参数。对支持本 Skill 的 Agent 说“打开 Media Automation Lark 面板”或“先帮我检查环境”，Agent 会直接启动本地控制台并返回访问地址。
+
+面板地址默认为 <http://127.0.0.1:8787>。面板默认只做本地预览，可完成六类任务：检查环境、先体验一次完整流程、直接整理网页或文件、按选题采集公开内容、归档 RSS 订阅、生成看板并准备定时任务；只有勾选“写入飞书”时才会调用飞书写入。
+
+## 先体验一次完整流程
+
+如果第一次不知道这个项目会产出什么，可以先跑内置样例。不联网、不写飞书，只验证分类和 Markdown 生成：
 
 ```bash
 python scripts/collector.py --offline-demo --category-map "AI:大模型,LLM,Agent;产品:增长" --output-dir output_demo --no-archive --no-notify --no-polish
 ```
 
-生成后查看 `output_demo/index.md`。确认没问题再改用真实搜索、RSS 或 API。
+生成后查看 `output_demo/index.md`。确认结果样式没问题，再改用真实网页、文件、RSS 或搜索选题。
 
 ## 常用命令
 
@@ -99,8 +105,8 @@ python scripts/install_backends.py --interactive
 # RSS 内容归档，先 dry-run
 python scripts/content-archiver.py --rss-url "https://example.com/feed.xml" --dry-run
 
-# 搜索采集并分类保存 Markdown
-python scripts/collector.py --query "LLM 应用落地" --category-map "AI:大模型,LLM,Agent" --dry-run
+# 搜索采集并分类保存 Markdown；可指定公开来源范围和排序目标
+python scripts/collector.py --query "LLM 应用落地" --source-scope bilibili --rank-by hotness --category-map "AI:大模型,LLM,Agent" --dry-run
 
 # 平台指标抓取，只抓 B 站
 python scripts/data-collector.py --fetch --platform bilibili --dry-run
@@ -124,11 +130,13 @@ python -m pytest tests
 
 细节见 [references/search-backends.md](references/search-backends.md)。
 
+面板里的“按选题去采集”会让用户先选来源范围、采集清单和排序目标。爆款排序只使用公开搜索结果里可见的阅读、播放、点赞、收藏、评论等文本线索；如果结果里没有这些线索，会自动退回相关度排序。
+
 ## 安全和合规设计
 
 - URL 入口使用 `common.is_safe_url` 拦截 `file://`、localhost、link-local、云元数据地址和私网地址。
 - 密钥只走环境变量或 `@env:` 占位符；`config.json`、`.env` 已加入 `.gitignore`。
-- 所有写飞书动作都支持 `--dry-run`，首次运行建议先空跑。
+- 所有写飞书动作都支持 `--dry-run`，首次运行建议先本地预览。
 - 抓取正文默认保留原文，不做自动改写；项目只润色自己生成的摘要、通知和索引文字。
 - 本项目不绕过验证码、登录限制、付费墙、加密或平台风控。
 
@@ -145,7 +153,7 @@ python -m pytest tests
 ## 项目结构
 
 ```text
-scripts/                 核心脚本
+scripts/                 核心脚本（含 Agent 面板入口 panel-agent.py）
 references/              飞书、API、搜索后端、Prompt 参考
 assets/cron-examples/    crontab、systemd、Windows 任务计划示例
 agents/                  Agent/技能接口描述
@@ -172,12 +180,13 @@ reports/                 审查记录和发布前检查
 - README 动图预览：`assets/media-automation-lark-demo.gif`
 - 轻量工作流动画：`assets/media-automation-lark-flow.svg`
 - 静态流程图：`media-automation-skill-workflow.png`
+- Agent 面板入口：`scripts/panel-agent.py`
 
 ## 状态
 
 当前公开版本：[`v0.1.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0)。
 
-- 验证：`python -m pytest tests`，11 个测试通过。
+- 验证：`python -m pytest tests`。
 - 动画：README 使用轻量 GIF 预览；配乐版 MP4 已作为 `v0.1.0` Release 附件发布。
 - 源码：HyperFrames 时间流短片保留在 `hyperframes/media-automation-lark-timeline/`。
 

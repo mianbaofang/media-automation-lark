@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Agent-launchable local browser control panel: `scripts/panel-agent.py` opens `http://127.0.0.1:8787` for environment checks, a safe sample run, webpage/file intake, topic-based public search collection, RSS dry-run, dashboard preview, and Feishu opt-in writes.
+- Polished the panel into a browser workbench with a plain-language six-task flow, source/ranking controls for search collection, folded internal execution details, and next-step prompts after each run.
+
 ## v0.1.0 - 2026-07-07
 
 First public-ready release of Media Automation Lark.

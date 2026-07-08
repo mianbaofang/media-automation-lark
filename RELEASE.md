@@ -2,6 +2,8 @@
 
 Media Automation Lark ships the first public-ready version of the Feishu/Lark media automation workflow: content archiving, analytics, material management, search collection, runtime backend detection, and documentation that makes safe usage explicit.
 
+> Current `main` also includes an Agent-launchable local browser control panel. Users can ask their Agent to open the Media Automation Lark panel; the Agent entrypoint is `scripts/panel-agent.py start --open`, and the default URL is `http://127.0.0.1:8787`. The panel now behaves like a plain-language local workbench: check readiness, try a safe sample run, organize webpages/files, collect public topics with source and ranking controls, archive RSS, preview dashboards, and opt into Feishu writes only after review.
+
 ## New
 
 - Added four runnable workflows: RSS/API content archiving, platform metric dashboards, multimodal material management, and search-to-categorized-Markdown collection.

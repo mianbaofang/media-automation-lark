@@ -19,6 +19,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import common
@@ -99,7 +100,9 @@ def build_index(out_dir: str, rows: list[dict], intro: str = "") -> str:
     for cat, items in cats.items():
         lines.append(f"## {cat}")
         for it in items:
-            lines.append(f"- [{it['title']}]({safe_name(cat)}/{os.path.basename(it['path'])}) — {it['url']}")
+            notes = [str(it[k]) for k in ("source_scope", "rank_note") if it.get(k)]
+            suffix = f"（{'；'.join(notes)}）" if notes else ""
+            lines.append(f"- [{it['title']}]({safe_name(cat)}/{os.path.basename(it['path'])}) — {it['url']} {suffix}".rstrip())
         lines.append("")
     path = os.path.join(out_dir, "index.md")
     with open(path, "w", encoding="utf-8") as f:
@@ -124,6 +127,137 @@ OFFLINE_SAMPLES = [
 ]
 
 
+SOURCE_SCOPES = {
+    "public_web": {"label": "全网公开网页", "terms": []},
+    "wechat_public": {"label": "微信公众号公开页", "terms": ["site:mp.weixin.qq.com"]},
+    "bilibili": {"label": "B 站公开页", "terms": ["site:bilibili.com"]},
+    "zhihu": {"label": "知乎公开页", "terms": ["site:zhihu.com"]},
+    "xiaohongshu": {"label": "小红书公开页", "terms": ["site:xiaohongshu.com"]},
+    "douyin": {"label": "抖音公开页", "terms": ["site:douyin.com"]},
+    "custom": {"label": "指定网站 / 作者 / 账号", "terms": []},
+}
+
+RANK_LABELS = {
+    "hotness": "优先看爆款迹象",
+    "relevance": "优先看最相关",
+    "category": "优先看分类匹配",
+    "author": "优先看指定作者 / 账号",
+}
+
+
+def split_items(text: str) -> list[str]:
+    items: list[str] = []
+    for raw in (text or "").replace("；", "\n").replace(";", "\n").splitlines():
+        item = raw.strip().strip("-*•、,， ")
+        if item:
+            items.append(item)
+    return items
+
+
+def source_scope_label(scope: str) -> str:
+    return SOURCE_SCOPES.get(scope, SOURCE_SCOPES["public_web"])["label"]
+
+
+def source_terms(scope: str, source_filter: str = "") -> list[str]:
+    terms = list(SOURCE_SCOPES.get(scope, SOURCE_SCOPES["public_web"])["terms"])
+    for item in split_items(source_filter):
+        parsed = urlparse(item if "://" in item else f"https://{item}")
+        host = parsed.netloc.strip()
+        if "." in item and host:
+            terms.append(f"site:{host}")
+        else:
+            terms.append(item)
+    return terms
+
+
+def scoped_query(query: str, scope: str, source_filter: str = "") -> str:
+    terms = source_terms(scope, source_filter)
+    if not terms:
+        return query
+    return " ".join([query, *terms])
+
+
+def compact_number(value: str, unit: str) -> float:
+    try:
+        num = float(value.replace(",", ""))
+    except ValueError:
+        return 0.0
+    unit = unit.lower()
+    if unit in {"万", "w"}:
+        return num * 10000
+    if unit == "k":
+        return num * 1000
+    return num
+
+
+def hotness_score(text: str) -> float:
+    score = 0.0
+    pattern = re.compile(r"(\d+(?:\.\d+)?)\s*([万wWkK]?)\s*(阅读|浏览|播放|点赞|赞|收藏|评论|转发|分享)")
+    weights = {
+        "阅读": 1.0,
+        "浏览": 1.0,
+        "播放": 1.0,
+        "点赞": 3.0,
+        "赞": 3.0,
+        "收藏": 4.0,
+        "评论": 5.0,
+        "转发": 5.0,
+        "分享": 5.0,
+    }
+    for value, unit, name in pattern.findall(text):
+        score += compact_number(value, unit) * weights.get(name, 1.0)
+    return score
+
+
+def relevance_score(text: str, query: str) -> float:
+    blob = text.lower()
+    score = 0.0
+    for token in re.split(r"\s+", query.lower()):
+        token = token.strip()
+        if token and token in blob:
+            score += 1.0
+    return score
+
+
+def category_score(text: str, cat_map: list[tuple[str, list[str]]]) -> float:
+    blob = text.lower()
+    score = 0.0
+    for _, kws in cat_map:
+        for kw in kws:
+            if kw.lower() in blob:
+                score += 1.0
+    return score
+
+
+def rank_results(results: list[dict], query: str, rank_by: str, cat_map: list[tuple[str, list[str]]],
+                 source_filter: str = "") -> list[dict]:
+    ranked = []
+    author_terms = split_items(source_filter)
+    for item in results:
+        blob = " ".join(str(item.get(k, "")) for k in ("title", "snippet", "url"))
+        if rank_by == "hotness":
+            score = hotness_score(blob) + relevance_score(blob, query)
+            note = "爆款线索"
+        elif rank_by == "category":
+            score = category_score(blob, cat_map) + relevance_score(blob, query) * 0.2
+            note = "分类匹配"
+        elif rank_by == "author":
+            score = relevance_score(blob, query)
+            for term in author_terms:
+                if term.lower() in blob.lower():
+                    score += 5
+            note = "作者/账号匹配"
+        else:
+            score = relevance_score(blob, query)
+            note = "相关度"
+        it = dict(item)
+        it["rank_score"] = round(score, 2)
+        it["rank_note"] = f"{note}: {it['rank_score']}"
+        ranked.append(it)
+    ranked.sort(key=lambda x: x.get("rank_score", 0), reverse=True)
+    return ranked
+
+
 def main():
     p = argparse.ArgumentParser(description="智能搜索采集 → 分类 Markdown")
     p.add_argument("--config", default=None)
@@ -131,6 +265,9 @@ def main():
     p.add_argument("--category-map", default=None, help="分类映射，如 'AI:大模型,LLM;产品:增长'")
     p.add_argument("--backends", default=None, help="限定后端，逗号分隔，如 anysearch,tavily")
     p.add_argument("--rss-url", action="append", default=None, help="附加 RSS 源（可选）")
+    p.add_argument("--source-scope", default=None, choices=sorted(SOURCE_SCOPES), help="采集来源范围")
+    p.add_argument("--source-filter", default=None, help="限定网站、作者、账号或栏目，可写多行")
+    p.add_argument("--rank-by", default=None, choices=sorted(RANK_LABELS), help="结果排序方式")
     p.add_argument("--max-per-query", type=int, default=5)
     p.add_argument("--default-category", default="综合")
     p.add_argument("--no-fetch", action="store_true", help="只列 URL，不抓正文")
@@ -164,6 +301,9 @@ def main():
     default_cat = a.default_category or scfg.get("default_category") or "综合"
     rss_urls = a.rss_url or scfg.get("rss_urls") or []
     only = [b.strip() for b in (a.backends or scfg.get("backends") or "").split(",") if b.strip()] or None
+    source_scope = a.source_scope or scfg.get("source_scope") or "public_web"
+    source_filter = a.source_filter or scfg.get("source_filter") or ""
+    rank_by = a.rank_by or scfg.get("rank_by") or "hotness"
     out_dir = a.output_dir or (config.get("paths", {}) or {}).get("output_dir") or os.path.join(os.getcwd(), "output")
     os.makedirs(out_dir, exist_ok=True)
 
@@ -202,11 +342,14 @@ def main():
         return
 
     # 3) 真实采集
-    import feedparser  # 延迟导入
     seen = set()
     for q in queries:
+        search_query = scoped_query(q, source_scope, source_filter)
         _log(f"\n【检索】{q}")
-        results = sb.search_all(q, n=a.max_per_query, only=only)
+        _log(f"  来源范围: {source_scope_label(source_scope)}；排序: {RANK_LABELS.get(rank_by, rank_by)}")
+        if search_query != q:
+            _log(f"  实际检索: {search_query}")
+        results = rank_results(sb.search_all(search_query, n=a.max_per_query, only=only), q, rank_by, cat_map, source_filter)
         for it in results:
             if it["url"] in seen:
                 continue
@@ -220,7 +363,25 @@ def main():
             cat = classify(it["title"], it["url"], q, cat_map, default_cat)
             path = write_markdown(out_dir, cat, it["title"], it["url"],
                                   md or it["snippet"], q, it["backend"], [cat])
-            rows.append({"title": it["title"], "url": it["url"], "category": cat, "path": path})
+            rows.append({
+                "title": it["title"],
+                "url": it["url"],
+                "category": cat,
+                "query": q,
+                "path": path,
+                "source_scope": source_scope_label(source_scope),
+                "rank_note": it.get("rank_note", ""),
+            })
+
+    feedparser = None
+    if rss_urls:
+        try:
+            import feedparser as _feedparser  # 延迟导入；纯搜索不依赖 RSS 解析
+            feedparser = _feedparser
+        except ImportError:
+            _log("\n⚠️ RSS 解析组件 feedparser 未安装，无法处理 RSS 源。")
+            _log("   普通搜索不受影响；RSS 自动归档需先补齐 Python 依赖。")
+            sys.exit(2)
 
     for u in rss_urls:
         _log(f"\n【RSS】{u}")

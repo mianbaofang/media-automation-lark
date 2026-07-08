@@ -36,6 +36,9 @@
     ],
     "category_map": "AI:大模型,LLM,Agent;产品:增长,PM,运营;技术:Python,架构,RAG",
     "default_category": "综合",
+    "source_scope": "public_web",
+    "source_filter": "",
+    "rank_by": "hotness",
     "backends": "",
     "rss_urls": []
   },

@@ -30,7 +30,7 @@ When running a content account, the exhausting part is often not one single crea
 
 Each step is simple on its own, but together they fragment attention. Materials end up scattered across downloads, chats, and browser bookmarks. Metric review turns into copy-paste. A topic can move from search to fetch to cleanup to archive before anyone has really judged whether it is worth doing.
 
-I built this project to put those repeated transfers into a local, previewable workflow: dry-run first, then decide whether to fetch, convert, analyze, and write to Feishu/Lark. People keep the judgment, taste, and creative choices; scripts handle the repeated movement that should not consume attention every day.
+I built this project to put those repeated transfers into a local, previewable workflow: preview locally first, then decide whether to fetch, convert, analyze, and write to Feishu/Lark. People keep the judgment, taste, and creative choices; scripts handle the repeated movement that should not consume attention every day.
 
 A local automation toolkit that connects content ingestion, search collection, material analysis, analytics dashboards, and Feishu/Lark archiving. It uses Python scripts to orchestrate RSS/API inputs, optional search backends, file-to-Markdown conversion, LLM extraction, and `lark-cli` writes to Bitable, Docs, and bot notifications.
 
@@ -77,15 +77,21 @@ lark-cli config init
 lark-cli auth login --recommend
 ```
 
-## Offline Demo
+## Beginner Entry: Ask An Agent To Open The Panel
 
-Run a no-network, no-Feishu demo to verify Markdown generation and categorization:
+End users do not need to memorize script arguments. In an Agent that supports this Skill, ask it to "open the Media Automation Lark panel" or "check my environment first". The Agent should launch the local panel and return the URL.
+
+The default panel URL is <http://127.0.0.1:8787>. The panel defaults to local preview. It exposes six plain-language tasks: check readiness, try a safe sample run, organize a webpage or file, collect public content by topic, archive RSS updates, and generate dashboards before scheduling. Feishu writes only run when you explicitly check "write to Feishu".
+
+## Safe Sample Run
+
+If you are not sure what the project produces, run the built-in sample first. It uses no network and writes nothing to Feishu:
 
 ```bash
 python scripts/collector.py --offline-demo --category-map "AI:LLM,Agent;Product:growth" --output-dir output_demo --no-archive --no-notify --no-polish
 ```
 
-Then open `output_demo/index.md`.
+Then open `output_demo/index.md`. Once the output shape feels right, switch to real webpages, files, RSS feeds, or search topics.
 
 ## Common Commands
 
@@ -93,7 +99,7 @@ Then open `output_demo/index.md`.
 python scripts/env-check.py
 python scripts/install_backends.py --interactive
 python scripts/content-archiver.py --rss-url "https://example.com/feed.xml" --dry-run
-python scripts/collector.py --query "LLM applications" --category-map "AI:LLM,Agent" --dry-run
+python scripts/collector.py --query "LLM applications" --source-scope bilibili --rank-by hotness --category-map "AI:LLM,Agent" --dry-run
 python scripts/data-collector.py --fetch --platform bilibili --dry-run
 python scripts/material-manager.py --file "./report.pdf" --dry-run
 python -m pytest tests
@@ -110,6 +116,8 @@ Backends are detected at runtime. Installed backends are used; missing backends 
 - `http`: built-in requests + BeautifulSoup fallback.
 
 See [references/search-backends.md](references/search-backends.md).
+
+In the panel, search collection asks for source scope, topic list, and ranking goal. Hotness ranking only uses publicly visible signals in search-result text, such as reads, views, plays, likes, saves, comments, or shares. If those signals are unavailable, it falls back to relevance.
 
 ## Safety
 
@@ -147,12 +155,13 @@ This project builds on the following open-source projects and tool ecosystems:
 - README demo GIF: `assets/media-automation-lark-demo.gif`
 - Lightweight workflow animation: `assets/media-automation-lark-flow.svg`
 - Static workflow image: `media-automation-skill-workflow.png`
+- Agent panel entrypoint: `scripts/panel-agent.py`
 
 ## Status
 
 Current public version: [`v0.1.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.1.0).
 
-- Verification: `python -m pytest tests`, 11 tests passed.
+- Verification: `python -m pytest tests`.
 - Animation: the README uses a lightweight GIF preview; the music-backed MP4 is attached to the `v0.1.0` GitHub Release.
 - Source: the HyperFrames timeline source lives in `hyperframes/media-automation-lark-timeline/`.
 

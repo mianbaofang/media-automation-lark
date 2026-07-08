@@ -1,4 +1,10 @@
 interface:
   display_name: "自媒体自动化（飞书 CLI）"
   short_description: "lark-cli 内容归档/数据可视化/素材管理 + 全网搜索采集分类 + renhua 去AI味"
-  default_prompt: "搭建一个自媒体自动化工作流：用 lark-cli 把 RSS/API 内容、多平台数据指标、文章/图片/PDF 素材抓取、结构化并归档到飞书多维表格与云文档，并配置定时任务；还可按检索词自动采集全网文章存成分类 Markdown（场景 D）。先跑 scripts/env-check.py --auto-install 检测环境，再按场景 A/B/C/D 执行对应脚本。产出的中文文字默认经 renhua（人话）去 AI 味润色。"
+  default_prompt: "搭建一个自媒体自动化工作流：用 lark-cli 把 RSS/API 内容、多平台数据指标、文章/图片/PDF 素材抓取、结构化并归档到飞书多维表格与云文档，并配置定时任务；还可按选题清单自动采集公开网页，按来源范围和排序目标整理成分类 Markdown（场景 D）。如果用户说不会用、打开面板、开始配置或先检查环境，直接调用 scripts/panel-agent.py start --open 并把返回 URL 给用户，不要求用户输入命令。面板用六个普通任务入口呈现：检查环境、安全样例、网页/文件整理、选题采集、RSS 订阅、看板和定时准备。正式写入前先做本地预览验证。产出的中文文字默认经 renhua（人话）去 AI 味润色。"
+actions:
+  - id: open_control_panel
+    label: "打开本地控制面板"
+    entrypoint: "scripts/panel-agent.py start --open"
+    url: "http://127.0.0.1:8787"
+    safe_default: "面板默认本地预览；用户勾选写入飞书后才执行写入。"
