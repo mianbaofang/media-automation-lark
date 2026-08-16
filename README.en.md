@@ -34,6 +34,13 @@ A local content-automation toolkit for creators and small teams. It supports Fei
 
 ## Quick Start
 
+If you only need the Agent Skill, preview it first and then install it with GitHub CLI:
+
+```bash
+gh skill preview mianbaofang/media-automation-lark media-automation-lark
+gh skill install mianbaofang/media-automation-lark media-automation-lark --agent codex --scope user
+```
+
 Run the offline demo first to inspect the output shape. It needs no network access, Feishu permission, or API key:
 
 ```bash

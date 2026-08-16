@@ -1,6 +1,6 @@
 # Media Automation Lark / 自媒体自动化工作流（飞书 CLI 版）
 
-面向内容创作者和小团队的本地内容自动化工具：把 RSS/API、公开网页搜索、网页与文件素材、平台指标整理成 Markdown、Excel/HTML 看板，并按需写入飞书（Feishu/Lark）多维表格、云文档和机器人通知。
+面向内容创作者和小团队的本地内容自动化工具：把 RSS/API、公开网页搜索、网页与文件素材、平台指标整理成 Markdown、Excel/HTML 看板，并按需写入飞书（Feishu/Lark）多维表格、云文档和机器人通知。它覆盖 Feishu content automation，也适合做 RSS to Feishu 归档。
 
 如果你要做 Feishu/Lark 内容自动化，把 RSS、公开网页和文件整理后归档，这个工具会先生成本地预览，再由你决定是否写入飞书。
 
@@ -35,6 +35,13 @@
 </p>
 
 ## 快速开始
+
+如果只需要安装这个 Agent Skill，而不是先克隆源码，可以先预览再安装：
+
+```bash
+gh skill preview mianbaofang/media-automation-lark media-automation-lark
+gh skill install mianbaofang/media-automation-lark media-automation-lark --agent codex --scope user
+```
 
 先用离线演示确认输出格式，不需要联网、飞书权限或 API 密钥：
 

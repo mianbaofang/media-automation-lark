@@ -21,9 +21,11 @@ The links and release assets in this section document the historical v0.1.0 publ
 - Music-backed MP4: attached to the `v0.1.0` GitHub Release
 - Tests: `python -m pytest tests`
 
-## v0.3.0 Local Pre-Review
+## v0.3.0 Published Verification
 
-- Status: local release materials prepared for review; not published by this checklist.
+- Status: published and verified against the public Git tag and GitHub Release on 2026-08-16.
+- Repository: `https://github.com/mianbaofang/media-automation-lark`
+- Release: `https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0`
 - Canonical repository Skill entrypoint: `skills/media-automation-lark/SKILL.md`
 - ZIP install entrypoint: `media-automation-lark/SKILL.md` after extracting `media-automation-lark-skill-v0.3.0.zip`
 - Chinese README preview asset: `assets/media-automation-lark-demo.gif` (960x540, 5 fps, 36 seconds)
@@ -34,14 +36,14 @@ The links and release assets in this section document the historical v0.1.0 publ
 
 ## Recommended GitHub Repository Settings
 
-- Description: `Local media automation toolkit for Feishu/Lark: content archiving, search collection, material management, and analytics dashboards.`
-- Topics: `python`, `feishu`, `lark`, `bitable`, `content-automation`, `media-workflow`, `rss`, `markdown`, `automation`, `dashboard`
+- Description: `Local Feishu/Lark content automation Agent Skill for RSS to Feishu archiving, public web collection, material management, and analytics dashboards.`
+- Topics: `python`, `feishu`, `lark`, `bitable`, `content-automation`, `feishu-automation`, `rss`, `rss-to-feishu`, `content-archiving`, `media-workflow`, `web-scraping`, `data-collection`, `markdown`, `dashboard`, `agent-skill`, `local-first`
 - First release title: `v0.1.0 - Local Media Automation for Feishu/Lark`
 - Website/social preview: use `assets/media-automation-lark-demo.gif` or `media-automation-skill-workflow.png`
 
 ## Historical v0.1.0 Publication Commands
 
-The following commands are retained only as a record of the original v0.1.0 setup. Do not rerun them for the current repository; in particular, the repository is already initialized and v0.3.0 requires a separate review and release decision.
+The following commands are retained only as a record of the original v0.1.0 setup. Do not rerun them for the current repository; the published v0.3.0 release uses the versioned Skill ZIP described above.
 
 ```bash
 python -m pytest tests
