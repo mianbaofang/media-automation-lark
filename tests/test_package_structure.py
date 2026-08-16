@@ -10,6 +10,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / "skills" / "media-automation-lark"
+EVALS = ROOT / "evals"
+REPORTS = ROOT / "reports" / "skill-evidence"
 PRIVATE_PATH = re.compile(r"(?:[A-Za-z]:\\(?:Users|Object)\\|/(?:Users|home)/)", re.IGNORECASE)
 
 
@@ -29,22 +31,25 @@ def test_canonical_package_has_one_identity_and_required_runtime_files():
     package_name = next(line for line in (PACKAGE / "SKILL.md").read_text(encoding="utf-8").splitlines() if line.startswith("name:"))
     assert package_name == "name: media-automation-lark"
     assert not (ROOT / "SKILL.md").exists()
+    assert not (PACKAGE / "evals").exists()
+    assert not (PACKAGE / "reports").exists()
     assert (PACKAGE / "security" / "network_policy.json").is_file()
     assert (PACKAGE / "security" / "permission_policy.json").is_file()
 
 
 def test_package_declares_reproducible_trigger_evidence():
     manifest = json.loads((PACKAGE / "manifest.json").read_text(encoding="utf-8"))
-    cases_path = PACKAGE / "evals" / "trigger_cases.json"
-    config_path = PACKAGE / "evals" / "semantic_config.json"
-    output_schema_path = PACKAGE / "evals" / "output" / "schema.json"
-    output_cases_path = PACKAGE / "evals" / "output" / "cases.jsonl"
+    cases_path = EVALS / "trigger_cases.json"
+    config_path = EVALS / "semantic_config.json"
+    output_schema_path = EVALS / "output" / "schema.json"
+    output_cases_path = EVALS / "output" / "cases.jsonl"
     cases = json.loads(cases_path.read_text(encoding="utf-8"))
 
-    assert "evals" in manifest["factory_components"]
+    assert "evals" not in manifest["factory_components"]
     assert "reports" not in manifest["factory_components"]
-    assert "reports" in manifest["evidence_components"]
-    assert "evals/output" in manifest["evidence_components"]
+    assert "source-repo/evals" in manifest["evidence_components"]
+    assert "source-repo/reports/skill-evidence" in manifest["evidence_components"]
+    assert "evals" in manifest["archive_excludes"]
     assert "audit reports" in manifest["archive_excludes"]
     assert "output eval fixtures" in manifest["archive_excludes"]
     assert cases_path.is_file()
@@ -57,7 +62,7 @@ def test_package_declares_reproducible_trigger_evidence():
 
 
 def test_public_yao_reports_do_not_expose_machine_paths():
-    reports = PACKAGE / "reports"
+    reports = REPORTS
     for path in reports.iterdir():
         if path.is_file():
             assert not PRIVATE_PATH.search(path.read_text(encoding="utf-8")), path
@@ -86,7 +91,7 @@ def test_deterministic_archive_excludes_promotional_material(tmp_path, monkeypat
     assert not any(name.lower().endswith((".gif", ".mp4", ".webm", ".png", ".jpg", ".jpeg")) for name in names)
     assert not any("README" in name or "/reports/" in name or "/hyperframes/" in name for name in names)
     assert not any("/output_panel/" in name for name in names)
-    assert not any("/evals/output/" in name for name in names)
+    assert not any("/evals/" in name for name in names)
 
 
 def test_package_files_prunes_case_insensitive_non_runtime_trees(tmp_path):

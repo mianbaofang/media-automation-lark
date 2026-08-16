@@ -5,7 +5,7 @@
 
 ## 结论
 
-`v0.3.0` 是当前公开版本。本报告只记录当前仓库和远程 GitHub Release 中可以追溯到文件或命令输出的事实，不能替代搜索收录或下载数据的公开验证。
+`v0.3.1` 是当前公开版本。本报告只记录当前仓库和远程 GitHub Release 中可以追溯到文件或命令输出的事实，不能替代搜索收录或下载数据的公开验证。
 
 ## 当前已确认
 
@@ -14,7 +14,7 @@
 | Skill 入口 | 唯一维护中的入口为 `skills/media-automation-lark/SKILL.md`；发布 ZIP 的安装入口为其顶层目录内的 `SKILL.md` |
 | 运行边界 | 默认先做本地预览；`--offline-demo` 与可能读取真实输入的 `--dry-run` 分开说明 |
 | 安全边界 | README、`DISCLAIMER.md` 和 `SECURITY.md` 均要求遵守适用法律、平台 ToS 与 `robots.txt`，不绕过登录、验证码、付费墙或风控 |
-| 公开版本 | 远程存在 `v0.3.0` Git Tag 和 GitHub Release；Release 提供版本化 Skill ZIP 与 SHA-256 校验文件 |
+| 公开版本 | 远程存在 `v0.3.1` Git Tag 和 GitHub Release；Release 提供版本化 Skill ZIP 与 SHA-256 校验文件 |
 | 双语材料 | `README.md` 为中文入口，`README.en.md` 为英文入口；两者保留各自的首屏、快速开始、动机、免责声明、能力和发布信息结构 |
 | 预览媒体 | 中英文 README 动图的规格记录为 960×540、5 fps、36 秒；发布前仍应对最终工作树重新核验 |
 

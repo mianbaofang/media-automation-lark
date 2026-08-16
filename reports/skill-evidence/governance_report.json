@@ -1,25 +1,27 @@
 {
   "ok": true,
   "failures": [],
-  "warnings": [],
+  "warnings": [
+    "Maturity tier says production but governance score is 70/100, below the recommended minimum 80."
+  ],
   "details": {
-    "skill_dir": ".",
+    "skill_dir": "skills/media-automation-lark",
     "manifest_present": true,
     "frontmatter_name": "media-automation-lark",
     "manifest_name": "media-automation-lark",
     "status": "active",
     "maturity_tier": "production",
     "review_cadence": "per-release",
-    "governance_score": 85,
+    "governance_score": 70,
     "declared_maturity_minimum": 80,
-    "computed_governance_band": "production",
-    "computed_maturity_tier": "production",
+    "computed_governance_band": "reusable",
+    "computed_maturity_tier": "reusable",
     "score_breakdown": {
       "metadata_integrity": 20,
       "ownership_and_review": 20,
-      "boundary_and_eval": 15,
+      "boundary_and_eval": 5,
       "operational_assets": 20,
-      "maintenance_evidence": 10
+      "maintenance_evidence": 5
     }
   }
 }

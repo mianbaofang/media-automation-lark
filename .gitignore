@@ -7,6 +7,11 @@ config.json
 output/
 output_*/
 reports/*.tmp
+# Keep source-level Skill evaluation fixtures versioned; runtime output dirs
+# elsewhere remain ignored by the rules above.
+!evals/
+!evals/output/
+!evals/output/**
 hyperframes/**/renders/
 hyperframes/**/snapshots/
 

@@ -28,14 +28,6 @@ COMMAND=<python> <repo>/skills/media-automation-lark/scripts/collector.py --conf
 DURATION_MS=<elapsed>
 STDOUT:
 STDERR:
-【后端检测】
-  ✓ anysearch    AnySearch（免key也能用）  — 可用
-  ✓ tavily       Tavily（需API key）  — 可用
-  ✓ autocli      AutoCLI（复用Chrome登录态，read出Markdown）  — 可用
-  ✓ agent_reach  Agent Reach（15平台，交互编排）  — 交互模式可用
-  ✓ multi_search Multi Search Engine（17引擎，免key，依赖WebFetch）  — 交互模式可用
-  ✓ http         HTTP 兜底（requests+BeautifulSoup）  — 可用
-
 [OFFLINE-DEMO] 已写入 2 篇示例到 <tmp>/search-output
   索引: <tmp>/search-output/index.md
 ARTIFACT AI/<date>-Agent_在自媒体运营中的用法.md:
@@ -112,7 +104,7 @@ CASE=metrics-dashboard
 EXECUTION_MODE=command
 PROVIDER_BACKED=false
 EXIT_CODE=0
-COMMAND=<python> <repo>/skills/media-automation-lark/scripts/data-collector.py --source <repo>/skills/media-automation-lark/evals/output/fixtures/metrics.json --config <tmp>/dashboard-config.json --dry-run --no-notify
+COMMAND=<python> <repo>/skills/media-automation-lark/scripts/data-collector.py --source <repo>/evals/output/fixtures/metrics.json --config <tmp>/dashboard-config.json --dry-run --no-notify
 DURATION_MS=<elapsed>
 STDOUT:
 {"ok": true, "summary": {"total_reads": 1500, "total_likes": 150, "total_comments": 75, "total_shares": 75, "engagement_rate": 0.2, "days": 2, "platforms": ["bilibili"]}, "written": 0, "dashboard": "<path>", "insight": {}}
@@ -218,9 +210,9 @@ Media Automation Lark
 状态
 未检测到 lark-cli
 配置文件
-<repo>/skills/media-automation-lark/output_panel/gui-config.json
+面板状态 / gui-config.json
 输出目录
-<repo>/skills/media-automation-lark/output_panel/output
+面板状态 / output
 本地看板
 尚未生成
 样例结果

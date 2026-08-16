@@ -51,7 +51,7 @@ def test_output_eval_generates_reproducible_local_evidence():
             assert case["execution"]["mode"] == "command"
             assert case["execution"]["provider_backed"] is False
             for relative in case.get("input_files", []):
-                assert (ROOT / "skills" / "media-automation-lark" / "evals" / "output" / relative).exists()
+                assert (ROOT / "evals" / "output" / relative).exists()
 
         blind_text = (report_dir / "output_blind_review_pack.json").read_text(encoding="utf-8")
         assert "variant_a_role" not in blind_text

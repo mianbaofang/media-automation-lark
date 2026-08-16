@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "skill_dir": ".",
+  "skill_dir": "skills/media-automation-lark",
   "summary": {
-    "scanned_files": 29,
+    "scanned_files": 27,
     "script_count": 12,
     "internal_module_count": 0,
     "secret_findings": 0,
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 1,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 29,
-    "package_sha256": "a02a2422b8120bf5053148547295da06faf0f0717cf09c0fa94d2a99d0dcab82"
+    "package_hash_file_count": 27,
+    "package_sha256": "f0c669f2de444a8346223e4f28e4c968c9ae004d4d22ef6f0837bdce2db05c9b"
   },
   "failures": [],
   "warnings": [
@@ -357,7 +357,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: gui-panel.py [-h] [--host HOST] [--port PORT] [--open]\n\n启动 Media Automation Lark 本地控制面板\n\noptions:\n  -h, --help   show this help message and exit\n  --host HOST\n  --port PORT\n  --open       启动后尝试打开默认浏览器",
+        "stdout_excerpt": "usage: gui-panel.py [-h] [--host HOST] [--port PORT] [--state-dir STATE_DIR]\n                    [--lang {zh-CN,en}] [--open]\n\n启动 Media Automation Lark 本地控制面板\n\noptions:\n  -h, --help            show this help message and exit\n  --host HOST\n ",
         "stderr_excerpt": ""
       },
       {
@@ -387,7 +387,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: panel-agent.py [-h] [--host HOST] [--port PORT] [--open]\n                      [{start,stop,status}]\n\nAgent launcher for Media Automation Lark control panel\n\npositional arguments:\n  {start,stop,status}\n\noptions:\n  -h, --help         ",
+        "stdout_excerpt": "usage: panel-agent.py [-h] [--host HOST] [--port PORT] [--state-dir STATE_DIR]\n                      [--lang {zh-CN,en}] [--open]\n                      [{start,stop,status}]\n\nAgent launcher for Media Automation Lark control panel\n\npositiona",
         "stderr_excerpt": ""
       }
     ],
@@ -545,7 +545,7 @@
     "remote_metadata_policy": "allow-metadata-only"
   },
   "artifacts": {
-    "json": "reports/security_trust_report.json",
-    "markdown": "reports/security_trust_report.md"
+    "json": "reports/skill-evidence/security_trust_report.json",
+    "markdown": "reports/skill-evidence/security_trust_report.md"
   }
 }

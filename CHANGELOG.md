@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.3.1 - 2026-08-16
+
+### Fixed
+
+- Moved evaluation fixtures and Yao evidence out of `skills/media-automation-lark/`, so GitHub CLI installation and the versioned ZIP now contain the same runtime-only package.
+- Tracked the source-level output-evaluation fixtures under `evals/` and kept generated evidence under `reports/skill-evidence/`.
+- Added the `agent-skills` repository topic and aligned the Chinese discovery phrases with the English README.
+
+### Verification
+
+- `python -m pytest tests`
+- `quick_validate.py` and Yao `validate_skill.py`
+- Trigger and output evaluations
+- GitHub launch and discovery audits
+
 ## v0.3.0 - 2026-08-16
 
 ### Added

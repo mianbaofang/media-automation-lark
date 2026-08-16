@@ -1,0 +1,11 @@
+{
+  "search": {
+    "category_map": "AI:LLM,Agent",
+    "default_category": "综合",
+    "source_scope": "public_web",
+    "rank_by": "relevance",
+    "backends": ""
+  },
+  "text": {"polish": false},
+  "paths": {"output_dir": "./output"}
+}

@@ -1,8 +1,8 @@
 {
   "name": "media-automation-lark",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "owner": "mianbaofang",
-  "updated_at": "2026-08-15",
+  "updated_at": "2026-08-16",
   "status": "active",
   "maturity_tier": "production",
   "lifecycle_stage": "production",
@@ -15,17 +15,17 @@
     "assets/cron-examples",
     "references",
     "scripts",
-    "security",
-    "evals"
+    "security"
   ],
   "evidence_components": [
-    "reports",
-    "evals/output"
+    "source-repo/evals",
+    "source-repo/reports/skill-evidence"
   ],
   "archive_excludes": [
     "README files",
     "output",
     "output_panel",
+    "evals",
     "reports",
     "hyperframes",
     "mp4",
@@ -43,5 +43,5 @@
   "output_contract": "Previewable Markdown, JSON backups, HTML dashboards, and optional Feishu/Lark records; writes are explicit and dry-run capable.",
   "rollback_boundary": "Only generated local output and explicitly selected Feishu/Lark targets may be changed; source files are read-only unless the user requests an import.",
   "network_policy": "HTTPS requests are limited by the runtime URL safety checks and configured search backends; credentials come from environment variables.",
-  "package_scope": "The repository source keeps reports and evals/output as public validation evidence. The installable archive contains runtime Skill files only and excludes README files plus the case-insensitive output, output_panel, reports, hyperframes, mp4, media, and evals/output directories, screenshots, audit reports, and output eval fixtures."
+  "package_scope": "The installable package contains runtime Skill files only. Source-repository validation evidence lives under evals/ (including evals/output/) and reports/skill-evidence/; generated output/, output_panel/, hyperframes/, mp4/, and media/ directories are also excluded from GitHub CLI installs and the versioned archive."
 }

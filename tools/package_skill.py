@@ -48,15 +48,14 @@ REQUIRED_FILES = (
     "scripts/search_backends.py",
     "security/network_policy.json",
     "security/permission_policy.json",
-    "evals/semantic_config.json",
-    "evals/trigger_cases.json",
 )
 # These files document the repository's production output contract. They are
-# required for source validation but are deliberately excluded from the
-# installable archive with the rest of evals/output.
+# required for source validation but live outside the installable package.
 REQUIRED_SOURCE_EVIDENCE_FILES = (
     "evals/output/schema.json",
     "evals/output/cases.jsonl",
+    "evals/semantic_config.json",
+    "evals/trigger_cases.json",
 )
 EXCLUDED_DIRS = {
     "__pycache__",
@@ -65,13 +64,14 @@ EXCLUDED_DIRS = {
     "venv",
     "output",
     "output_panel",
+    "evals",
     "reports",
     "hyperframes",
     "mp4",
     "media",
 }
 EXCLUDED_RELATIVE_DIRS = {("evals", "output")}
-MANIFEST_EXCLUDED_PATHS = {"output", "output_panel", "reports", "hyperframes", "mp4", "media", "evals/output"}
+MANIFEST_EXCLUDED_PATHS = {"output", "output_panel", "evals", "reports", "hyperframes", "mp4", "media", "evals/output"}
 FORBIDDEN_SUFFIXES = {".gif", ".mp4", ".webm", ".png", ".jpg", ".jpeg", ".zip", ".sha256"}
 SENSITIVE_SUFFIXES = {".key", ".pem", ".p12", ".pfx", ".jks", ".keystore"}
 SENSITIVE_STEMS = {
@@ -228,7 +228,7 @@ def validate(root: Path, skill_root: Path, files: list[tuple[Path, Path]]) -> li
         if not (skill_root / relative).is_file():
             failures.append(f"missing required file: {relative}")
     for relative in REQUIRED_SOURCE_EVIDENCE_FILES:
-        if not (skill_root / relative).is_file():
+        if not (root / relative).is_file():
             failures.append(f"missing required source evidence: {relative}")
 
     try:
@@ -242,17 +242,20 @@ def validate(root: Path, skill_root: Path, files: list[tuple[Path, Path]]) -> li
             failures.append("manifest canonical_path must point to the packaged Skill")
         if not re.fullmatch(r"\d+\.\d+\.\d+", str(manifest.get("version") or "")):
             failures.append("manifest version must be semantic")
-        if "evals/output" not in (manifest.get("evidence_components") or []):
-            failures.append("manifest must declare evals/output as evidence")
+        evidence_components = {str(value).casefold() for value in (manifest.get("evidence_components") or [])}
+        if "source-repo/evals" not in evidence_components:
+            failures.append("manifest must declare source-repo/evals as evidence")
+        if "source-repo/reports/skill-evidence" not in evidence_components:
+            failures.append("manifest must declare source-repo/reports/skill-evidence as evidence")
         if "output eval fixtures" not in (manifest.get("archive_excludes") or []):
             failures.append("manifest must exclude output eval fixtures from the archive")
-        if "evals/output" not in str(manifest.get("package_scope") or ""):
-            failures.append("manifest package_scope must describe evals/output")
+        package_scope = str(manifest.get("package_scope") or "").casefold()
+        if "evals/" not in package_scope or "reports/skill-evidence/" not in package_scope:
+            failures.append("manifest package_scope must describe source evidence outside the package")
         declared_excludes = {str(value).casefold() for value in (manifest.get("archive_excludes") or [])}
         for excluded in MANIFEST_EXCLUDED_PATHS:
             if excluded.casefold() not in declared_excludes:
                 failures.append(f"manifest must declare archive exclusion: {excluded}")
-        package_scope = str(manifest.get("package_scope") or "").casefold()
         for excluded in MANIFEST_EXCLUDED_PATHS:
             if excluded.casefold() not in package_scope:
                 failures.append(f"manifest package_scope must describe {excluded}")
@@ -273,7 +276,7 @@ def validate(root: Path, skill_root: Path, files: list[tuple[Path, Path]]) -> li
     # Output-eval cases remain public source evidence even though they are not
     # packaged. Keep them portable so the repository can be cloned elsewhere.
     for relative in REQUIRED_SOURCE_EVIDENCE_FILES:
-        path = skill_root / relative
+        path = root / relative
         if not path.is_file():
             continue
         try:

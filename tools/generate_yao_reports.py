@@ -64,7 +64,7 @@ def main() -> int:
 
     root = Path(args.repo_root).resolve()
     skill_root = (root / PACKAGE_RELATIVE).resolve()
-    reports = skill_root / "reports"
+    reports = root / "reports" / "skill-evidence"
     yao_root = resolve_yao_root(args.yao_meta_root)
     trust_script = yao_root / "scripts" / "trust_check.py"
     governance_script = yao_root / "scripts" / "governance_check.py"
@@ -97,17 +97,17 @@ def main() -> int:
     replacements = [
         (str(skill_root), "."),
         (skill_root.as_posix(), "."),
-        (str(root), "../.."),
-        (root.as_posix(), "../.."),
+        (str(root), "."),
+        (root.as_posix(), "."),
     ]
     trust = replace_paths(trust, replacements)
     governance = replace_paths(governance, replacements)
-    trust["skill_dir"] = "."
+    trust["skill_dir"] = "skills/media-automation-lark"
     trust["artifacts"] = {
-        "json": "reports/security_trust_report.json",
-        "markdown": "reports/security_trust_report.md",
+        "json": "reports/skill-evidence/security_trust_report.json",
+        "markdown": "reports/skill-evidence/security_trust_report.md",
     }
-    governance.setdefault("details", {})["skill_dir"] = "."
+    governance.setdefault("details", {})["skill_dir"] = "skills/media-automation-lark"
     trust_markdown = replace_paths(trust_markdown, replacements)
 
     reports.mkdir(parents=True, exist_ok=True)

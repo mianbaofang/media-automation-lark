@@ -26,9 +26,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "media-automation-lark"
-EVAL_ROOT = SKILL_ROOT / "evals" / "output"
+EVAL_ROOT = ROOT / "evals" / "output"
 FIXTURES = EVAL_ROOT / "fixtures"
-REPORT_ROOT = SKILL_ROOT / "reports"
+REPORT_ROOT = ROOT / "reports" / "skill-evidence"
 BLIND_SEED = "yao-output-eval-blind-v1"
 
 
