@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-`v0.1.x` receives security fixes while this project is actively maintained.
+The current public release line, `v0.2.x`, receives security fixes while this project is actively maintained. The unreleased `v0.3.0` local candidate is not a published support promise; its support status will be stated in the release notes if it is published.
 
 ## Reporting A Vulnerability
 

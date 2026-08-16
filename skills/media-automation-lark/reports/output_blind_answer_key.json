@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "seed": "yao-output-eval-blind-v1",
+  "summary": {
+    "pair_count": 5,
+    "with_skill_expected_count": 5,
+    "baseline_expected_count": 0
+  },
+  "answers": [
+    {
+      "case_id": "offline-search-archive",
+      "variant_a_role": "with_skill",
+      "variant_b_role": "baseline",
+      "expected_winner_role": "with_skill",
+      "expected_winner_variant": "A",
+      "score_winner_role": "with_skill",
+      "delta": 100.0
+    },
+    {
+      "case_id": "metrics-dashboard",
+      "variant_a_role": "baseline",
+      "variant_b_role": "with_skill",
+      "expected_winner_role": "with_skill",
+      "expected_winner_variant": "B",
+      "score_winner_role": "with_skill",
+      "delta": 100.0
+    },
+    {
+      "case_id": "material-local-preview",
+      "variant_a_role": "baseline",
+      "variant_b_role": "with_skill",
+      "expected_winner_role": "with_skill",
+      "expected_winner_variant": "B",
+      "score_winner_role": "with_skill",
+      "delta": 100.0
+    },
+    {
+      "case_id": "panel-safe-default",
+      "variant_a_role": "baseline",
+      "variant_b_role": "with_skill",
+      "expected_winner_role": "with_skill",
+      "expected_winner_variant": "B",
+      "score_winner_role": "with_skill",
+      "delta": 100.0
+    },
+    {
+      "case_id": "unsafe-url-boundary",
+      "variant_a_role": "with_skill",
+      "variant_b_role": "baseline",
+      "expected_winner_role": "with_skill",
+      "expected_winner_variant": "A",
+      "score_winner_role": "with_skill",
+      "delta": 100.0
+    }
+  ]
+}

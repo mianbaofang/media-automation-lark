@@ -1,6 +1,8 @@
 """纯函数与降级路径的单测。运行：pytest tests/"""
 import importlib.util
 import os
+import sys
+from types import ModuleType, SimpleNamespace
 
 import pytest
 
@@ -36,6 +38,14 @@ def _load_gui_panel():
 def _load_panel_agent():
     p = os.path.join(os.path.dirname(__file__), "..", "scripts", "panel-agent.py")
     spec = importlib.util.spec_from_file_location("panel_agent", p)
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+def _load_material_manager():
+    p = os.path.join(os.path.dirname(__file__), "..", "scripts", "material-manager.py")
+    spec = importlib.util.spec_from_file_location("material_manager", p)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
     return m
@@ -84,6 +94,34 @@ def test_polish_no_key_degrades():
     # 无 LLM key 时原样返回，不抛
     out = common.polish_text("真正重要的是保住判断。", {"text": {"polish": True}, "llm": {}})
     assert out == "真正重要的是保住判断。"
+
+
+def test_pdf_fallback_uses_pypdf_reader(monkeypatch, tmp_path):
+    mm = _load_material_manager()
+    called = {}
+
+    class FakePage:
+        def extract_text(self):
+            return "PDF fallback text"
+
+    class FakePdfReader:
+        def __init__(self, path):
+            called["path"] = path
+            self.pages = [FakePage()]
+
+    fake_pypdf = ModuleType("pypdf")
+    fake_pypdf.PdfReader = FakePdfReader
+    sample = tmp_path / "fallback.pdf"
+    sample.write_bytes(b"%PDF-placeholder")
+    monkeypatch.setattr(mm.file2md, "is_available", lambda: False)
+    monkeypatch.setitem(sys.modules, "pypdf", fake_pypdf)
+
+    title, text, pages = mm.read_pdf(str(sample))
+
+    assert title == "fallback.pdf"
+    assert text == "PDF fallback text"
+    assert pages == 1
+    assert called["path"] == str(sample)
 
 
 # ---- search_backends 解析 ----def test_parse_anysearch_md():
@@ -179,6 +217,19 @@ def test_gui_panel_home_does_not_show_manual_start_command():
     assert "python scripts/gui-panel.py" not in html
 
 
+def test_gui_panel_supports_english_locale():
+    gp = _load_gui_panel()
+    gp.configure_language("en")
+    try:
+        html = gp.render_home().decode("utf-8")
+        assert '<html lang="en">' in html
+        assert "Local automation console" in html
+        assert "Try the full workflow" in html
+        assert not any("\u4e00" <= ch <= "\u9fff" for ch in html)
+    finally:
+        gp.configure_language("zh-CN")
+
+
 def test_gui_panel_category_preset_keeps_rules_out_of_main_form():
     gp = _load_gui_panel()
     cmd, _ = gp.build_command(
@@ -258,3 +309,38 @@ def test_panel_agent_payload_has_url_and_status():
     assert data["ok"] is True
     assert data["url"] == "http://127.0.0.1:8787"
     assert data["pid"] == 123
+
+
+def test_panel_agent_forwards_language_to_windows_launcher(monkeypatch, tmp_path):
+    pa = _load_panel_agent()
+    pa.configure_state_dir(tmp_path)
+    monkeypatch.setattr(
+        pa.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=0, stdout="1234", stderr=""),
+    )
+    assert pa.start_windows_process("127.0.0.1", 8799, "en") == 1234
+    launcher = pa.LAUNCHER_FILE.read_text(encoding="utf-8")
+    assert '--lang "en"' in launcher
+
+
+def test_collector_offline_demo_skips_backend_detection(monkeypatch, tmp_path):
+    def fail_detect():
+        raise AssertionError("offline demo must not probe search backends")
+
+    monkeypatch.setattr(col.sb, "detect", fail_detect)
+    monkeypatch.setattr(
+        col.sys,
+        "argv",
+        [
+            "collector.py",
+            "--offline-demo",
+            "--output-dir",
+            str(tmp_path),
+            "--no-polish",
+            "--no-archive",
+            "--no-notify",
+        ],
+    )
+    col.main()
+    assert (tmp_path / "index.md").is_file()

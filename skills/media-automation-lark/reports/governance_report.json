@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "failures": [],
+  "warnings": [],
+  "details": {
+    "skill_dir": ".",
+    "manifest_present": true,
+    "frontmatter_name": "media-automation-lark",
+    "manifest_name": "media-automation-lark",
+    "status": "active",
+    "maturity_tier": "production",
+    "review_cadence": "per-release",
+    "governance_score": 85,
+    "declared_maturity_minimum": 80,
+    "computed_governance_band": "production",
+    "computed_maturity_tier": "production",
+    "score_breakdown": {
+      "metadata_integrity": 20,
+      "ownership_and_review": 20,
+      "boundary_and_eval": 15,
+      "operational_assets": 20,
+      "maintenance_evidence": 10
+    }
+  }
+}

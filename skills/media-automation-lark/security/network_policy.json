@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "default_policy": {
+    "require_https": true,
+    "custom_hosts": "deny-by-default",
+    "review_rule": "Only declared public HTTPS hosts may be contacted; user-provided feed and article URLs remain subject to common.is_safe_url and explicit runtime input."
+  },
+  "scripts": {
+    "scripts\\common.py": {
+      "purpose": "Call the configured LLM endpoint for structured extraction and text polishing.",
+      "allowed_hosts": ["api.openai.com"],
+      "allowed_path_prefixes": ["/v1"],
+      "requires_https": true,
+      "custom_url_policy": "explicit user configuration only after common.is_safe_url validation",
+      "timeout_seconds": 120,
+      "auth": "environment-provided LLM key"
+    },
+    "scripts\\content-archiver.py": {
+      "purpose": "Read user-selected RSS/API sources and archive normalized content.",
+      "allowed_hosts": ["example.com", "api.example.com"],
+      "allowed_path_prefixes": ["/"],
+      "requires_https": true,
+      "custom_url_policy": "explicit user input only after common.is_safe_url validation",
+      "timeout_seconds": 30,
+      "auth": "none or user-configured API headers"
+    },
+    "scripts\\platforms_fetcher.py": {
+      "purpose": "Read public Bilibili metadata for the optional metrics workflow.",
+      "allowed_hosts": ["api.bilibili.com", "space.bilibili.com"],
+      "allowed_path_prefixes": ["/"],
+      "requires_https": true,
+      "custom_url_policy": "not supported",
+      "timeout_seconds": 30,
+      "auth": "none"
+    },
+    "scripts\\search_backends.py": {
+      "purpose": "Call configured public search and extraction backends.",
+      "allowed_hosts": ["github.com", "raw.githubusercontent.com", "cli.tavily.com"],
+      "allowed_path_prefixes": ["/"],
+      "requires_https": true,
+      "custom_url_policy": "backend-specific and explicit; fetched article URLs are validated by common.is_safe_url",
+      "timeout_seconds": 60,
+      "auth": "optional backend environment keys"
+    }
+  }
+}

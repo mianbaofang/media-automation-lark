@@ -1,0 +1,85 @@
+{
+  "recommended_threshold": 0.48,
+  "should_trigger": [
+    {
+      "text": "把 RSS 和公开网页采集整理成 Markdown，并按分类归档到飞书多维表格。",
+      "family": "content_archive"
+    },
+    {
+      "text": "打开本地控制面板，检查环境并准备 lark-cli 的本地预览。",
+      "family": "control_panel"
+    },
+    {
+      "text": "按选题搜索采集文章，生成数据看板并保存到云文档。",
+      "family": "search_and_dashboard"
+    },
+    {
+      "text": "整理图片、PDF 和 RSS 内容到 Markdown，再按素材管理流程归档到飞书。",
+      "family": "material_management"
+    },
+    {
+      "text": "Set up Feishu content automation: collect RSS feeds and public web pages, create a Markdown preview, and archive approved items to Bitable.",
+      "family": "feishu_content_automation"
+    },
+    {
+      "text": "Build a Lark content workflow for a creator team: gather articles, categorize them, and save the reviewed output to Lark Docs.",
+      "family": "lark_content_workflow"
+    },
+    {
+      "text": "Create an RSS to Feishu flow that archives new feed items to a Bitable after a local dry run.",
+      "family": "rss_to_feishu"
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "text": "只解释 RSS 是什么，不运行任何自动化流程。",
+      "family": "explain_only"
+    },
+    {
+      "text": "把这段内容翻译成英文，不需要飞书或脚本。",
+      "family": "translate_only"
+    },
+    {
+      "text": "只写一篇关于数据看板的说明，不执行任何采集。",
+      "family": "documentation_only"
+    },
+    {
+      "text": "Explain what RSS to Feishu means; do not run a collector or write anything.",
+      "family": "explain_only"
+    },
+    {
+      "text": "Translate the phrase Feishu content automation into Chinese; do not use Feishu or any scripts.",
+      "family": "translate_only"
+    },
+    {
+      "text": "Write a short definition of Lark content workflow for a glossary; no implementation.",
+      "family": "documentation_only"
+    }
+  ],
+  "near_neighbor": [
+    {
+      "text": "帮我解释飞书多维表格字段设计，但不做内容归档。",
+      "family": "lark_explanation"
+    },
+    {
+      "text": "仅给出本地控制面板的界面建议，不启动脚本。",
+      "family": "panel_design_only"
+    },
+    {
+      "text": "概述搜索采集的概念，不生成 Markdown 或调用后端。",
+      "family": "search_explanation"
+    },
+    {
+      "text": "Design a Lark content workflow architecture on paper; do not start the panel or collect data.",
+      "family": "workflow_design_only"
+    },
+    {
+      "text": "Compare Feishu Bitable and Lark Docs for manual editorial planning; no RSS to Feishu automation.",
+      "family": "lark_explanation"
+    },
+    {
+      "text": "Suggest search keywords for RSS to Feishu tools without running a collection.",
+      "family": "search_explanation"
+    }
+  ]
+}

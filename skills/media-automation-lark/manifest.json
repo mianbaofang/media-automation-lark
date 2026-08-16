@@ -1,0 +1,47 @@
+{
+  "name": "media-automation-lark",
+  "version": "0.3.0",
+  "owner": "mianbaofang",
+  "updated_at": "2026-08-15",
+  "status": "active",
+  "maturity_tier": "production",
+  "lifecycle_stage": "production",
+  "context_budget_tier": "production",
+  "review_cadence": "per-release",
+  "license": "MIT",
+  "canonical_path": "skills/media-automation-lark",
+  "factory_components": [
+    "agents",
+    "assets/cron-examples",
+    "references",
+    "scripts",
+    "security",
+    "evals"
+  ],
+  "evidence_components": [
+    "reports",
+    "evals/output"
+  ],
+  "archive_excludes": [
+    "README files",
+    "output",
+    "output_panel",
+    "reports",
+    "hyperframes",
+    "mp4",
+    "media",
+    "evals/output",
+    "demo media",
+    "HyperFrames source",
+    "MP4",
+    "screenshots",
+    "audit reports",
+    "output eval fixtures",
+    "runtime panel state"
+  ],
+  "input_files": "file-backed fixture: user-provided feeds, URLs, local materials, and optional metrics source files",
+  "output_contract": "Previewable Markdown, JSON backups, HTML dashboards, and optional Feishu/Lark records; writes are explicit and dry-run capable.",
+  "rollback_boundary": "Only generated local output and explicitly selected Feishu/Lark targets may be changed; source files are read-only unless the user requests an import.",
+  "network_policy": "HTTPS requests are limited by the runtime URL safety checks and configured search backends; credentials come from environment variables.",
+  "package_scope": "The repository source keeps reports and evals/output as public validation evidence. The installable archive contains runtime Skill files only and excludes README files plus the case-insensitive output, output_panel, reports, hyperframes, mp4, media, and evals/output directories, screenshots, audit reports, and output eval fixtures."
+}

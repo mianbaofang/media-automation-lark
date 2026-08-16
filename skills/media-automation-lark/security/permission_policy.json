@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-08-15",
+  "capabilities": {
+    "network": {
+      "decision": "approved",
+      "reviewer": "mianbaofang",
+      "scope": "Outbound HTTPS is limited to declared public hosts and explicit user-selected sources after URL safety validation.",
+      "reason": "The workflow needs RSS/API, public search, optional LLM extraction, and Bilibili reads; it does not execute remote code inline.",
+      "expires_at": "2026-12-31",
+      "evidence": ["security/network_policy.json", "SKILL.md"],
+      "target_enforcement": {
+        "openai": "metadata-only trust contract in agents/interface.yaml",
+        "claude": "use package-local SKILL.md and review network policy",
+        "generic": "use package-local SKILL.md and review network policy",
+        "vscode": "workspace trust review before running scripts"
+      }
+    },
+    "file_write": {
+      "decision": "approved",
+      "reviewer": "mianbaofang",
+      "scope": "Local output, backups, generated dashboards, configuration templates, and explicitly selected Feishu/Lark writes only.",
+      "reason": "The workflow is an automation tool whose result is local Markdown/HTML/JSON and optional user-authorized Feishu/Lark records.",
+      "expires_at": "2026-12-31",
+      "evidence": ["SKILL.md", "agents/interface.yaml"],
+      "target_enforcement": {
+        "openai": "metadata-only trust contract in agents/interface.yaml",
+        "claude": "use package-local SKILL.md and review output boundary",
+        "generic": "use package-local SKILL.md and review output boundary",
+        "vscode": "workspace trust review before running scripts"
+      }
+    },
+    "subprocess": {
+      "decision": "approved",
+      "reviewer": "mianbaofang",
+      "scope": "Local lark-cli, backend installers, and panel process launchers invoked through the documented scripts.",
+      "reason": "Feishu integration and the local panel require subprocess calls; commands are visible in the workflow and not fetched as remote executable code.",
+      "expires_at": "2026-12-31",
+      "evidence": ["SKILL.md", "references/lark-cli-setup.md"],
+      "target_enforcement": {
+        "openai": "metadata-only trust contract in agents/interface.yaml",
+        "claude": "review commands before execution",
+        "generic": "review commands before execution",
+        "vscode": "workspace trust review before running scripts"
+      }
+    },
+    "interactive": {
+      "decision": "approved",
+      "reviewer": "mianbaofang",
+      "scope": "Only the optional installer confirmation prompt and local browser panel interaction.",
+      "reason": "Interactive steps allow the user to approve optional backends and inspect local previews before any write action.",
+      "expires_at": "2026-12-31",
+      "evidence": ["SKILL.md", "scripts/install_backends.py"],
+      "target_enforcement": {
+        "openai": "metadata-only trust contract in agents/interface.yaml",
+        "claude": "review interactive prompts before execution",
+        "generic": "review interactive prompts before execution",
+        "vscode": "workspace trust review before running scripts"
+      }
+    }
+  }
+}

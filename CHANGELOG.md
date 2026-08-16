@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+## v0.3.0 - 2026-08-15 (local review candidate; not published)
+
+### Added
+
+- Added the canonical installable Skill package at `skills/media-automation-lark/` with its runtime files, interface metadata, security policies, references, and cron examples.
+- Added deterministic ZIP packaging and SHA-256 generation through `tools/package_skill.py`.
+- Added package-structure regression coverage in `tests/test_package_structure.py`.
+- Added verified Chinese and English README preview GIFs (960x540, 5 fps, 36 seconds) and aligned the bilingual launch materials.
+
+### Improved
+
+- The repository now exposes one canonical Skill entry at `skills/media-automation-lark/SKILL.md`, avoiding duplicate discovery and installation records.
+- README discovery copy now states the supported workflows, smallest safe start, package path, release asset layout, and crawler/data-collection limits in both languages.
+- Windows Task Scheduler documentation no longer depends on an Ethan-specific local path.
+- Clarified the offline demo versus dry-run behavior, Bilibili numeric UID setup, external scheduling responsibility, and the limits of URL input filtering.
+
+### Release Notes
+
+- The intended install asset is `media-automation-lark-skill-v0.3.0.zip` with its matching `.zip.sha256` file.
+- This entry describes the prepared local release candidate; the `v0.3.0` Git tag and GitHub Release remain separate publication steps and have not been created.
+
 ## v0.2.0 - 2026-07-08
 
 ### Added

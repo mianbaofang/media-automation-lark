@@ -1,0 +1,133 @@
+{
+  "optimizer_hints": {
+    "capability": "Collect and organize public media content into local previews and optional Feishu records",
+    "inputs": [
+      "RSS or API feeds",
+      "public web pages",
+      "local articles, images, PDFs, and metrics files"
+    ],
+    "trigger_actions": [
+      "内容归档到飞书",
+      "搜索采集",
+      "生成数据看板",
+      "打开本地控制面板"
+    ],
+    "exclusions": [
+      "explain-only requests",
+      "translation-only requests",
+      "documentation-only requests",
+      "no execution requests"
+    ]
+  },
+  "fallback_positive_concepts": [
+    "media_automation",
+    "lark_or_local_workflow"
+  ],
+  "positive_concepts": {
+    "media_automation": {
+      "weight": 0.55,
+      "phrases": [
+        "自媒体自动化",
+        "内容归档",
+        "归档",
+        "搜索采集",
+        "素材管理",
+        "数据看板",
+        "控制面板",
+        "RSS/API",
+        "Feishu content automation",
+        "Lark content workflow",
+        "Lark content workflows",
+        "RSS to Feishu",
+        "content archiving",
+        "public content collection"
+      ]
+    },
+    "lark_or_local_workflow": {
+      "weight": 0.45,
+      "phrases": [
+        "飞书",
+        "多维表格",
+        "云文档",
+        "lark-cli",
+        "本地控制面板",
+        "Feishu Bitable",
+        "Feishu Docs",
+        "Lark Bitable",
+        "Lark Docs",
+        "local preview",
+        "dry run"
+      ]
+    }
+  },
+  "negative_concepts": {
+    "documentation_only": {
+      "weight": 0.35,
+      "exclusive": true,
+      "phrases": [
+        "只解释",
+        "解释",
+        "仅总结",
+        "仅翻译",
+        "只写说明",
+        "概述",
+        "just explain",
+        "only summarize",
+        "translate only",
+        "write documentation",
+        "concept overview",
+        "no implementation",
+        "glossary"
+      ]
+    },
+    "no_execution": {
+      "weight": 0.35,
+      "exclusive": true,
+      "phrases": [
+        "不需要执行",
+        "不需要",
+        "不运行",
+        "不执行",
+        "不启动脚本",
+        "不生成",
+        "不做内容归档",
+        "不创建工作流",
+        "do not run",
+        "don't run",
+        "do not execute",
+        "without executing",
+        "no script",
+        "no data collection",
+        "do not start",
+        "do not collect",
+        "without running",
+        "no RSS to Feishu automation"
+      ]
+    },
+    "design_only": {
+      "weight": 0.55,
+      "exclusive": true,
+      "phrases": [
+        "仅给出",
+        "界面建议",
+        "只做界面",
+        "design only",
+        "interface suggestions",
+        "only suggest a UI",
+        "on paper",
+        "manual editorial planning",
+        "suggest search keywords"
+      ]
+    },
+    "translation_only": {
+      "weight": 0.55,
+      "exclusive": true,
+      "phrases": [
+        "translate",
+        "translation",
+        "into Chinese",
+        "only translate"
+      ]
+    }
+  }
+}

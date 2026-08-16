@@ -7,8 +7,8 @@
 - `beautifulsoup4`: HTML parsing.
 - `pandas` and `openpyxl`: metrics tables and Excel output.
 - `python-docx`: Word document export.
-- `PyPDF2`: PDF fallback extraction.
-- Microsoft [`markitdown`](https://github.com/microsoft/markitdown): file-to-Markdown conversion when available.
+- [`pypdf`](https://github.com/py-pdf/pypdf): PDF fallback extraction.
+- Microsoft [`MarkItDown`](https://github.com/microsoft/markitdown): optional file-to-Markdown conversion tool, installed as `markitdown[all]`. Markdown is the output text format, not the tool itself.
 
 ## Optional search and fetch backends
 
@@ -28,7 +28,7 @@
 
 ## 中文说明
 
-感谢 Python 开源生态中的 `requests`、`feedparser`、`beautifulsoup4`、`pandas`、`openpyxl`、`python-docx`、`PyPDF2` 和 Microsoft `markitdown`，它们支撑了网页读取、RSS 解析、文件转换、数据表和文档输出。
+感谢 Python 开源生态中的 `requests`、`feedparser`、`beautifulsoup4`、`pandas`、`openpyxl`、`python-docx`、[`pypdf`](https://github.com/py-pdf/pypdf) 和 Microsoft [`MarkItDown`](https://github.com/microsoft/markitdown)。它们支撑了网页读取、RSS 解析、文件转换、数据表和文档输出；MarkItDown 是文件转换工具，Markdown 是它产出的文本格式。
 
 感谢 `anysearch-skill`、`AutoCLI`、`Agent-Reach`、Tavily 和 `multi-search-engine` 等可选搜索/抓取工具生态，为不同运行环境提供了可降级的资料采集路线。
 

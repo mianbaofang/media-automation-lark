@@ -1,61 +1,51 @@
 # 项目审查报告
 
-审查时间：2026-07-07  
-项目路径：`E:\Object\media-automation-lark`
+审查时间：2026-08-16
+审计范围：仓库源码、可安装 Skill 包边界和公开发布材料；不把本地候选当作已发布版本。
 
 ## 结论
 
-项目已经具备公开发布的主体形态：核心脚本清晰、四个场景边界明确、已有单测、可离线演示，并且对搜索后端缺失有降级设计。本轮补齐了发布文档、免责声明、配置模板、动画素材和几个会影响安全/可用性的轻量代码修补。
+`v0.2.0` 是当前公开版本，`v0.3.0` 仍是本地发布候选。本报告只记录当前仓库中可以追溯到文件或命令输出的事实，不能替代 GitHub Tag、Release、搜索收录或下载数据的公开验证。
 
-## 已检查维度
+## 当前已确认
 
-| 维度 | 结果 |
+| 维度 | 当前记录 |
 |---|---|
-| 功能完整性 | A/B/C/D 四个场景可识别，离线 demo 可生成 Markdown 索引 |
-| 安全 | 已补 RSS/API URL 的 SSRF 过滤；密钥走 env 或 `@env:` |
-| 合规 | 已新增中英文免责声明，README 明确 ToS/robots/法律边界 |
-| 可维护性 | 脚本按场景拆分，共用逻辑集中在 `common.py` |
-| 可测试性 | `pytest` 覆盖 URL 安全、配置校验、去重、分类、解析、指标计算 |
-| 发布资料 | 已补 README、英文 README、Release、Disclaimer、HyperFrames 时间流短片、动画资产、`.gitignore` |
-| 环境 | 本机检测缺 `feedparser`、`PyPDF2`、`markitdown`、`lark-cli`；README 已写安装流程 |
+| Skill 入口 | 唯一维护中的入口为 `skills/media-automation-lark/SKILL.md`；发布 ZIP 的安装入口为其顶层目录内的 `SKILL.md` |
+| 运行边界 | 默认先做本地预览；`--offline-demo` 与可能读取真实输入的 `--dry-run` 分开说明 |
+| 安全边界 | README、`DISCLAIMER.md` 和 `SECURITY.md` 均要求遵守适用法律、平台 ToS 与 `robots.txt`，不绕过登录、验证码、付费墙或风控 |
+| 公开版本 | README 与变更记录指向公开 `v0.2.0`；`v0.3.0` 未创建 Tag 或 GitHub Release |
+| 双语材料 | `README.md` 为中文入口，`README.en.md` 为英文入口；两者保留各自的首屏、快速开始、动机、免责声明、能力和发布信息结构 |
+| 预览媒体 | 中英文 README 动图的规格记录为 960×540、5 fps、36 秒；发布前仍应对最终工作树重新核验 |
 
-## 本轮修复
+## 发布前必须复核
 
-- `scripts/content-archiver.py`：RSS/API URL 入口增加 `common.is_safe_url` 校验。
-- `scripts/data-collector.py`：让 `--platform` 参数真正传给平台抓取器。
-- `scripts/env-check.py`：`config.json.example` 默认生成到项目根目录。
-- `scripts/install_backends.py`：修正 Tavily CLI 安装地址拼写。
-- `tests/test_core.py`：新增内容归档 URL 安全回归测试。
-- 新增 `.gitignore`，避免提交 `.env`、`config.json`、缓存和运行产物。
-- 新增 `hyperframes/media-automation-lark-timeline/`：8 页时间流动画源码，配乐由 MiniMax CLI 生成。
+以下事项必须在确认发布候选后重新执行，并把结果与当时的工作树绑定：
 
-## 剩余风险
+1. 运行项目测试、Python 编译检查和 `git diff --check`。
+2. 运行 GitHub 上架与 Skill 发现面审计，确认导航、文件链接、版本状态和安装边界没有回退。
+3. 从当前 `skills/media-automation-lark/` 重新生成版本化 ZIP 与 SHA-256；不要把旧的本地构件当作最终发布资产。
+4. 在干净临时目录解压 ZIP，确认只有一个顶层安装目录、入口 `SKILL.md` 和运行时支持文件齐全。
+5. 分别验证离线演示、环境检查和 dry-run；没有网络或密钥时，输出应明确说明降级状态。
+6. 发布后再独立检查公开 Tag、Release 下载地址、GitHub 搜索结果和其他搜索引擎结果。配置元数据不等于已收录、已排名或有人下载。
 
-- 当前目录不是 Git 仓库；初始化 Git 后再检查一次 `git status`。
-- 公开发布前需要你决定开源许可证，本轮未擅自添加 `LICENSE`。
-- Bilibili 等公开接口可能变更或触发限制，线上任务应保留 `--source` 文件导入兜底。
-- `common.is_safe_url` 对域名不做 DNS 解析，不能完全防 DNS rebinding；个人本地自动化场景可接受，部署到服务端前建议升级。
-- 真实写飞书依赖用户侧表字段、权限和 `lark-cli` 登录态，发布前需用测试表跑一次 live dry-run。
+## 已知限制
 
-## 验证记录
+- 真实飞书写入依赖用户自己的表字段、权限和 `lark-cli` 登录态；本地 dry-run 不能证明远端写入成功。
+- 公共网页和平台接口可能限流、缺字段或改变格式；搜索结果与指标不代表完整平台数据。
+- `common.is_safe_url` 是输入过滤，不解析普通域名 DNS，因此不能单独作为完整的 SSRF 防护。
+- 本地发布候选的测试、审计和打包结果会随工作树变化；没有对应命令输出时，不应写成“已通过”。
 
-```bash
+## 历史记录更正
+
+旧版报告中的发布状态、许可证、测试数量和机器特定导出位置等结论已经过时，不能作为当前发布依据。
+
+## 复核命令
+
+```powershell
 python -m pytest tests
+python -m compileall scripts skills tools tests
+git diff --check
 ```
 
-结果：11 个测试全部通过。
-
-```bash
-python scripts/collector.py --offline-demo --category-map "AI:大模型,LLM,Agent;产品:增长" --output-dir output_demo --no-archive --no-notify --no-polish
-```
-
-结果：生成 2 篇示例 Markdown 和 `output_demo/index.md`。
-
-```bash
-npx hyperframes lint
-npx hyperframes validate
-npx hyperframes inspect
-npx hyperframes render --quality high --output "%USERPROFILE%\Desktop\media-automation-lark-timeline-music.mp4"
-```
-
-结果：HyperFrames 检查全部通过；桌面导出 36.032 秒配乐版 MP4。
+上面的命令是发布前复核入口；本报告不把未在当前候选工作树中重跑的结果标记为通过。

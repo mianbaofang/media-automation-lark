@@ -1,51 +1,90 @@
-# v0.2.0 - Agent Control Panel for Media Automation Lark
+# Release Draft: v0.3.0 - Media Automation Lark
 
-Media Automation Lark v0.2.0 turns the project from a script-first toolkit into an Agent-launchable local workbench. Users can ask an Agent to open the panel, preview results locally, and only write to Feishu/Lark after checking the output.
+This draft describes Media Automation Lark v0.3.0, which packages the local content-automation workflow as a standard, installable Agent Skill while keeping the repository itself as the source project. The repository's canonical Skill entrypoint is `skills/media-automation-lark/SKILL.md`; the versioned ZIP contains a relocated install entrypoint at `media-automation-lark/SKILL.md`.
 
-## New
+This is a local review draft. The `v0.3.0` Git tag and GitHub Release have not been created.
 
-- Added an Agent-facing panel launcher: `scripts/panel-agent.py start --open` starts the local browser panel and returns `http://127.0.0.1:8787`.
-- Added a plain-language local control panel with six tasks: environment check, safe sample run, webpage/file intake, topic search collection, RSS archiving, and dashboard preview.
-- Added source-scope and ranking controls for topic collection, including public web, WeChat public pages, Bilibili, Zhihu, Xiaohongshu, Douyin, and custom source filters.
-- Added user-facing result summaries for every panel action, with generated files linked directly and internal stdout/stderr folded under "details for Agent debugging".
+## Highlights
 
-## Improved
+- Added the canonical Skill package at `skills/media-automation-lark/`.
+- Removed the duplicate repository-root Skill entry so automatic discovery sees one installable package.
+- Added a deterministic package builder at `tools/package_skill.py`.
+- The intended versioned install asset is `media-automation-lark-skill-v0.3.0.zip`.
+- Its matching SHA-256 file will be generated from the same candidate package.
+- Added package-structure tests and a clean runtime-file boundary that excludes README media, screenshots, source animation files, MP4 files, and audit reports.
+- Aligned the Chinese and English README launch surfaces. The current candidate records both preview GIFs at 960x540, 5 fps, and 36 seconds; re-check the final files before publication.
 
-- Search collection now defaults to a fast candidate-index workflow in the panel, so users can inspect results before deciding whether to fetch full pages or write to Feishu.
-- README and Skill docs now describe the beginner path: ask an Agent to open the panel instead of asking end users to memorize commands.
-- Search result ranking now records public ranking notes in the generated index, so users can see whether ordering came from visible hotness signals, relevance, category match, or author/account match.
+## Install
 
-## Fixed
+After v0.3.0 is published, download the versioned Skill ZIP and its checksum from that Release. GitHub's automatic source archive is the repository source tree and is not the supported Skill install asset.
 
-- Fixed topic search being blocked by the optional RSS parser dependency when users were not using RSS.
-- Fixed Windows subprocess text decoding for search backends by reading tool output as UTF-8 with replacement fallback.
+After downloading, verify the checksum and extract the archive. The archive has one top-level directory:
+
+```text
+media-automation-lark/
+  SKILL.md
+  LICENSE
+  DISCLAIMER.md
+  requirements.txt
+  config.json.example
+  manifest.json
+  agents/
+  assets/
+  evals/
+  references/
+  scripts/
+  security/
+```
+
+In the source repository, the canonical entrypoint is:
+
+```text
+skills/media-automation-lark/SKILL.md
+```
+
+After extracting the release ZIP for a Skill library, the install entrypoint is:
+
+```text
+media-automation-lark/SKILL.md
+```
+
+Install the extracted `media-automation-lark/` directory as one package. Keep all files inside that directory together; the scripts and references are part of the runtime contract.
 
 ## Verification
 
-- `python -m pytest tests` passed: 20 tests.
-- `git diff --check` passed.
-- Browser validation covered panel result pages for material intake, empty search input, real topic search, empty RSS input, real RSS dry-run, and dashboard generation.
-- The active local panel was verified at `http://127.0.0.1:8787`.
+The release preparation checklist is:
 
-## Known Risks
+- Run Python compilation and the repository test suite.
+- Regenerate portable Yao governance and trust evidence with `python tools/generate_yao_reports.py`.
+- Validate package structure, including one canonical `SKILL.md`, required support files, no machine-specific paths, and no promotional media in the ZIP.
+- Generate deterministic ZIP output and its SHA-256 from the package manifest version.
+- Run `git diff --check` and the launch/discovery audits.
+- Re-check preview GIF dimensions, frame rate, duration, and file size.
 
-- Live Feishu/Lark writes still require local `lark-cli` login, matching table fields, and user-managed permissions.
-- Public platform search results may be sparse, rate-limited, or noisy. The panel shows a local index first so users can judge quality before deeper collection.
-- Search/crawling behavior remains the user's legal responsibility. Read `DISCLAIMER.md` before use.
+This draft does not mark those checks as passed until they have been run against the final local candidate. A successful local check also does not prove that a future GitHub Release is published or discoverable.
+
+## Runtime Scope
+
+The Skill can collect and organize RSS/API content, public web material, local files, and platform metrics into previewable Markdown, JSON backups, HTML dashboards, and optional Feishu/Lark records. Writes remain explicit and dry-run capable.
+
+`--offline-demo` runs the collector's built-in fixture without network access. `--dry-run` is a separate preview mode: it may read real inputs or public APIs and writes local artifacts, but skips Feishu/Lark writes and bot notifications. The project does not include a resident scheduler; cron, systemd timer, or Windows Task Scheduler must be configured by the user with the templates under `assets/cron-examples/`.
+
+For Bilibili metrics, copy `config.json.example` to `config.json`, set `platforms.bilibili.mid` to a numeric account UID, and pass `--config config.json` explicitly. URL checks reject non-HTTP(S), local, metadata, and literal private or reserved IP targets; ordinary hostnames are not DNS-resolved, so the filter is not a complete SSRF defense.
+
+The project does not bypass logins, captchas, paywalls, encryption, platform controls, or robots.txt restrictions. Read [DISCLAIMER.md](DISCLAIMER.md) before use.
+
+## Asset Policy
+
+The install ZIP and checksum are functional release assets. The README GIFs, screenshots, HyperFrames source, promotional MP4, and audit reports remain repository documentation or production material and are not required to run the Skill.
 
 ## Upgrade
 
-For a fresh install:
+This package follows the existing `media-automation-lark` Skill name. Replace an older installed package with the contents of the v0.3.0 ZIP, then run the environment check and the offline demo before enabling network or Feishu/Lark writes.
 
-```bash
-pip install -r requirements.txt
-python scripts/env-check.py --gen-config
-copy config.json.example config.json
-python -m pytest tests
-```
+## Links
 
-For non-technical users, ask an Agent to open the Media Automation Lark panel and check the environment first.
-
-## Full Changelog
-
-- https://github.com/mianbaofang/media-automation-lark/compare/v0.1.0...v0.2.0
+- Repository: <https://github.com/mianbaofang/media-automation-lark>
+- Changelog: [CHANGELOG.md](CHANGELOG.md)
+- Canonical repository Skill entrypoint: [`skills/media-automation-lark/SKILL.md`](skills/media-automation-lark/SKILL.md)
+- ZIP install entrypoint: `media-automation-lark/SKILL.md`
+- License: [LICENSE](LICENSE)

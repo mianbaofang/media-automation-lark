@@ -25,3 +25,7 @@ venv/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local browser captures and private source media
+.playwright-cli/
+mp4/
