@@ -202,9 +202,9 @@ reports/                  Audit records and launch checks
 
 ## Status
 
-Current public version: [`v0.2.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.2.0).
+Current public version: [`v0.3.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0).
 
-- `v0.3.0` is a local release candidate only; no Git tag or GitHub Release has been created.
+- `v0.3.0` is published; the Skill install ZIP and SHA-256 checksum are available in the [GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0).
 - Verification: `python -m pytest tests`.
 - Animation: both README previews are verified 960x540, 5 fps, 36-second GIFs under 6 MiB. The music-backed MP4 is promotional media, not a Skill install asset.
 - Source: the HyperFrames timeline source remains in `hyperframes/media-automation-lark-timeline/`.

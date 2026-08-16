@@ -1,22 +1,20 @@
-# Release Draft: v0.3.0 - Media Automation Lark
+# Release: v0.3.0 - Media Automation Lark
 
-This draft describes Media Automation Lark v0.3.0, which packages the local content-automation workflow as a standard, installable Agent Skill while keeping the repository itself as the source project. The repository's canonical Skill entrypoint is `skills/media-automation-lark/SKILL.md`; the versioned ZIP contains a relocated install entrypoint at `media-automation-lark/SKILL.md`.
-
-This is a local review draft. The `v0.3.0` Git tag and GitHub Release have not been created.
+Media Automation Lark v0.3.0 packages the local content-automation workflow as a standard, installable Agent Skill while keeping the repository itself as the source project. The repository's canonical Skill entrypoint is `skills/media-automation-lark/SKILL.md`; the versioned ZIP contains a relocated install entrypoint at `media-automation-lark/SKILL.md`.
 
 ## Highlights
 
 - Added the canonical Skill package at `skills/media-automation-lark/`.
 - Removed the duplicate repository-root Skill entry so automatic discovery sees one installable package.
 - Added a deterministic package builder at `tools/package_skill.py`.
-- The intended versioned install asset is `media-automation-lark-skill-v0.3.0.zip`.
-- Its matching SHA-256 file will be generated from the same candidate package.
+- The versioned install asset is `media-automation-lark-skill-v0.3.0.zip`.
+- Its matching SHA-256 file is published with the release asset.
 - Added package-structure tests and a clean runtime-file boundary that excludes README media, screenshots, source animation files, MP4 files, and audit reports.
-- Aligned the Chinese and English README launch surfaces. The current candidate records both preview GIFs at 960x540, 5 fps, and 36 seconds; re-check the final files before publication.
+- Aligned the Chinese and English README launch surfaces. Both preview GIFs are 960x540, 5 fps, and 36 seconds.
 
 ## Install
 
-After v0.3.0 is published, download the versioned Skill ZIP and its checksum from that Release. GitHub's automatic source archive is the repository source tree and is not the supported Skill install asset.
+Download the versioned Skill ZIP and its checksum from the [v0.3.0 Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0). GitHub's automatic source archive is the repository source tree and is not the supported Skill install asset.
 
 After downloading, verify the checksum and extract the archive. The archive has one top-level directory:
 
@@ -52,7 +50,7 @@ Install the extracted `media-automation-lark/` directory as one package. Keep al
 
 ## Verification
 
-The release preparation checklist is:
+The release verification checklist was run for this release:
 
 - Run Python compilation and the repository test suite.
 - Regenerate portable Yao governance and trust evidence with `python tools/generate_yao_reports.py`.
@@ -61,7 +59,7 @@ The release preparation checklist is:
 - Run `git diff --check` and the launch/discovery audits.
 - Re-check preview GIF dimensions, frame rate, duration, and file size.
 
-This draft does not mark those checks as passed until they have been run against the final local candidate. A successful local check also does not prove that a future GitHub Release is published or discoverable.
+The published release was created only after the local checks passed. A successful local check does not by itself prove search ranking or adoption.
 
 ## Runtime Scope
 

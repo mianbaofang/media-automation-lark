@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-## v0.3.0 - 2026-08-15 (local review candidate; not published)
+## v0.3.0 - 2026-08-16
 
 ### Added
 
@@ -20,8 +18,7 @@
 
 ### Release Notes
 
-- The intended install asset is `media-automation-lark-skill-v0.3.0.zip` with its matching `.zip.sha256` file.
-- This entry describes the prepared local release candidate; the `v0.3.0` Git tag and GitHub Release remain separate publication steps and have not been created.
+- The install asset is `media-automation-lark-skill-v0.3.0.zip` with its matching `.zip.sha256` file, published in the [v0.3.0 GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0).
 
 ## v0.2.0 - 2026-07-08
 

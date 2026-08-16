@@ -204,9 +204,9 @@ reports/                  审查记录和发布前检查
 
 ## 状态
 
-当前公开版本：[`v0.2.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.2.0)。
+当前公开版本：[`v0.3.0`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0)。
 
-- `v0.3.0` 目前只是本地发布候选，尚未创建 Git Tag 或 GitHub Release。
+- `v0.3.0` 已发布；Skill 安装包和 SHA-256 校验文件见 [GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.0)。
 - 验证：`python -m pytest tests`。
 - 动画：中英文 README 分别使用 960×540、5 fps、36 秒的轻量 GIF 预览；配乐版 MP4 属于宣传素材，不是 Skill 安装资产。
 - 源码：HyperFrames 时间流短片保留在 `hyperframes/media-automation-lark-timeline/`。
