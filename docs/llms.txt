@@ -1,0 +1,37 @@
+# Media Automation Lark
+
+> Local-first Feishu/Lark content automation Agent Skill and CLI toolkit for creators and small teams. It collects RSS/API feeds, public web pages, local files, and platform metrics into previewable Markdown, JSON backups, HTML dashboards, and optional reviewed Feishu/Lark records.
+
+This Pages entry describes the open-source repository. It is not a hosted publishing platform. The project does not bypass logins, captchas, paywalls, or platform controls. Public collection must follow applicable law, platform terms, rate limits, and robots.txt.
+
+## Primary resources
+
+- [Repository](https://github.com/mianbaofang/media-automation-lark): source code, issues, and release history.
+- [English README](https://github.com/mianbaofang/media-automation-lark/blob/main/README.en.md): setup, commands, workflows, and runtime boundaries.
+- [中文 README](https://github.com/mianbaofang/media-automation-lark/blob/main/README.md): 中文安装、工作流、合规边界和发布资料。
+- [中文 Pages entry](https://mianbaofang.github.io/media-automation-lark/zh-CN/): Chinese discovery page with localized metadata and the same runtime boundaries.
+- [Installable Skill entrypoint](https://github.com/mianbaofang/media-automation-lark/blob/main/skills/media-automation-lark/SKILL.md): canonical repository Skill metadata and execution contract.
+- [Latest public release](https://github.com/mianbaofang/media-automation-lark/releases/latest): versioned Skill ZIP and SHA-256 checksum assets.
+- Current local source candidate: `v0.3.2`; it is not tagged or published as a GitHub Release.
+- [Release notes](https://github.com/mianbaofang/media-automation-lark/blob/main/RELEASE.md): package layout, installation entrypoint, verification scope, and runtime boundaries.
+- [Disclaimer](https://github.com/mianbaofang/media-automation-lark/blob/main/DISCLAIMER.md): crawler, platform, privacy, and legal-use boundaries.
+- [Security policy](https://github.com/mianbaofang/media-automation-lark/blob/main/SECURITY.md): security reporting path and secret-handling expectations.
+
+## Supported workflows
+
+- RSS/API content archiving to local previews and optional Feishu/Lark Bitable records.
+- Public web search collection and categorization into Markdown.
+- Articles, images, PDFs, and Office files converted into a local Markdown material archive.
+- Platform metrics collected into local HTML and Excel dashboards, with optional Feishu/Lark sync.
+- Local control-panel previews and operating-system scheduling templates.
+
+## Operational boundaries
+
+- Start with `--offline-demo` for the built-in no-network search fixture, then use `--dry-run` before any remote write.
+- Feishu/Lark writes and bot notifications require explicit user confirmation and local credentials.
+- The project is not a resident scheduler and does not claim complete platform coverage or complete SSRF protection.
+- Search ranking, indexing, traffic, downloads, and AI citations are not implied by repository metadata or this file.
+
+## Discovery terms
+
+Feishu content automation; Lark content workflow; RSS to Feishu; local-first content automation; Agent Skill; public web collection; material management; metrics dashboard; 自媒体自动化; 内容归档到飞书; 搜索采集; 素材管理; 数据看板。

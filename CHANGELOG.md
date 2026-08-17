@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.3.2 - 2026-08-17
+
+### Changed
+
+- Added an explicit `Do not use` boundary for explanation, translation, and ordinary documentation tasks that do not request this workflow, for bypassing access controls or platform restrictions, and for unconfirmed Feishu/Lark writes.
+- Declared OpenAI, Agent Skills, and generic targets, then added reproducible Skill IR, compiler, and conformance evidence through temporary staging so those reports do not enter GitHub CLI installs.
+- Kept the installable archive and GitHub CLI entry runtime-only; evaluation fixtures and generated Yao evidence remain source-repository materials under `evals/` and `reports/skill-evidence/`.
+
+### Verification
+
+- Passed the Yao governance, Skill conformance, trigger/output evaluation, package-structure, official Skill validation, GitHub launch, and deterministic archive checks before publication.
+
 ## v0.3.1 - 2026-08-16
 
 ### Fixed

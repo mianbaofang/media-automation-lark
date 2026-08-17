@@ -1,6 +1,6 @@
 # Media Automation Lark
 
-A local content-automation toolkit for creators and small teams. It supports Feishu content automation and a practical Lark content workflow: collect RSS/API feeds, public web searches, webpages and files, and platform metrics; produce Markdown, Excel/HTML dashboards; and optionally write reviewed results to Feishu/Lark Bitable, Docs, and bot notifications. A common use case is RSS to Feishu archiving.
+A local media automation Agent Skill and CLI toolkit for creators and small teams. It supports Feishu content automation and a practical Lark content workflow: collect RSS/API feeds, public web searches, webpages and files, and platform metrics; produce Markdown, Excel/HTML dashboards; and optionally write reviewed results to Feishu/Lark Bitable, Docs, and bot notifications. A common use case is RSS to Feishu archiving.
 
 <table align="center"><tr><td><a href="https://github.com/mianbaofang/media-automation-lark/releases"><img src="https://img.shields.io/github/v/release/mianbaofang/media-automation-lark?style=flat-square&label=release" alt="Latest public release"></a></td><td><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mianbaofang/media-automation-lark?style=flat-square&label=license" alt="MIT license"></a></td><td><a href="https://github.com/mianbaofang/media-automation-lark/stargazers"><img src="https://img.shields.io/github/stars/mianbaofang/media-automation-lark?style=flat-square&label=stars" alt="GitHub stars"></a></td></tr></table>
 
@@ -23,13 +23,15 @@ A local content-automation toolkit for creators and small teams. It supports Fei
   ·
   <a href="ACKNOWLEDGEMENTS.md">Acknowledgements</a>
   ·
-  <a href="RELEASE.md">Release notes</a>
-  ·
   <a href="CHANGELOG.md">Changelog</a>
+  ·
+  <a href="RELEASE.md">Release notes</a>
   ·
   <a href="SECURITY.md">Security</a>
   ·
   <a href="reports/project-audit.md">Audit report</a>
+  ·
+  <a href="docs/index.html">Pages source</a>
 </p>
 
 ## Quick Start
@@ -200,6 +202,7 @@ reports/                  Audit records and launch checks
 - Issue / PR templates: `.github/`
 - Launch checklist: `reports/github-launch-checklist.md`
 - HyperFrames timeline source: `hyperframes/media-automation-lark-timeline/`
+- GitHub Pages SEO/GEO source: `docs/` (enable Pages to serve the bilingual entries)
 - Chinese README preview: `assets/media-automation-lark-demo.gif`
 - English README preview: `assets/media-automation-lark-demo.en.gif`
 - Static workflow image: `media-automation-skill-workflow.png`
@@ -209,9 +212,10 @@ reports/                  Audit records and launch checks
 
 ## Status
 
-Current public version: [`v0.3.1`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.1).
+Current public version: [`v0.3.2`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.2).
 
-- `v0.3.1` is published; the Skill install ZIP and SHA-256 checksum are available in the [GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.1).
+- `v0.3.2` is published; the Skill install ZIP and SHA-256 checksum are available in the [GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.2).
+- GitHub's automatic source ZIP is not a Skill install package; use the versioned ZIP and matching `.zip.sha256` attached to the relevant Release.
 - Verification: `python -m pytest tests`.
 - Animation: both README previews are verified 960x540, 5 fps, 36-second GIFs under 6 MiB. The music-backed MP4 is promotional media, not a Skill install asset.
 - Source: the HyperFrames timeline source remains in `hyperframes/media-automation-lark-timeline/`.

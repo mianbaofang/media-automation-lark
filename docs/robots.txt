@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mianbaofang.github.io/media-automation-lark/sitemap.xml

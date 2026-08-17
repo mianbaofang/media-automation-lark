@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Automation Lark｜飞书内容自动化 Agent Skill</title>
+  <meta name="description" content="Media Automation Lark 是面向创作者和小团队的本地优先飞书内容自动化 Agent Skill：采集 RSS、公开网页、文件和平台指标，生成可检查的 Markdown、Excel 与 HTML 看板，再由用户决定是否写入飞书。">
+  <meta name="keywords" content="飞书内容自动化,Lark 内容工作流,RSS 到飞书,Agent Skill,内容采集,本地优先">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mianbaofang.github.io/media-automation-lark/zh-CN/">
+  <link rel="alternate" hreflang="en" href="https://mianbaofang.github.io/media-automation-lark/">
+  <link rel="alternate" hreflang="zh-CN" href="https://mianbaofang.github.io/media-automation-lark/zh-CN/">
+  <link rel="alternate" hreflang="x-default" href="https://mianbaofang.github.io/media-automation-lark/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Media Automation Lark｜飞书内容自动化 Agent Skill">
+  <meta property="og:description" content="先在本地整理和检查 RSS、网页、文件与指标，再决定是否写入飞书。">
+  <meta property="og:url" content="https://mianbaofang.github.io/media-automation-lark/zh-CN/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/mianbaofang/media-automation-lark/main/media-automation-skill-workflow.png">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareSourceCode",
+    "name":"Media Automation Lark",
+    "description":"面向创作者和小团队的本地优先飞书内容自动化 Agent Skill。",
+    "url":"https://mianbaofang.github.io/media-automation-lark/zh-CN/",
+    "codeRepository":"https://github.com/mianbaofang/media-automation-lark",
+    "programmingLanguage":"Python",
+    "runtimePlatform":"Python 3.10+",
+    "license":"https://github.com/mianbaofang/media-automation-lark/blob/main/LICENSE",
+    "version":"0.3.1",
+    "author":{"@type":"Person","name":"mianbaofang","url":"https://github.com/mianbaofang"},
+    "keywords":["飞书内容自动化","Lark 内容工作流","RSS 到飞书","Agent Skill"]
+  }
+  </script>
+  <style>
+    :root { color-scheme: light; --ink:#142033; --muted:#526174; --line:#d8e0e8; --paper:#f7f9fb; --surface:#fff; --accent:#147a5a; --blue:#1f5fbf; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.7 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+    a { color:var(--blue); } .wrap { width:min(1120px,calc(100% - 40px)); margin:0 auto; }
+    header { display:flex; justify-content:space-between; gap:24px; align-items:center; padding:22px 0; border-bottom:1px solid var(--line); }
+    header a:first-child { color:var(--ink); font-weight:750; text-decoration:none; } nav { display:flex; gap:16px; flex-wrap:wrap; font-size:.92rem; }
+    .hero { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:48px; align-items:center; padding:72px 0 64px; }
+    .eyebrow { color:var(--accent); font-size:.82rem; font-weight:750; letter-spacing:0; } h1,h2 { line-height:1.15; } h1 { margin:0; font-size:4rem; }
+    .lede { max-width:58ch; color:var(--muted); font-size:1.1rem; } .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+    .button { display:inline-block; padding:9px 16px; border:1px solid var(--blue); border-radius:6px; font-weight:700; text-decoration:none; } .primary { color:#fff; background:var(--blue); }
+    figure { margin:0; } figure img { display:block; width:100%; border:1px solid var(--line); background:var(--surface); } figcaption { margin-top:10px; color:var(--muted); font-size:.88rem; }
+    section { padding:52px 0; border-top:1px solid var(--line); } h2 { margin:0 0 14px; font-size:2rem; } .intro { max-width:68ch; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; margin-top:26px; } article { min-height:150px; padding:18px; border-top:3px solid var(--blue); background:var(--surface); } article:nth-child(2){border-top-color:var(--accent);} article:nth-child(3){border-top-color:#a75b00;} article:nth-child(4){border-top-color:var(--ink);} article p { color:var(--muted); }
+    pre { overflow:auto; padding:18px; border:1px solid var(--line); background:#111820; color:#eef4f7; } footer { padding:30px 0 48px; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; }
+    @media (max-width:800px) { header { align-items:flex-start; flex-direction:column; } .hero { display:flex; flex-direction:column; align-items:flex-start; gap:32px; padding:48px 0; } .grid { grid-template-columns:1fr 1fr; } }
+    @media (max-width:520px) { .wrap { width:min(100% - 28px,1120px); } h1 { font-size:2.7rem; } .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a href="https://github.com/mianbaofang/media-automation-lark">Media Automation Lark</a><nav aria-label="主导航"><a href="https://github.com/mianbaofang/media-automation-lark/releases/latest">最新发布</a><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/README.md">中文 README</a><a href="../">English</a></nav></header>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div><p class="eyebrow">本地优先 · 飞书 / Lark · Agent Skill</p><h1 id="page-title">Media Automation Lark</h1><p class="lede">把 RSS/API、公开网页、文件和平台指标整理成可检查的 Markdown、JSON 备份与看板；先在本地预览，再由你决定是否写入飞书。</p><div class="actions"><a class="button primary" href="https://github.com/mianbaofang/media-automation-lark/releases/latest">查看公开版本</a><a class="button" href="https://github.com/mianbaofang/media-automation-lark/blob/main/skills/media-automation-lark/SKILL.md">查看可安装 Skill</a></div><p class="intro">这是一个本地工作流工具，不是代替用户做决定的托管发布平台。联网、远程抓取和飞书写入都必须由用户显式控制。</p></div>
+        <figure><img src="https://raw.githubusercontent.com/mianbaofang/media-automation-lark/main/media-automation-skill-workflow.png" alt="Media Automation Lark 从内容采集、文件整理到本地预览和飞书写入的工作流图"><figcaption>采集、素材整理、指标、预览和可选飞书同步。</figcaption></figure>
+      </section>
+      <section aria-labelledby="capabilities-title"><h2 id="capabilities-title">能做什么</h2><p class="intro">适合需要重复整理内容、又不想跳过检查步骤的创作者和小团队。</p><div class="grid"><article><strong>内容归档</strong><p>把 RSS/API 内容整理成记录，检查后再写入飞书多维表格。</p></article><article><strong>搜索采集</strong><p>收集公开网页结果、按规则分类，并在 Markdown 中保留来源链接。</p></article><article><strong>素材管理</strong><p>把文章、图片、PDF 和 Office 文件整理为本地 Markdown 素材库。</p></article><article><strong>指标看板</strong><p>用本地 HTML 和 Excel 查看平台指标，并支持 dry-run。</p></article></div></section>
+      <section aria-labelledby="start-title"><h2 id="start-title">一分钟开始</h2><p class="intro">先预览和安装 Skill，再运行不联网的内置样例：</p><pre><code>gh skill preview mianbaofang/media-automation-lark media-automation-lark
+gh skill install mianbaofang/media-automation-lark media-automation-lark --agent codex --scope user
+
+python scripts/collector.py --offline-demo --output-dir output_demo --no-archive --no-notify --no-polish</code></pre><p>当前公开版本为 <strong>v0.3.1</strong>。本地候选版本不会被页面写成已发布版本。</p></section>
+      <section><h2>边界与资料</h2><p class="intro">项目不绕过验证码、登录限制、付费墙、加密或平台风控。真实写入飞书前，请先使用 dry-run 和本地预览。</p><p><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/README.md">中文 README</a> · <a href="https://github.com/mianbaofang/media-automation-lark/blob/main/README.en.md">English README</a> · <a href="https://github.com/mianbaofang/media-automation-lark/blob/main/DISCLAIMER.md">免责声明</a> · <a href="https://github.com/mianbaofang/media-automation-lark/issues">Issues / 联系</a></p></section>
+    </main>
+    <footer>作者：<a href="https://github.com/mianbaofang">mianbaofang</a> · MIT License · GitHub Pages 需要在仓库设置中启用后才会公开提供此页面。</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Media Automation Lark | Feishu/Lark Content Automation Agent Skill</title>
+    <meta name="description" content="Local-first Feishu/Lark content automation Agent Skill and CLI toolkit for RSS, public web collection, files, metrics dashboards, and reviewed Feishu writes.">
+    <meta name="keywords" content="Media Automation Lark, Feishu, Lark, Agent Skill, RSS to Feishu, content automation, local-first, Bitable, dashboard">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mianbaofang.github.io/media-automation-lark/">
+    <link rel="alternate" hreflang="en" href="https://mianbaofang.github.io/media-automation-lark/">
+    <link rel="alternate" hreflang="zh-CN" href="https://mianbaofang.github.io/media-automation-lark/zh-CN/">
+    <link rel="alternate" hreflang="x-default" href="https://mianbaofang.github.io/media-automation-lark/">
+    <link rel="sitemap" type="application/xml" href="https://mianbaofang.github.io/media-automation-lark/sitemap.xml">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Media Automation Lark">
+    <meta property="og:title" content="Media Automation Lark | Feishu/Lark Content Automation">
+    <meta property="og:description" content="A local-first Agent Skill and CLI toolkit for RSS, public web collection, files, metrics dashboards, and reviewed Feishu/Lark workflows.">
+    <meta property="og:url" content="https://mianbaofang.github.io/media-automation-lark/">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mianbaofang/media-automation-lark/main/media-automation-skill-workflow.png">
+    <meta property="og:image:alt" content="Media Automation Lark workflow from collection and files to local previews and Feishu/Lark records">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Media Automation Lark | Feishu/Lark Content Automation">
+    <meta name="twitter:description" content="Local-first RSS, web, file, metrics, and Feishu/Lark content automation for creators and small teams.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/mianbaofang/media-automation-lark/main/media-automation-skill-workflow.png">
+    <meta name="twitter:image:alt" content="Media Automation Lark workflow diagram">
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://mianbaofang.github.io/media-automation-lark/#website",
+            "url": "https://mianbaofang.github.io/media-automation-lark/",
+            "name": "Media Automation Lark",
+            "description": "Local-first Feishu/Lark content automation Agent Skill and CLI toolkit for creators and small teams.",
+            "inLanguage": "en",
+            "publisher": {
+              "@id": "https://github.com/mianbaofang#person"
+            }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://github.com/mianbaofang#person",
+            "name": "mianbaofang",
+            "url": "https://github.com/mianbaofang"
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "@id": "https://mianbaofang.github.io/media-automation-lark/#software",
+            "name": "Media Automation Lark",
+            "description": "A local-first Feishu/Lark content automation Agent Skill and CLI toolkit for RSS/API feeds, public web pages, local files, platform metrics, Markdown previews, dashboards, and optional reviewed writes.",
+            "url": "https://mianbaofang.github.io/media-automation-lark/",
+            "codeRepository": "https://github.com/mianbaofang/media-automation-lark",
+            "programmingLanguage": "Python",
+            "runtimePlatform": "Python 3.10+",
+            "license": "https://github.com/mianbaofang/media-automation-lark/blob/main/LICENSE",
+            "keywords": "Feishu, Lark, Agent Skill, RSS to Feishu, content automation, local-first, Bitable, dashboard"
+          }
+        ]
+      }
+    </script>
+
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #142033;
+        --muted: #526174;
+        --line: #d8e0e8;
+        --paper: #f7f9fb;
+        --surface: #ffffff;
+        --blue: #1f5fbf;
+        --green: #147a5a;
+        --amber: #a75b00;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a { color: var(--blue); }
+      a:hover { color: #123d7e; }
+
+      .wrap {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        color: var(--ink);
+        font-weight: 750;
+        text-decoration: none;
+        letter-spacing: 0;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 0.92rem;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 48px;
+        align-items: center;
+        padding: 72px 0 64px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--green);
+        font-size: 0.82rem;
+        font-weight: 750;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1, h2 { line-height: 1.15; }
+      h1 { margin: 0; font-size: 4rem; }
+      h2 { margin: 0 0 16px; font-size: 2.25rem; }
+
+      .lede {
+        max-width: 58ch;
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border: 1px solid var(--blue);
+        border-radius: 6px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        background: var(--blue);
+        color: #ffffff;
+      }
+
+      .button.secondary {
+        background: var(--surface);
+        color: var(--blue);
+      }
+
+      .note {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      figure { margin: 0; }
+      figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+      figcaption { margin-top: 10px; color: var(--muted); font-size: 0.86rem; }
+
+      .section {
+        padding: 52px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-intro { max-width: 68ch; color: var(--muted); }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin: 28px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .feature-grid li {
+        min-height: 150px;
+        padding: 18px;
+        border-top: 3px solid var(--blue);
+        background: var(--surface);
+      }
+
+      .feature-grid li:nth-child(2) { border-top-color: var(--green); }
+      .feature-grid li:nth-child(3) { border-top-color: var(--amber); }
+      .feature-grid li:nth-child(4) { border-top-color: var(--ink); }
+      .feature-grid strong { display: block; margin-bottom: 8px; }
+      .feature-grid span { color: var(--muted); font-size: 0.93rem; }
+
+      .bilingual {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 36px;
+      }
+
+      .resource-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 32px;
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      footer {
+        padding: 30px 0 48px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 800px) {
+        .site-header, .hero, .bilingual { grid-template-columns: 1fr; }
+        .site-header { align-items: flex-start; flex-direction: column; }
+        .hero { gap: 32px; padding: 48px 0; }
+        .feature-grid, .resource-list { grid-template-columns: 1fr 1fr; }
+      }
+
+      @media (max-width: 520px) {
+        .wrap { width: min(100% - 28px, 1120px); }
+        .feature-grid, .resource-list { grid-template-columns: 1fr; }
+        h1 { font-size: 2.7rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-header">
+        <a class="brand" href="https://github.com/mianbaofang/media-automation-lark">Media Automation Lark</a>
+        <nav aria-label="Primary navigation">
+          <a href="https://github.com/mianbaofang/media-automation-lark">Source</a>
+          <a href="https://github.com/mianbaofang/media-automation-lark/releases/latest">Latest release</a>
+          <a href="https://github.com/mianbaofang/media-automation-lark/blob/main/README.md">中文 README</a>
+          <a href="zh-CN/">中文页面</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">Local-first Agent Skill and CLI toolkit</p>
+            <h1 id="page-title">Media Automation Lark</h1>
+            <p class="lede">Collect RSS/API feeds, public web pages, local materials, and platform metrics into inspectable Markdown, JSON backups, and dashboards. Review the result locally before choosing whether to write to Feishu/Lark.</p>
+            <div class="actions">
+              <a class="button primary" href="https://github.com/mianbaofang/media-automation-lark/releases/latest">View latest release</a>
+              <a class="button secondary" href="https://github.com/mianbaofang/media-automation-lark/blob/main/skills/media-automation-lark/SKILL.md">Open installable Skill</a>
+            </div>
+            <p class="note">The project is a local workflow toolkit, not a hosted publishing platform. Network access and Feishu/Lark writes remain explicit and user-controlled.</p>
+          </div>
+          <figure>
+            <img src="https://raw.githubusercontent.com/mianbaofang/media-automation-lark/main/media-automation-skill-workflow.png" alt="Media Automation Lark workflow from content collection and files to local previews, dashboards, and Feishu/Lark records">
+            <figcaption>Collection, material intake, metrics, local previews, and optional Feishu/Lark sync.</figcaption>
+          </figure>
+        </section>
+
+        <section class="section" aria-labelledby="capabilities-title">
+          <h2 id="capabilities-title">What it covers</h2>
+          <p class="section-intro">The runtime is designed for creators and small teams that need repeatable organization without hiding the review step.</p>
+          <ul class="feature-grid">
+            <li><strong>Content archiving</strong><span>RSS/API items become structured records ready for review and optional Bitable writes.</span></li>
+            <li><strong>Search collection</strong><span>Collect public web results, categorize them, and preserve source links in Markdown.</span></li>
+            <li><strong>Material management</strong><span>Bring articles, images, PDFs, and Office files into a local Markdown archive.</span></li>
+            <li><strong>Metrics dashboards</strong><span>Build local HTML and Excel views from platform metrics with dry-run support.</span></li>
+          </ul>
+        </section>
+
+        <section class="section bilingual" aria-labelledby="language-title">
+          <div lang="en">
+            <h2 id="language-title">Start from the source</h2>
+            <p class="section-intro">Preview the Skill, install the runtime package, or run the offline demo before connecting credentials or public APIs.</p>
+            <p><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/README.en.md">Read the English README</a> for setup, commands, safety boundaries, and the release asset layout.</p>
+          </div>
+          <div lang="zh-CN">
+            <h2>中文入口</h2>
+            <p class="section-intro">这是一个本地优先的飞书内容自动化 Agent Skill 与 CLI 工具，先生成可检查的预览，再由用户决定是否写入飞书。</p>
+            <p><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/README.md">阅读中文 README</a>，查看安装、命令、合规边界和发布资产说明。</p>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="resources-title">
+          <h2 id="resources-title">Canonical resources</h2>
+          <ul class="resource-list">
+            <li><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/skills/media-automation-lark/SKILL.md">Repository Skill entrypoint</a></li>
+            <li><a href="https://github.com/mianbaofang/media-automation-lark/releases/latest">Versioned install ZIP and checksum</a></li>
+            <li><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/RELEASE.md">Release notes</a></li>
+            <li><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/DISCLAIMER.md">Crawler and platform disclaimer</a></li>
+            <li><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/SECURITY.md">Security policy</a></li>
+            <li><a href="https://github.com/mianbaofang/media-automation-lark/issues">Issues and usage questions</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>MIT licensed. The static Pages source lives in <code>docs/</code>; GitHub Pages must be enabled for the repository before this URL is publicly served.</p>
+      </footer>
+    </div>
+  </body>
+</html>

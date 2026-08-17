@@ -1,14 +1,19 @@
 {
   "name": "media-automation-lark",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "owner": "mianbaofang",
-  "updated_at": "2026-08-16",
+  "updated_at": "2026-08-17",
   "status": "active",
   "maturity_tier": "production",
   "lifecycle_stage": "production",
   "context_budget_tier": "production",
   "review_cadence": "per-release",
   "license": "MIT",
+  "target_platforms": [
+    "openai",
+    "agent-skills",
+    "generic"
+  ],
   "canonical_path": "skills/media-automation-lark",
   "factory_components": [
     "agents",

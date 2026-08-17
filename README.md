@@ -1,8 +1,8 @@
 # Media Automation Lark / 自媒体自动化工作流（飞书 CLI 版）
 
-面向内容创作者和小团队的本地内容自动化工具：把 RSS/API、公开网页搜索、网页与文件素材、平台指标整理成 Markdown、Excel/HTML 看板，并按需写入飞书（Feishu/Lark）多维表格、云文档和机器人通知。它覆盖 Feishu content automation、Lark content workflow，也适合做 RSS to Feishu archive 和 local content automation。
+面向内容创作者和小团队的本地 media automation Agent Skill 与 CLI 工具：把 RSS/API、公开网页搜索、网页与文件素材、平台指标整理成 Markdown、Excel/HTML 看板，并按需写入飞书（Feishu/Lark）多维表格、云文档和机器人通知。它覆盖 Feishu content automation、Lark content workflow，也适合做 RSS to Feishu archive 和 local content automation。
 
-如果你要做 Feishu/Lark 内容自动化，把 RSS、公开网页和文件整理后归档，这个工具会先生成本地预览，再由你决定是否写入飞书。
+如果你要做 Feishu/Lark 内容自动化或内容归档到飞书，把 RSS、公开网页和文件整理后归档，这个工具会先生成本地预览，再由你决定是否写入飞书。
 
 <table align="center"><tr><td><a href="https://github.com/mianbaofang/media-automation-lark/releases"><img src="https://img.shields.io/github/v/release/mianbaofang/media-automation-lark?style=flat-square&label=release" alt="最新公开版本"></a></td><td><a href="https://github.com/mianbaofang/media-automation-lark/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mianbaofang/media-automation-lark?style=flat-square&label=license" alt="MIT 开源协议"></a></td><td><a href="https://github.com/mianbaofang/media-automation-lark/stargazers"><img src="https://img.shields.io/github/stars/mianbaofang/media-automation-lark?style=flat-square&label=stars" alt="GitHub Stars"></a></td></tr></table>
 
@@ -25,13 +25,15 @@
   ·
   <a href="ACKNOWLEDGEMENTS.md">致谢</a>
   ·
-  <a href="RELEASE.md">发布说明</a>
-  ·
   <a href="CHANGELOG.md">更新日志</a>
+  ·
+  <a href="RELEASE.md">发布说明</a>
   ·
   <a href="SECURITY.md">安全说明</a>
   ·
   <a href="reports/project-audit.md">审查报告</a>
+  ·
+  <a href="docs/index.html">Pages 页面源码</a>
 </p>
 
 ## 快速开始
@@ -202,6 +204,7 @@ reports/                  审查记录和发布前检查
 - Issue / PR 模板：`.github/`
 - 发布检查清单：`reports/github-launch-checklist.md`
 - HyperFrames 时间流短片源码：`hyperframes/media-automation-lark-timeline/`
+- GitHub Pages SEO/GEO 源码：`docs/`（启用 Pages 后提供中英文入口）
 - 中文 README 动图预览：`assets/media-automation-lark-demo.gif`
 - 英文 README 动图预览：`assets/media-automation-lark-demo.en.gif`
 - 静态流程图：`media-automation-skill-workflow.png`
@@ -211,9 +214,10 @@ reports/                  审查记录和发布前检查
 
 ## 状态
 
-当前公开版本：[`v0.3.1`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.1)。
+当前公开版本：[`v0.3.2`](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.2)。
 
-- `v0.3.1` 已发布；Skill 安装包和 SHA-256 校验文件见 [GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.1)。
+- `v0.3.2` 已发布；Skill 安装包和 SHA-256 校验文件见 [GitHub Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.2)。
+- GitHub 自动生成的源码 ZIP 不是 Skill 安装包；正式安装资产以对应 Release 中的版本化 ZIP 和 `.zip.sha256` 为准。
 - 验证：`python -m pytest tests`。
 - 动画：中英文 README 分别使用 960×540、5 fps、36 秒的轻量 GIF 预览；配乐版 MP4 属于宣传素材，不是 Skill 安装资产。
 - 源码：HyperFrames 时间流短片保留在 `hyperframes/media-automation-lark-timeline/`。

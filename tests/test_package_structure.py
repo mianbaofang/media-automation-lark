@@ -49,6 +49,7 @@ def test_package_declares_reproducible_trigger_evidence():
     assert "reports" not in manifest["factory_components"]
     assert "source-repo/evals" in manifest["evidence_components"]
     assert "source-repo/reports/skill-evidence" in manifest["evidence_components"]
+    assert set(manifest["target_platforms"]) == {"openai", "agent-skills", "generic"}
     assert "evals" in manifest["archive_excludes"]
     assert "audit reports" in manifest["archive_excludes"]
     assert "output eval fixtures" in manifest["archive_excludes"]
@@ -63,9 +64,39 @@ def test_package_declares_reproducible_trigger_evidence():
 
 def test_public_yao_reports_do_not_expose_machine_paths():
     reports = REPORTS
+    required = {
+        "compiled_targets.json",
+        "compiled_targets.md",
+        "conformance_matrix.json",
+        "conformance_matrix.md",
+        "governance_report.json",
+        "security_trust_report.json",
+        "security_trust_report.md",
+        "skill-ir.json",
+    }
+    assert required <= {path.name for path in reports.iterdir() if path.is_file()}
     for path in reports.iterdir():
         if path.is_file():
             assert not PRIVATE_PATH.search(path.read_text(encoding="utf-8")), path
+
+    conformance = json.loads((reports / "conformance_matrix.json").read_text(encoding="utf-8"))
+    assert conformance["ok"] is True
+    assert conformance["summary"] == {"target_count": 3, "pass_count": 3, "fail_count": 0}
+    assert conformance["evidence_mode"] == "temporary-staging"
+
+    compiled = json.loads((reports / "compiled_targets.json").read_text(encoding="utf-8"))
+    assert compiled["ok"] is True
+    assert compiled["summary"]["target_count"] == 3
+    assert compiled["summary"]["block_count"] == 0
+    assert compiled["evidence_mode"] == "temporary-staging"
+
+    skill_ir = json.loads((reports / "skill-ir.json").read_text(encoding="utf-8"))
+    ir_paths = [
+        *skill_ir["source_files"],
+        *(path for values in skill_ir["resources"].values() for path in values),
+        *(path for key, values in skill_ir["eval_plan"].items() if key != "baseline" for path in values),
+    ]
+    assert all("\\" not in path for path in ir_paths)
 
 
 def test_private_path_detection_handles_json_escaped_windows_paths():

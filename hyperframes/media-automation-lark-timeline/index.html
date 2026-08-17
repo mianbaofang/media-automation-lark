@@ -708,6 +708,19 @@
         });
       }
 
+      if (document.documentElement.lang === "zh-CN") {
+        const metaLabels = ["时间成本", "单次运行", "使用场景", "搜索采集", "素材管理", "数据看板", "控制", "团队闭环"];
+        const railLabels = ["开始", "检查", "用途", "搜索", "素材", "指标", "控制", "团队"];
+        document.querySelectorAll(".meta strong").forEach((node, index) => {
+          node.textContent = metaLabels[index] || node.textContent;
+        });
+        document.querySelectorAll(".rail").forEach((rail) => {
+          rail.querySelectorAll(".step").forEach((node, index) => {
+            node.textContent = railLabels[index] || node.textContent;
+          });
+        });
+      }
+
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       const sceneIds = ["#s1", "#s2", "#s3", "#s4", "#s5", "#s6", "#s7", "#s8"];

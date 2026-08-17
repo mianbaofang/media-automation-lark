@@ -1,20 +1,20 @@
-# Release: v0.3.1 - Media Automation Lark
+# Release: v0.3.2 - Media Automation Lark
 
-Media Automation Lark v0.3.1 packages the local content-automation workflow as a standard, installable Agent Skill while keeping the repository itself as the source project. The repository's canonical Skill entrypoint is `skills/media-automation-lark/SKILL.md`; the versioned ZIP contains a relocated install entrypoint at `media-automation-lark/SKILL.md`.
+Media Automation Lark v0.3.2 keeps the installable Agent Skill runtime separate from repository-only evaluation and governance evidence. The repository's canonical Skill entrypoint is `skills/media-automation-lark/SKILL.md`; the versioned ZIP contains a relocated install entrypoint at `media-automation-lark/SKILL.md`.
 
 ## Highlights
 
-- Added the canonical Skill package at `skills/media-automation-lark/`.
-- Removed the duplicate repository-root Skill entry so automatic discovery sees one installable package.
-- Added a deterministic package builder at `tools/package_skill.py`.
-- The versioned install asset is `media-automation-lark-skill-v0.3.1.zip`.
+- Added explicit `Do not use` boundaries for unrelated writing tasks, access-control bypasses, and unconfirmed Feishu/Lark writes.
+- Added portable Skill IR, compiler targets, and conformance evidence without placing evaluation fixtures or generated reports in the install package.
+- Kept GitHub CLI installation and the versioned archive aligned on the same runtime-only file set.
+- The versioned install asset is `media-automation-lark-skill-v0.3.2.zip`.
 - Its matching SHA-256 file is published with the release asset.
 - Added package-structure tests and a clean runtime-file boundary that excludes README media, screenshots, source animation files, MP4 files, and audit reports.
 - Aligned the Chinese and English README launch surfaces. Both preview GIFs are 960x540, 5 fps, and 36 seconds.
 
 ## Install
 
-Download the versioned Skill ZIP and its checksum from the [v0.3.1 Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.1). GitHub's automatic source archive is the repository source tree and is not the supported Skill install asset.
+Download the versioned Skill ZIP and its checksum from the [v0.3.2 Release](https://github.com/mianbaofang/media-automation-lark/releases/tag/v0.3.2). GitHub's automatic source archive is the repository source tree and is not the supported Skill install asset.
 
 After downloading, verify the checksum and extract the archive. The archive has one top-level directory:
 
@@ -76,7 +76,7 @@ The install ZIP and checksum are functional release assets. The README GIFs, scr
 
 ## Upgrade
 
-This package follows the existing `media-automation-lark` Skill name. Replace an older installed package with the contents of the v0.3.1 ZIP, then run the environment check and the offline demo before enabling network or Feishu/Lark writes.
+This package follows the existing `media-automation-lark` Skill name. Replace an older installed package with the contents of the v0.3.2 ZIP, then run the environment check and the offline demo before enabling network or Feishu/Lark writes.
 
 ## Links
 

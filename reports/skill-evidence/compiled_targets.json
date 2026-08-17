@@ -1,0 +1,1663 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-08-17",
+  "skill_dir": "skills/media-automation-lark",
+  "summary": {
+    "target_count": 3,
+    "pass_count": 3,
+    "warn_count": 0,
+    "block_count": 0,
+    "failure_count": 0,
+    "warning_count": 0
+  },
+  "targets": [
+    {
+      "schema_version": "1.0",
+      "target": "openai",
+      "status": "pass",
+      "compiler": {
+        "name": "yao-skill-ir-compiler",
+        "schema_version": "1.0",
+        "source": "skill-ir",
+        "ir_source": "reports\\skill-ir.json",
+        "ir_schema_version": "2.0.0"
+      },
+      "source": {
+        "skill_dir": "skills/media-automation-lark",
+        "canonical_metadata": "agents/interface.yaml",
+        "declared_targets": [
+          "openai",
+          "agent-skills",
+          "generic"
+        ]
+      },
+      "compiled_contract": {
+        "name": "media-automation-lark",
+        "title": "自媒体自动化（飞书 CLI）",
+        "version": "0.3.2",
+        "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+        "job_to_be_done": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+        "trigger": {
+          "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+          "should_trigger": [
+            "把 RSS 和公开网页采集整理成 Markdown，并按分类归档到飞书多维表格。",
+            "打开本地控制面板，检查环境并准备 lark-cli 的本地预览。",
+            "按选题搜索采集文章，生成数据看板并保存到云文档。",
+            "整理图片、PDF 和 RSS 内容到 Markdown，再按素材管理流程归档到飞书。",
+            "Set up Feishu content automation: collect RSS feeds and public web pages, create a Markdown preview, and archive approved items to Bitable.",
+            "Build a Lark content workflow for a creator team: gather articles, categorize them, and save the reviewed output to Lark Docs.",
+            "Create an RSS to Feishu flow that archives new feed items to a Bitable after a local dry run."
+          ],
+          "should_not_trigger": [
+            "只解释 RSS 是什么，不运行任何自动化流程。",
+            "把这段内容翻译成英文，不需要飞书或脚本。",
+            "只写一篇关于数据看板的说明，不执行任何采集。",
+            "Explain what RSS to Feishu means; do not run a collector or write anything.",
+            "Translate the phrase Feishu content automation into Chinese; do not use Feishu or any scripts.",
+            "Write a short definition of Lark content workflow for a glossary; no implementation."
+          ],
+          "edge_cases": [
+            "帮我解释飞书多维表格字段设计，但不做内容归档。",
+            "仅给出本地控制面板的界面建议，不启动脚本。",
+            "概述搜索采集的概念，不生成 Markdown 或调用后端。",
+            "Design a Lark content workflow architecture on paper; do not start the panel or collect data.",
+            "Compare Feishu Bitable and Lark Docs for manual editorial planning; no RSS to Feishu automation.",
+            "Suggest search keywords for RSS to Feishu tools without running a collection."
+          ]
+        },
+        "workflow": {
+          "steps": [
+            "Understand the request.",
+            "Execute the main task.",
+            "Validate the result."
+          ],
+          "decision_points": [],
+          "failure_modes": []
+        },
+        "resources": {
+          "references": [
+            "references/api-integration.md",
+            "references/lark-cli-setup.md",
+            "references/llm-prompt-templates.md",
+            "references/renhua-style.md",
+            "references/search-backends.md",
+            "references/workflow.md"
+          ],
+          "scripts": [
+            "scripts/collector.py",
+            "scripts/common.py",
+            "scripts/content-archiver.py",
+            "scripts/data-collector.py",
+            "scripts/env-check.py",
+            "scripts/file2md.py",
+            "scripts/gui-panel.py",
+            "scripts/install_backends.py",
+            "scripts/material-manager.py",
+            "scripts/panel-agent.py",
+            "scripts/platforms_fetcher.py",
+            "scripts/search_backends.py"
+          ],
+          "assets": [
+            "assets/cron-examples/crontab.txt",
+            "assets/cron-examples/systemd-timer.md",
+            "assets/cron-examples/windows-task-scheduler.md"
+          ],
+          "reports": [],
+          "counts": {
+            "references": 6,
+            "scripts": 12,
+            "assets": 3,
+            "reports": 0
+          }
+        },
+        "eval_plan": {
+          "trigger": [
+            "evals/output/cases.jsonl",
+            "evals/output/fixtures/metrics.json",
+            "evals/output/fixtures/search_config.json",
+            "evals/output/schema.json",
+            "evals/semantic_config.json",
+            "evals/trigger_cases.json"
+          ],
+          "output": [
+            "evals/output/cases.jsonl",
+            "evals/output/fixtures/metrics.json",
+            "evals/output/fixtures/search_config.json",
+            "evals/output/schema.json"
+          ],
+          "adversarial": [],
+          "baseline": "without_skill",
+          "counts": {
+            "trigger": 6,
+            "output": 4,
+            "adversarial": 0,
+            "baseline": 1
+          }
+        },
+        "risk": {
+          "output_risk": "low",
+          "execution_risk": "medium",
+          "trust_boundary": "team"
+        },
+        "governance": {
+          "owner": "mianbaofang",
+          "maturity": "production",
+          "review_cadence": "per-release",
+          "review_due": ""
+        },
+        "runtime": {
+          "activation": {
+            "mode": "manual",
+            "paths": []
+          },
+          "execution": {
+            "context": "inline",
+            "shell": "powershell"
+          },
+          "trust": {
+            "source_tier": "local",
+            "remote_inline_execution": "forbid",
+            "remote_metadata_policy": "allow-metadata-only"
+          },
+          "adapter_targets": [
+            "openai",
+            "generic"
+          ],
+          "canonical_format": "agent-skills"
+        },
+        "permissions": {
+          "schema_version": "1.0",
+          "source": "reports\\security_trust_report.json",
+          "source_available": true,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "review_required": true,
+          "capabilities": {
+            "network": {
+              "required": true,
+              "script_count": 4,
+              "scripts": [
+                "scripts\\common.py",
+                "scripts\\content-archiver.py",
+                "scripts\\platforms_fetcher.py",
+                "scripts\\search_backends.py"
+              ],
+              "review_reason": "Outbound hosts must match security/network_policy.json."
+            },
+            "file_write": {
+              "required": true,
+              "script_count": 10,
+              "scripts": [
+                "scripts\\collector.py",
+                "scripts\\common.py",
+                "scripts\\content-archiver.py",
+                "scripts\\data-collector.py",
+                "scripts\\env-check.py",
+                "scripts\\file2md.py",
+                "scripts\\gui-panel.py",
+                "scripts\\install_backends.py",
+                "scripts\\material-manager.py",
+                "scripts\\panel-agent.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
+            },
+            "subprocess": {
+              "required": true,
+              "script_count": 6,
+              "scripts": [
+                "scripts\\common.py",
+                "scripts\\env-check.py",
+                "scripts\\gui-panel.py",
+                "scripts\\install_backends.py",
+                "scripts\\panel-agent.py",
+                "scripts\\search_backends.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
+            },
+            "interactive": {
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts\\install_backends.py"
+              ],
+              "review_reason": "Scripts prompt for user input or credentials."
+            }
+          },
+          "network_policy": {
+            "source": "security/network_policy.json",
+            "covered_scripts": [
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\platforms_fetcher.py",
+              "scripts\\search_backends.py"
+            ],
+            "missing_scripts": [],
+            "mismatches": []
+          },
+          "help_smoke": {
+            "enabled": true,
+            "checked_count": 9,
+            "failed_count": 0,
+            "failed_scripts": []
+          },
+          "trust_summary": {
+            "secret_findings": 0,
+            "network_script_count": 4,
+            "file_write_script_count": 10,
+            "subprocess_script_count": 6,
+            "interactive_script_count": 1,
+            "help_smoke_failed_count": 0
+          }
+        },
+        "source_files_count": 3,
+        "target": "openai",
+        "target_permission_contract": {
+          "schema_version": "1.0",
+          "target": "openai",
+          "permission_model": "metadata-only",
+          "native_enforcement": false,
+          "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
+          "review_required": true,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "capability_counts": {
+            "network": 4,
+            "file_write": 10,
+            "subprocess": 6,
+            "interactive": 1
+          },
+          "evidence": "reports\\security_trust_report.json",
+          "operator_note": "OpenAI target carries permission metadata for reviewer visibility; host enforcement remains outside the package."
+        },
+        "target_native_contract": {
+          "schema_version": "1.0",
+          "target": "openai",
+          "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
+          "activation": {
+            "policy": "Use frontmatter description for catalog routing and targets/openai/agents/openai.yaml for display name, default prompt, and compatibility metadata.",
+            "trigger_description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+            "manual_activation_supported": true,
+            "automatic_activation_note": "Depends on the target client route/catalog implementation."
+          },
+          "resources": {
+            "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
+            "counts": {
+              "references": 6,
+              "scripts": 12,
+              "assets": 3,
+              "reports": 0
+            },
+            "generated_files": [
+              "targets/openai/adapter.json",
+              "targets/openai/agents/openai.yaml"
+            ]
+          },
+          "scripts": {
+            "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
+            "script_count": 12,
+            "help_smoke_failed_count": 0
+          },
+          "permissions": {
+            "enforcement": "metadata-only",
+            "native_enforcement": false,
+            "declared_capabilities": [
+              "network",
+              "file_write",
+              "subprocess",
+              "interactive"
+            ],
+            "review_required": true
+          },
+          "review": {
+            "artifacts": [
+              "targets/openai/agents/openai.yaml",
+              "targets/openai/adapter.json",
+              "reports/review-studio.html"
+            ],
+            "fallback_behavior": "If OpenAI-native metadata is ignored, the package remains readable as neutral Agent Skills source.",
+            "unsupported_native_features": [
+              "client-native permission prompts",
+              "provider-executed scripts",
+              "client-native script permission prompts are represented as permission contract metadata"
+            ]
+          },
+          "install_scope": "plugin or skill package consumer"
+        },
+        "degradation_strategy": "metadata-adapter",
+        "target_runtime": {
+          "adapter_mode": "metadata-adapter",
+          "generated_files": [
+            "targets/openai/adapter.json",
+            "targets/openai/agents/openai.yaml"
+          ],
+          "metadata_mapping": {
+            "display_name": "targets/openai/agents/openai.yaml::interface.display_name",
+            "default_prompt": "targets/openai/agents/openai.yaml::interface.default_prompt",
+            "activation": "targets/openai/agents/openai.yaml::compatibility.activation_mode",
+            "execution": "targets/openai/agents/openai.yaml::compatibility.execution_context",
+            "trust": "targets/openai/agents/openai.yaml::compatibility.trust_level",
+            "permissions": "targets/openai/agents/openai.yaml::compatibility.permission_contract",
+            "degradation": "targets/openai/agents/openai.yaml::compatibility.degradation_strategy"
+          },
+          "preserved_semantics": [
+            "trigger",
+            "workflow-counts",
+            "resources",
+            "eval-plan",
+            "risk",
+            "governance",
+            "runtime",
+            "trust",
+            "permissions"
+          ],
+          "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source"
+        }
+      },
+      "permission_contract": {
+        "schema_version": "1.0",
+        "source": "reports\\security_trust_report.json",
+        "source_available": true,
+        "declared_capabilities": [
+          "network",
+          "file_write",
+          "subprocess",
+          "interactive"
+        ],
+        "review_required": true,
+        "capabilities": {
+          "network": {
+            "required": true,
+            "script_count": 4,
+            "scripts": [
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\platforms_fetcher.py",
+              "scripts\\search_backends.py"
+            ],
+            "review_reason": "Outbound hosts must match security/network_policy.json."
+          },
+          "file_write": {
+            "required": true,
+            "script_count": 10,
+            "scripts": [
+              "scripts\\collector.py",
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\data-collector.py",
+              "scripts\\env-check.py",
+              "scripts\\file2md.py",
+              "scripts\\gui-panel.py",
+              "scripts\\install_backends.py",
+              "scripts\\material-manager.py",
+              "scripts\\panel-agent.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
+          },
+          "subprocess": {
+            "required": true,
+            "script_count": 6,
+            "scripts": [
+              "scripts\\common.py",
+              "scripts\\env-check.py",
+              "scripts\\gui-panel.py",
+              "scripts\\install_backends.py",
+              "scripts\\panel-agent.py",
+              "scripts\\search_backends.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
+          },
+          "interactive": {
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts\\install_backends.py"
+            ],
+            "review_reason": "Scripts prompt for user input or credentials."
+          }
+        },
+        "network_policy": {
+          "source": "security/network_policy.json",
+          "covered_scripts": [
+            "scripts\\common.py",
+            "scripts\\content-archiver.py",
+            "scripts\\platforms_fetcher.py",
+            "scripts\\search_backends.py"
+          ],
+          "missing_scripts": [],
+          "mismatches": []
+        },
+        "help_smoke": {
+          "enabled": true,
+          "checked_count": 9,
+          "failed_count": 0,
+          "failed_scripts": []
+        },
+        "trust_summary": {
+          "secret_findings": 0,
+          "network_script_count": 4,
+          "file_write_script_count": 10,
+          "subprocess_script_count": 6,
+          "interactive_script_count": 1,
+          "help_smoke_failed_count": 0
+        }
+      },
+      "target_permission_contract": {
+        "schema_version": "1.0",
+        "target": "openai",
+        "permission_model": "metadata-only",
+        "native_enforcement": false,
+        "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
+        "review_required": true,
+        "declared_capabilities": [
+          "network",
+          "file_write",
+          "subprocess",
+          "interactive"
+        ],
+        "capability_counts": {
+          "network": 4,
+          "file_write": 10,
+          "subprocess": 6,
+          "interactive": 1
+        },
+        "evidence": "reports\\security_trust_report.json",
+        "operator_note": "OpenAI target carries permission metadata for reviewer visibility; host enforcement remains outside the package."
+      },
+      "target_native_contract": {
+        "schema_version": "1.0",
+        "target": "openai",
+        "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
+        "activation": {
+          "policy": "Use frontmatter description for catalog routing and targets/openai/agents/openai.yaml for display name, default prompt, and compatibility metadata.",
+          "trigger_description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+          "manual_activation_supported": true,
+          "automatic_activation_note": "Depends on the target client route/catalog implementation."
+        },
+        "resources": {
+          "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
+          "counts": {
+            "references": 6,
+            "scripts": 12,
+            "assets": 3,
+            "reports": 0
+          },
+          "generated_files": [
+            "targets/openai/adapter.json",
+            "targets/openai/agents/openai.yaml"
+          ]
+        },
+        "scripts": {
+          "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
+          "script_count": 12,
+          "help_smoke_failed_count": 0
+        },
+        "permissions": {
+          "enforcement": "metadata-only",
+          "native_enforcement": false,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "review_required": true
+        },
+        "review": {
+          "artifacts": [
+            "targets/openai/agents/openai.yaml",
+            "targets/openai/adapter.json",
+            "reports/review-studio.html"
+          ],
+          "fallback_behavior": "If OpenAI-native metadata is ignored, the package remains readable as neutral Agent Skills source.",
+          "unsupported_native_features": [
+            "client-native permission prompts",
+            "provider-executed scripts",
+            "client-native script permission prompts are represented as permission contract metadata"
+          ]
+        },
+        "install_scope": "plugin or skill package consumer"
+      },
+      "target_transform": {
+        "target": "openai",
+        "adapter_mode": "metadata-adapter",
+        "generated_files": [
+          "targets/openai/adapter.json",
+          "targets/openai/agents/openai.yaml"
+        ],
+        "metadata_mapping": {
+          "display_name": "targets/openai/agents/openai.yaml::interface.display_name",
+          "default_prompt": "targets/openai/agents/openai.yaml::interface.default_prompt",
+          "activation": "targets/openai/agents/openai.yaml::compatibility.activation_mode",
+          "execution": "targets/openai/agents/openai.yaml::compatibility.execution_context",
+          "trust": "targets/openai/agents/openai.yaml::compatibility.trust_level",
+          "permissions": "targets/openai/agents/openai.yaml::compatibility.permission_contract",
+          "degradation": "targets/openai/agents/openai.yaml::compatibility.degradation_strategy"
+        },
+        "preserved_semantics": [
+          "trigger",
+          "workflow-counts",
+          "resources",
+          "eval-plan",
+          "risk",
+          "governance",
+          "runtime",
+          "trust",
+          "permissions"
+        ],
+        "degradation_strategy": "metadata-adapter",
+        "permission_representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
+        "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
+        "activation_policy": "Use frontmatter description for catalog routing and targets/openai/agents/openai.yaml for display name, default prompt, and compatibility metadata.",
+        "resource_strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
+        "script_strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
+        "permission_enforcement": "metadata-only"
+      },
+      "unsupported_features": [
+        "client-native script permission prompts are represented as permission contract metadata"
+      ],
+      "warnings": [],
+      "failures": []
+    },
+    {
+      "schema_version": "1.0",
+      "target": "agent-skills",
+      "status": "pass",
+      "compiler": {
+        "name": "yao-skill-ir-compiler",
+        "schema_version": "1.0",
+        "source": "skill-ir",
+        "ir_source": "reports\\skill-ir.json",
+        "ir_schema_version": "2.0.0"
+      },
+      "source": {
+        "skill_dir": "skills/media-automation-lark",
+        "canonical_metadata": "agents/interface.yaml",
+        "declared_targets": [
+          "openai",
+          "agent-skills",
+          "generic"
+        ]
+      },
+      "compiled_contract": {
+        "name": "media-automation-lark",
+        "title": "自媒体自动化（飞书 CLI）",
+        "version": "0.3.2",
+        "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+        "job_to_be_done": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+        "trigger": {
+          "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+          "should_trigger": [
+            "把 RSS 和公开网页采集整理成 Markdown，并按分类归档到飞书多维表格。",
+            "打开本地控制面板，检查环境并准备 lark-cli 的本地预览。",
+            "按选题搜索采集文章，生成数据看板并保存到云文档。",
+            "整理图片、PDF 和 RSS 内容到 Markdown，再按素材管理流程归档到飞书。",
+            "Set up Feishu content automation: collect RSS feeds and public web pages, create a Markdown preview, and archive approved items to Bitable.",
+            "Build a Lark content workflow for a creator team: gather articles, categorize them, and save the reviewed output to Lark Docs.",
+            "Create an RSS to Feishu flow that archives new feed items to a Bitable after a local dry run."
+          ],
+          "should_not_trigger": [
+            "只解释 RSS 是什么，不运行任何自动化流程。",
+            "把这段内容翻译成英文，不需要飞书或脚本。",
+            "只写一篇关于数据看板的说明，不执行任何采集。",
+            "Explain what RSS to Feishu means; do not run a collector or write anything.",
+            "Translate the phrase Feishu content automation into Chinese; do not use Feishu or any scripts.",
+            "Write a short definition of Lark content workflow for a glossary; no implementation."
+          ],
+          "edge_cases": [
+            "帮我解释飞书多维表格字段设计，但不做内容归档。",
+            "仅给出本地控制面板的界面建议，不启动脚本。",
+            "概述搜索采集的概念，不生成 Markdown 或调用后端。",
+            "Design a Lark content workflow architecture on paper; do not start the panel or collect data.",
+            "Compare Feishu Bitable and Lark Docs for manual editorial planning; no RSS to Feishu automation.",
+            "Suggest search keywords for RSS to Feishu tools without running a collection."
+          ]
+        },
+        "workflow": {
+          "steps": [
+            "Understand the request.",
+            "Execute the main task.",
+            "Validate the result."
+          ],
+          "decision_points": [],
+          "failure_modes": []
+        },
+        "resources": {
+          "references": [
+            "references/api-integration.md",
+            "references/lark-cli-setup.md",
+            "references/llm-prompt-templates.md",
+            "references/renhua-style.md",
+            "references/search-backends.md",
+            "references/workflow.md"
+          ],
+          "scripts": [
+            "scripts/collector.py",
+            "scripts/common.py",
+            "scripts/content-archiver.py",
+            "scripts/data-collector.py",
+            "scripts/env-check.py",
+            "scripts/file2md.py",
+            "scripts/gui-panel.py",
+            "scripts/install_backends.py",
+            "scripts/material-manager.py",
+            "scripts/panel-agent.py",
+            "scripts/platforms_fetcher.py",
+            "scripts/search_backends.py"
+          ],
+          "assets": [
+            "assets/cron-examples/crontab.txt",
+            "assets/cron-examples/systemd-timer.md",
+            "assets/cron-examples/windows-task-scheduler.md"
+          ],
+          "reports": [],
+          "counts": {
+            "references": 6,
+            "scripts": 12,
+            "assets": 3,
+            "reports": 0
+          }
+        },
+        "eval_plan": {
+          "trigger": [
+            "evals/output/cases.jsonl",
+            "evals/output/fixtures/metrics.json",
+            "evals/output/fixtures/search_config.json",
+            "evals/output/schema.json",
+            "evals/semantic_config.json",
+            "evals/trigger_cases.json"
+          ],
+          "output": [
+            "evals/output/cases.jsonl",
+            "evals/output/fixtures/metrics.json",
+            "evals/output/fixtures/search_config.json",
+            "evals/output/schema.json"
+          ],
+          "adversarial": [],
+          "baseline": "without_skill",
+          "counts": {
+            "trigger": 6,
+            "output": 4,
+            "adversarial": 0,
+            "baseline": 1
+          }
+        },
+        "risk": {
+          "output_risk": "low",
+          "execution_risk": "medium",
+          "trust_boundary": "team"
+        },
+        "governance": {
+          "owner": "mianbaofang",
+          "maturity": "production",
+          "review_cadence": "per-release",
+          "review_due": ""
+        },
+        "runtime": {
+          "activation": {
+            "mode": "manual",
+            "paths": []
+          },
+          "execution": {
+            "context": "inline",
+            "shell": "powershell"
+          },
+          "trust": {
+            "source_tier": "local",
+            "remote_inline_execution": "forbid",
+            "remote_metadata_policy": "allow-metadata-only"
+          },
+          "adapter_targets": [
+            "openai",
+            "generic"
+          ],
+          "canonical_format": "agent-skills"
+        },
+        "permissions": {
+          "schema_version": "1.0",
+          "source": "reports\\security_trust_report.json",
+          "source_available": true,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "review_required": true,
+          "capabilities": {
+            "network": {
+              "required": true,
+              "script_count": 4,
+              "scripts": [
+                "scripts\\common.py",
+                "scripts\\content-archiver.py",
+                "scripts\\platforms_fetcher.py",
+                "scripts\\search_backends.py"
+              ],
+              "review_reason": "Outbound hosts must match security/network_policy.json."
+            },
+            "file_write": {
+              "required": true,
+              "script_count": 10,
+              "scripts": [
+                "scripts\\collector.py",
+                "scripts\\common.py",
+                "scripts\\content-archiver.py",
+                "scripts\\data-collector.py",
+                "scripts\\env-check.py",
+                "scripts\\file2md.py",
+                "scripts\\gui-panel.py",
+                "scripts\\install_backends.py",
+                "scripts\\material-manager.py",
+                "scripts\\panel-agent.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
+            },
+            "subprocess": {
+              "required": true,
+              "script_count": 6,
+              "scripts": [
+                "scripts\\common.py",
+                "scripts\\env-check.py",
+                "scripts\\gui-panel.py",
+                "scripts\\install_backends.py",
+                "scripts\\panel-agent.py",
+                "scripts\\search_backends.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
+            },
+            "interactive": {
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts\\install_backends.py"
+              ],
+              "review_reason": "Scripts prompt for user input or credentials."
+            }
+          },
+          "network_policy": {
+            "source": "security/network_policy.json",
+            "covered_scripts": [
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\platforms_fetcher.py",
+              "scripts\\search_backends.py"
+            ],
+            "missing_scripts": [],
+            "mismatches": []
+          },
+          "help_smoke": {
+            "enabled": true,
+            "checked_count": 9,
+            "failed_count": 0,
+            "failed_scripts": []
+          },
+          "trust_summary": {
+            "secret_findings": 0,
+            "network_script_count": 4,
+            "file_write_script_count": 10,
+            "subprocess_script_count": 6,
+            "interactive_script_count": 1,
+            "help_smoke_failed_count": 0
+          }
+        },
+        "source_files_count": 3,
+        "target": "agent-skills",
+        "target_permission_contract": {
+          "schema_version": "1.0",
+          "target": "agent-skills",
+          "permission_model": "metadata-only",
+          "native_enforcement": false,
+          "representation": "adapter metadata",
+          "review_required": true,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "capability_counts": {
+            "network": 4,
+            "file_write": 10,
+            "subprocess": 6,
+            "interactive": 1
+          },
+          "evidence": "reports\\security_trust_report.json",
+          "operator_note": "Permission semantics are preserved as metadata for reviewer visibility."
+        },
+        "target_native_contract": {
+          "schema_version": "1.0",
+          "target": "agent-skills",
+          "native_surface": "Agent Skills standard source tree",
+          "activation": {
+            "policy": "Use SKILL.md frontmatter name and description for progressive disclosure.",
+            "trigger_description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+            "manual_activation_supported": true,
+            "automatic_activation_note": "Depends on the target client route/catalog implementation."
+          },
+          "resources": {
+            "strategy": "Keep optional directories as relative resources next to SKILL.md.",
+            "counts": {
+              "references": 6,
+              "scripts": 12,
+              "assets": 3,
+              "reports": 0
+            },
+            "generated_files": [
+              "SKILL.md",
+              "agents/interface.yaml"
+            ]
+          },
+          "scripts": {
+            "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
+            "script_count": 12,
+            "help_smoke_failed_count": 0
+          },
+          "permissions": {
+            "enforcement": "consumer-enforced-or-metadata-only",
+            "native_enforcement": false,
+            "declared_capabilities": [
+              "network",
+              "file_write",
+              "subprocess",
+              "interactive"
+            ],
+            "review_required": true
+          },
+          "review": {
+            "artifacts": [
+              "SKILL.md",
+              "agents/interface.yaml",
+              "reports/review-studio.html"
+            ],
+            "fallback_behavior": "The source tree itself is the target artifact.",
+            "unsupported_native_features": []
+          },
+          "install_scope": "Agent Skills source root"
+        },
+        "degradation_strategy": "neutral-source",
+        "target_runtime": {
+          "adapter_mode": "neutral-agent-skills-source",
+          "generated_files": [
+            "SKILL.md",
+            "agents/interface.yaml"
+          ],
+          "metadata_mapping": {
+            "name": "SKILL.md::frontmatter.name",
+            "description": "SKILL.md::frontmatter.description",
+            "interface": "agents/interface.yaml",
+            "manifest": "manifest.json"
+          },
+          "preserved_semantics": [
+            "trigger",
+            "workflow",
+            "resources",
+            "eval-plan",
+            "risk",
+            "governance",
+            "runtime",
+            "trust",
+            "permissions"
+          ],
+          "native_surface": "Agent Skills standard source tree"
+        }
+      },
+      "permission_contract": {
+        "schema_version": "1.0",
+        "source": "reports\\security_trust_report.json",
+        "source_available": true,
+        "declared_capabilities": [
+          "network",
+          "file_write",
+          "subprocess",
+          "interactive"
+        ],
+        "review_required": true,
+        "capabilities": {
+          "network": {
+            "required": true,
+            "script_count": 4,
+            "scripts": [
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\platforms_fetcher.py",
+              "scripts\\search_backends.py"
+            ],
+            "review_reason": "Outbound hosts must match security/network_policy.json."
+          },
+          "file_write": {
+            "required": true,
+            "script_count": 10,
+            "scripts": [
+              "scripts\\collector.py",
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\data-collector.py",
+              "scripts\\env-check.py",
+              "scripts\\file2md.py",
+              "scripts\\gui-panel.py",
+              "scripts\\install_backends.py",
+              "scripts\\material-manager.py",
+              "scripts\\panel-agent.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
+          },
+          "subprocess": {
+            "required": true,
+            "script_count": 6,
+            "scripts": [
+              "scripts\\common.py",
+              "scripts\\env-check.py",
+              "scripts\\gui-panel.py",
+              "scripts\\install_backends.py",
+              "scripts\\panel-agent.py",
+              "scripts\\search_backends.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
+          },
+          "interactive": {
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts\\install_backends.py"
+            ],
+            "review_reason": "Scripts prompt for user input or credentials."
+          }
+        },
+        "network_policy": {
+          "source": "security/network_policy.json",
+          "covered_scripts": [
+            "scripts\\common.py",
+            "scripts\\content-archiver.py",
+            "scripts\\platforms_fetcher.py",
+            "scripts\\search_backends.py"
+          ],
+          "missing_scripts": [],
+          "mismatches": []
+        },
+        "help_smoke": {
+          "enabled": true,
+          "checked_count": 9,
+          "failed_count": 0,
+          "failed_scripts": []
+        },
+        "trust_summary": {
+          "secret_findings": 0,
+          "network_script_count": 4,
+          "file_write_script_count": 10,
+          "subprocess_script_count": 6,
+          "interactive_script_count": 1,
+          "help_smoke_failed_count": 0
+        }
+      },
+      "target_permission_contract": {
+        "schema_version": "1.0",
+        "target": "agent-skills",
+        "permission_model": "metadata-only",
+        "native_enforcement": false,
+        "representation": "adapter metadata",
+        "review_required": true,
+        "declared_capabilities": [
+          "network",
+          "file_write",
+          "subprocess",
+          "interactive"
+        ],
+        "capability_counts": {
+          "network": 4,
+          "file_write": 10,
+          "subprocess": 6,
+          "interactive": 1
+        },
+        "evidence": "reports\\security_trust_report.json",
+        "operator_note": "Permission semantics are preserved as metadata for reviewer visibility."
+      },
+      "target_native_contract": {
+        "schema_version": "1.0",
+        "target": "agent-skills",
+        "native_surface": "Agent Skills standard source tree",
+        "activation": {
+          "policy": "Use SKILL.md frontmatter name and description for progressive disclosure.",
+          "trigger_description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+          "manual_activation_supported": true,
+          "automatic_activation_note": "Depends on the target client route/catalog implementation."
+        },
+        "resources": {
+          "strategy": "Keep optional directories as relative resources next to SKILL.md.",
+          "counts": {
+            "references": 6,
+            "scripts": 12,
+            "assets": 3,
+            "reports": 0
+          },
+          "generated_files": [
+            "SKILL.md",
+            "agents/interface.yaml"
+          ]
+        },
+        "scripts": {
+          "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
+          "script_count": 12,
+          "help_smoke_failed_count": 0
+        },
+        "permissions": {
+          "enforcement": "consumer-enforced-or-metadata-only",
+          "native_enforcement": false,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "review_required": true
+        },
+        "review": {
+          "artifacts": [
+            "SKILL.md",
+            "agents/interface.yaml",
+            "reports/review-studio.html"
+          ],
+          "fallback_behavior": "The source tree itself is the target artifact.",
+          "unsupported_native_features": []
+        },
+        "install_scope": "Agent Skills source root"
+      },
+      "target_transform": {
+        "target": "agent-skills",
+        "adapter_mode": "neutral-agent-skills-source",
+        "generated_files": [
+          "SKILL.md",
+          "agents/interface.yaml"
+        ],
+        "metadata_mapping": {
+          "name": "SKILL.md::frontmatter.name",
+          "description": "SKILL.md::frontmatter.description",
+          "interface": "agents/interface.yaml",
+          "manifest": "manifest.json"
+        },
+        "preserved_semantics": [
+          "trigger",
+          "workflow",
+          "resources",
+          "eval-plan",
+          "risk",
+          "governance",
+          "runtime",
+          "trust",
+          "permissions"
+        ],
+        "degradation_strategy": "neutral-source",
+        "permission_representation": "adapter metadata",
+        "native_surface": "Agent Skills standard source tree",
+        "activation_policy": "Use SKILL.md frontmatter name and description for progressive disclosure.",
+        "resource_strategy": "Keep optional directories as relative resources next to SKILL.md.",
+        "script_strategy": "Scripts remain local optional resources and should advertise --help when executable.",
+        "permission_enforcement": "consumer-enforced-or-metadata-only"
+      },
+      "unsupported_features": [],
+      "warnings": [],
+      "failures": []
+    },
+    {
+      "schema_version": "1.0",
+      "target": "generic",
+      "status": "pass",
+      "compiler": {
+        "name": "yao-skill-ir-compiler",
+        "schema_version": "1.0",
+        "source": "skill-ir",
+        "ir_source": "reports\\skill-ir.json",
+        "ir_schema_version": "2.0.0"
+      },
+      "source": {
+        "skill_dir": "skills/media-automation-lark",
+        "canonical_metadata": "agents/interface.yaml",
+        "declared_targets": [
+          "openai",
+          "agent-skills",
+          "generic"
+        ]
+      },
+      "compiled_contract": {
+        "name": "media-automation-lark",
+        "title": "自媒体自动化（飞书 CLI）",
+        "version": "0.3.2",
+        "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+        "job_to_be_done": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+        "trigger": {
+          "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+          "should_trigger": [
+            "把 RSS 和公开网页采集整理成 Markdown，并按分类归档到飞书多维表格。",
+            "打开本地控制面板，检查环境并准备 lark-cli 的本地预览。",
+            "按选题搜索采集文章，生成数据看板并保存到云文档。",
+            "整理图片、PDF 和 RSS 内容到 Markdown，再按素材管理流程归档到飞书。",
+            "Set up Feishu content automation: collect RSS feeds and public web pages, create a Markdown preview, and archive approved items to Bitable.",
+            "Build a Lark content workflow for a creator team: gather articles, categorize them, and save the reviewed output to Lark Docs.",
+            "Create an RSS to Feishu flow that archives new feed items to a Bitable after a local dry run."
+          ],
+          "should_not_trigger": [
+            "只解释 RSS 是什么，不运行任何自动化流程。",
+            "把这段内容翻译成英文，不需要飞书或脚本。",
+            "只写一篇关于数据看板的说明，不执行任何采集。",
+            "Explain what RSS to Feishu means; do not run a collector or write anything.",
+            "Translate the phrase Feishu content automation into Chinese; do not use Feishu or any scripts.",
+            "Write a short definition of Lark content workflow for a glossary; no implementation."
+          ],
+          "edge_cases": [
+            "帮我解释飞书多维表格字段设计，但不做内容归档。",
+            "仅给出本地控制面板的界面建议，不启动脚本。",
+            "概述搜索采集的概念，不生成 Markdown 或调用后端。",
+            "Design a Lark content workflow architecture on paper; do not start the panel or collect data.",
+            "Compare Feishu Bitable and Lark Docs for manual editorial planning; no RSS to Feishu automation.",
+            "Suggest search keywords for RSS to Feishu tools without running a collection."
+          ]
+        },
+        "workflow": {
+          "steps": [
+            "Understand the request.",
+            "Execute the main task.",
+            "Validate the result."
+          ],
+          "decision_points": [],
+          "failure_modes": []
+        },
+        "resources": {
+          "references": [
+            "references/api-integration.md",
+            "references/lark-cli-setup.md",
+            "references/llm-prompt-templates.md",
+            "references/renhua-style.md",
+            "references/search-backends.md",
+            "references/workflow.md"
+          ],
+          "scripts": [
+            "scripts/collector.py",
+            "scripts/common.py",
+            "scripts/content-archiver.py",
+            "scripts/data-collector.py",
+            "scripts/env-check.py",
+            "scripts/file2md.py",
+            "scripts/gui-panel.py",
+            "scripts/install_backends.py",
+            "scripts/material-manager.py",
+            "scripts/panel-agent.py",
+            "scripts/platforms_fetcher.py",
+            "scripts/search_backends.py"
+          ],
+          "assets": [
+            "assets/cron-examples/crontab.txt",
+            "assets/cron-examples/systemd-timer.md",
+            "assets/cron-examples/windows-task-scheduler.md"
+          ],
+          "reports": [],
+          "counts": {
+            "references": 6,
+            "scripts": 12,
+            "assets": 3,
+            "reports": 0
+          }
+        },
+        "eval_plan": {
+          "trigger": [
+            "evals/output/cases.jsonl",
+            "evals/output/fixtures/metrics.json",
+            "evals/output/fixtures/search_config.json",
+            "evals/output/schema.json",
+            "evals/semantic_config.json",
+            "evals/trigger_cases.json"
+          ],
+          "output": [
+            "evals/output/cases.jsonl",
+            "evals/output/fixtures/metrics.json",
+            "evals/output/fixtures/search_config.json",
+            "evals/output/schema.json"
+          ],
+          "adversarial": [],
+          "baseline": "without_skill",
+          "counts": {
+            "trigger": 6,
+            "output": 4,
+            "adversarial": 0,
+            "baseline": 1
+          }
+        },
+        "risk": {
+          "output_risk": "low",
+          "execution_risk": "medium",
+          "trust_boundary": "team"
+        },
+        "governance": {
+          "owner": "mianbaofang",
+          "maturity": "production",
+          "review_cadence": "per-release",
+          "review_due": ""
+        },
+        "runtime": {
+          "activation": {
+            "mode": "manual",
+            "paths": []
+          },
+          "execution": {
+            "context": "inline",
+            "shell": "powershell"
+          },
+          "trust": {
+            "source_tier": "local",
+            "remote_inline_execution": "forbid",
+            "remote_metadata_policy": "allow-metadata-only"
+          },
+          "adapter_targets": [
+            "openai",
+            "generic"
+          ],
+          "canonical_format": "agent-skills"
+        },
+        "permissions": {
+          "schema_version": "1.0",
+          "source": "reports\\security_trust_report.json",
+          "source_available": true,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "review_required": true,
+          "capabilities": {
+            "network": {
+              "required": true,
+              "script_count": 4,
+              "scripts": [
+                "scripts\\common.py",
+                "scripts\\content-archiver.py",
+                "scripts\\platforms_fetcher.py",
+                "scripts\\search_backends.py"
+              ],
+              "review_reason": "Outbound hosts must match security/network_policy.json."
+            },
+            "file_write": {
+              "required": true,
+              "script_count": 10,
+              "scripts": [
+                "scripts\\collector.py",
+                "scripts\\common.py",
+                "scripts\\content-archiver.py",
+                "scripts\\data-collector.py",
+                "scripts\\env-check.py",
+                "scripts\\file2md.py",
+                "scripts\\gui-panel.py",
+                "scripts\\install_backends.py",
+                "scripts\\material-manager.py",
+                "scripts\\panel-agent.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
+            },
+            "subprocess": {
+              "required": true,
+              "script_count": 6,
+              "scripts": [
+                "scripts\\common.py",
+                "scripts\\env-check.py",
+                "scripts\\gui-panel.py",
+                "scripts\\install_backends.py",
+                "scripts\\panel-agent.py",
+                "scripts\\search_backends.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
+            },
+            "interactive": {
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts\\install_backends.py"
+              ],
+              "review_reason": "Scripts prompt for user input or credentials."
+            }
+          },
+          "network_policy": {
+            "source": "security/network_policy.json",
+            "covered_scripts": [
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\platforms_fetcher.py",
+              "scripts\\search_backends.py"
+            ],
+            "missing_scripts": [],
+            "mismatches": []
+          },
+          "help_smoke": {
+            "enabled": true,
+            "checked_count": 9,
+            "failed_count": 0,
+            "failed_scripts": []
+          },
+          "trust_summary": {
+            "secret_findings": 0,
+            "network_script_count": 4,
+            "file_write_script_count": 10,
+            "subprocess_script_count": 6,
+            "interactive_script_count": 1,
+            "help_smoke_failed_count": 0
+          }
+        },
+        "source_files_count": 3,
+        "target": "generic",
+        "target_permission_contract": {
+          "schema_version": "1.0",
+          "target": "generic",
+          "permission_model": "agent-skills-compatible-metadata",
+          "native_enforcement": false,
+          "representation": "targets/generic/adapter.json::target_permission_contract",
+          "review_required": true,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "capability_counts": {
+            "network": 4,
+            "file_write": 10,
+            "subprocess": 6,
+            "interactive": 1
+          },
+          "evidence": "reports\\security_trust_report.json",
+          "operator_note": "Generic target exposes permission metadata for downstream clients to enforce or review."
+        },
+        "target_native_contract": {
+          "schema_version": "1.0",
+          "target": "generic",
+          "native_surface": "Agent Skills compatible neutral package",
+          "activation": {
+            "policy": "Use SKILL.md name and description; consumers decide automatic or manual activation.",
+            "trigger_description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+            "manual_activation_supported": true,
+            "automatic_activation_note": "Depends on the target client route/catalog implementation."
+          },
+          "resources": {
+            "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
+            "counts": {
+              "references": 6,
+              "scripts": 12,
+              "assets": 3,
+              "reports": 0
+            },
+            "generated_files": [
+              "targets/generic/adapter.json"
+            ]
+          },
+          "scripts": {
+            "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
+            "script_count": 12,
+            "help_smoke_failed_count": 0
+          },
+          "permissions": {
+            "enforcement": "consumer-enforced-or-metadata-only",
+            "native_enforcement": false,
+            "declared_capabilities": [
+              "network",
+              "file_write",
+              "subprocess",
+              "interactive"
+            ],
+            "review_required": true
+          },
+          "review": {
+            "artifacts": [
+              "targets/generic/adapter.json",
+              "reports/review-studio.html"
+            ],
+            "fallback_behavior": "Neutral source is the runtime fallback.",
+            "unsupported_native_features": []
+          },
+          "install_scope": "generic Agent Skills compatible root"
+        },
+        "degradation_strategy": "neutral-source",
+        "target_runtime": {
+          "adapter_mode": "agent-skills-compatible",
+          "generated_files": [
+            "targets/generic/adapter.json"
+          ],
+          "metadata_mapping": {
+            "display_name": "targets/generic/adapter.json::display_name",
+            "default_prompt": "targets/generic/adapter.json::default_prompt",
+            "activation": "targets/generic/adapter.json::activation_mode",
+            "execution": "targets/generic/adapter.json::execution_context",
+            "trust": "targets/generic/adapter.json::trust_level",
+            "permissions": "targets/generic/adapter.json::target_permission_contract",
+            "degradation": "targets/generic/adapter.json::degradation_strategy"
+          },
+          "preserved_semantics": [
+            "trigger",
+            "workflow-counts",
+            "resources",
+            "eval-plan",
+            "risk",
+            "governance",
+            "runtime",
+            "trust",
+            "permissions"
+          ],
+          "native_surface": "Agent Skills compatible neutral package"
+        }
+      },
+      "permission_contract": {
+        "schema_version": "1.0",
+        "source": "reports\\security_trust_report.json",
+        "source_available": true,
+        "declared_capabilities": [
+          "network",
+          "file_write",
+          "subprocess",
+          "interactive"
+        ],
+        "review_required": true,
+        "capabilities": {
+          "network": {
+            "required": true,
+            "script_count": 4,
+            "scripts": [
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\platforms_fetcher.py",
+              "scripts\\search_backends.py"
+            ],
+            "review_reason": "Outbound hosts must match security/network_policy.json."
+          },
+          "file_write": {
+            "required": true,
+            "script_count": 10,
+            "scripts": [
+              "scripts\\collector.py",
+              "scripts\\common.py",
+              "scripts\\content-archiver.py",
+              "scripts\\data-collector.py",
+              "scripts\\env-check.py",
+              "scripts\\file2md.py",
+              "scripts\\gui-panel.py",
+              "scripts\\install_backends.py",
+              "scripts\\material-manager.py",
+              "scripts\\panel-agent.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
+          },
+          "subprocess": {
+            "required": true,
+            "script_count": 6,
+            "scripts": [
+              "scripts\\common.py",
+              "scripts\\env-check.py",
+              "scripts\\gui-panel.py",
+              "scripts\\install_backends.py",
+              "scripts\\panel-agent.py",
+              "scripts\\search_backends.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
+          },
+          "interactive": {
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts\\install_backends.py"
+            ],
+            "review_reason": "Scripts prompt for user input or credentials."
+          }
+        },
+        "network_policy": {
+          "source": "security/network_policy.json",
+          "covered_scripts": [
+            "scripts\\common.py",
+            "scripts\\content-archiver.py",
+            "scripts\\platforms_fetcher.py",
+            "scripts\\search_backends.py"
+          ],
+          "missing_scripts": [],
+          "mismatches": []
+        },
+        "help_smoke": {
+          "enabled": true,
+          "checked_count": 9,
+          "failed_count": 0,
+          "failed_scripts": []
+        },
+        "trust_summary": {
+          "secret_findings": 0,
+          "network_script_count": 4,
+          "file_write_script_count": 10,
+          "subprocess_script_count": 6,
+          "interactive_script_count": 1,
+          "help_smoke_failed_count": 0
+        }
+      },
+      "target_permission_contract": {
+        "schema_version": "1.0",
+        "target": "generic",
+        "permission_model": "agent-skills-compatible-metadata",
+        "native_enforcement": false,
+        "representation": "targets/generic/adapter.json::target_permission_contract",
+        "review_required": true,
+        "declared_capabilities": [
+          "network",
+          "file_write",
+          "subprocess",
+          "interactive"
+        ],
+        "capability_counts": {
+          "network": 4,
+          "file_write": 10,
+          "subprocess": 6,
+          "interactive": 1
+        },
+        "evidence": "reports\\security_trust_report.json",
+        "operator_note": "Generic target exposes permission metadata for downstream clients to enforce or review."
+      },
+      "target_native_contract": {
+        "schema_version": "1.0",
+        "target": "generic",
+        "native_surface": "Agent Skills compatible neutral package",
+        "activation": {
+          "policy": "Use SKILL.md name and description; consumers decide automatic or manual activation.",
+          "trigger_description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+          "manual_activation_supported": true,
+          "automatic_activation_note": "Depends on the target client route/catalog implementation."
+        },
+        "resources": {
+          "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
+          "counts": {
+            "references": 6,
+            "scripts": 12,
+            "assets": 3,
+            "reports": 0
+          },
+          "generated_files": [
+            "targets/generic/adapter.json"
+          ]
+        },
+        "scripts": {
+          "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
+          "script_count": 12,
+          "help_smoke_failed_count": 0
+        },
+        "permissions": {
+          "enforcement": "consumer-enforced-or-metadata-only",
+          "native_enforcement": false,
+          "declared_capabilities": [
+            "network",
+            "file_write",
+            "subprocess",
+            "interactive"
+          ],
+          "review_required": true
+        },
+        "review": {
+          "artifacts": [
+            "targets/generic/adapter.json",
+            "reports/review-studio.html"
+          ],
+          "fallback_behavior": "Neutral source is the runtime fallback.",
+          "unsupported_native_features": []
+        },
+        "install_scope": "generic Agent Skills compatible root"
+      },
+      "target_transform": {
+        "target": "generic",
+        "adapter_mode": "agent-skills-compatible",
+        "generated_files": [
+          "targets/generic/adapter.json"
+        ],
+        "metadata_mapping": {
+          "display_name": "targets/generic/adapter.json::display_name",
+          "default_prompt": "targets/generic/adapter.json::default_prompt",
+          "activation": "targets/generic/adapter.json::activation_mode",
+          "execution": "targets/generic/adapter.json::execution_context",
+          "trust": "targets/generic/adapter.json::trust_level",
+          "permissions": "targets/generic/adapter.json::target_permission_contract",
+          "degradation": "targets/generic/adapter.json::degradation_strategy"
+        },
+        "preserved_semantics": [
+          "trigger",
+          "workflow-counts",
+          "resources",
+          "eval-plan",
+          "risk",
+          "governance",
+          "runtime",
+          "trust",
+          "permissions"
+        ],
+        "degradation_strategy": "neutral-source",
+        "permission_representation": "targets/generic/adapter.json::target_permission_contract",
+        "native_surface": "Agent Skills compatible neutral package",
+        "activation_policy": "Use SKILL.md name and description; consumers decide automatic or manual activation.",
+        "resource_strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
+        "script_strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
+        "permission_enforcement": "consumer-enforced-or-metadata-only"
+      },
+      "unsupported_features": [],
+      "warnings": [],
+      "failures": []
+    }
+  ],
+  "failures": [],
+  "warnings": [],
+  "artifacts": {
+    "json": "reports/skill-evidence/compiled_targets.json",
+    "markdown": "reports/skill-evidence/compiled_targets.md"
+  },
+  "evidence_mode": "temporary-staging",
+  "staging_inputs": {
+    "mode": "temporary-staging",
+    "canonical_skill": "skills/media-automation-lark",
+    "source_evals": "evals",
+    "skill_ir": "reports/skill-evidence/skill-ir.json",
+    "reason": "Yao requires package-relative IR and eval paths; GitHub CLI copies every file inside the selected Skill directory."
+  }
+}

@@ -16,6 +16,7 @@ from pathlib import Path
 
 PACKAGE_NAME = "media-automation-lark"
 PACKAGE_RELATIVE = Path("skills") / PACKAGE_NAME
+REQUIRED_TARGET_PLATFORMS = {"openai", "agent-skills", "generic"}
 REQUIRED_FILES = (
     "SKILL.md",
     "LICENSE",
@@ -247,6 +248,10 @@ def validate(root: Path, skill_root: Path, files: list[tuple[Path, Path]]) -> li
             failures.append("manifest must declare source-repo/evals as evidence")
         if "source-repo/reports/skill-evidence" not in evidence_components:
             failures.append("manifest must declare source-repo/reports/skill-evidence as evidence")
+        target_platforms = {str(value) for value in (manifest.get("target_platforms") or [])}
+        missing_targets = sorted(REQUIRED_TARGET_PLATFORMS - target_platforms)
+        if missing_targets:
+            failures.append(f"manifest target_platforms missing: {', '.join(missing_targets)}")
         if "output eval fixtures" not in (manifest.get("archive_excludes") or []):
             failures.append("manifest must exclude output eval fixtures from the archive")
         package_scope = str(manifest.get("package_scope") or "").casefold()

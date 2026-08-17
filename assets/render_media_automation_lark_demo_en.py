@@ -160,6 +160,21 @@ TRANSLATIONS = {
         "New teammates can take over, old assets keep working, and owners stop waiting for manual cleanup. "
         "The time saved is the product."
     ),
+    "时间成本": "Time Cost",
+    "单次运行": "One Run",
+    "使用场景": "Use Cases",
+    "搜索采集": "Search Collector",
+    "素材管理": "Material Manager",
+    "数据看板": "Metrics Dashboard",
+    "团队闭环": "Team Loop",
+    "开始": "Start",
+    "检查": "Check",
+    "用途": "Uses",
+    "搜索": "Search",
+    "素材": "Assets",
+    "指标": "Signal",
+    "控制": "Control",
+    "团队": "Team",
 }
 
 

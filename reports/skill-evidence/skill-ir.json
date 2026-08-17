@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0.0",
+  "name": "media-automation-lark",
+  "title": "自媒体自动化（飞书 CLI）",
+  "job_to_be_done": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+  "trigger_surface": {
+    "description": "Feishu content automation and Lark content workflows for creators and small teams. Use it for a Lark content workflow or RSS to Feishu archiving when users want to collect RSS/API feeds and public webpages, organize articles and files, build metrics dashboards, preview locally, or optionally write reviewed results to Feishu/Lark Bitable or Docs. 适用于将 RSS/API、公开网页、文章、图片、PDF、Office 文件或平台指标整理成 Markdown、数据看板或飞书多维表格/云文档，也用于按选题采集公开内容、启动本地控制面板、配置 lark-cli 或给生成文字做 renhua 去 AI 味润色。触发词包括“自媒体自动化”“内容归档到飞书”“搜索采集”“素材管理”“数据看板”“打开面板”“用 lark-cli”。",
+    "should_trigger": [
+      "把 RSS 和公开网页采集整理成 Markdown，并按分类归档到飞书多维表格。",
+      "打开本地控制面板，检查环境并准备 lark-cli 的本地预览。",
+      "按选题搜索采集文章，生成数据看板并保存到云文档。",
+      "整理图片、PDF 和 RSS 内容到 Markdown，再按素材管理流程归档到飞书。",
+      "Set up Feishu content automation: collect RSS feeds and public web pages, create a Markdown preview, and archive approved items to Bitable.",
+      "Build a Lark content workflow for a creator team: gather articles, categorize them, and save the reviewed output to Lark Docs.",
+      "Create an RSS to Feishu flow that archives new feed items to a Bitable after a local dry run."
+    ],
+    "should_not_trigger": [
+      "只解释 RSS 是什么，不运行任何自动化流程。",
+      "把这段内容翻译成英文，不需要飞书或脚本。",
+      "只写一篇关于数据看板的说明，不执行任何采集。",
+      "Explain what RSS to Feishu means; do not run a collector or write anything.",
+      "Translate the phrase Feishu content automation into Chinese; do not use Feishu or any scripts.",
+      "Write a short definition of Lark content workflow for a glossary; no implementation."
+    ],
+    "edge_cases": [
+      "帮我解释飞书多维表格字段设计，但不做内容归档。",
+      "仅给出本地控制面板的界面建议，不启动脚本。",
+      "概述搜索采集的概念，不生成 Markdown 或调用后端。",
+      "Design a Lark content workflow architecture on paper; do not start the panel or collect data.",
+      "Compare Feishu Bitable and Lark Docs for manual editorial planning; no RSS to Feishu automation.",
+      "Suggest search keywords for RSS to Feishu tools without running a collection."
+    ]
+  },
+  "workflow": {
+    "steps": [
+      "Understand the request.",
+      "Execute the main task.",
+      "Validate the result."
+    ],
+    "decision_points": [],
+    "failure_modes": []
+  },
+  "resources": {
+    "references": [
+      "references/api-integration.md",
+      "references/lark-cli-setup.md",
+      "references/llm-prompt-templates.md",
+      "references/renhua-style.md",
+      "references/search-backends.md",
+      "references/workflow.md"
+    ],
+    "scripts": [
+      "scripts/collector.py",
+      "scripts/common.py",
+      "scripts/content-archiver.py",
+      "scripts/data-collector.py",
+      "scripts/env-check.py",
+      "scripts/file2md.py",
+      "scripts/gui-panel.py",
+      "scripts/install_backends.py",
+      "scripts/material-manager.py",
+      "scripts/panel-agent.py",
+      "scripts/platforms_fetcher.py",
+      "scripts/search_backends.py"
+    ],
+    "assets": [
+      "assets/cron-examples/crontab.txt",
+      "assets/cron-examples/systemd-timer.md",
+      "assets/cron-examples/windows-task-scheduler.md"
+    ],
+    "reports": []
+  },
+  "eval_plan": {
+    "trigger": [
+      "evals/output/cases.jsonl",
+      "evals/output/fixtures/metrics.json",
+      "evals/output/fixtures/search_config.json",
+      "evals/output/schema.json",
+      "evals/semantic_config.json",
+      "evals/trigger_cases.json"
+    ],
+    "output": [
+      "evals/output/cases.jsonl",
+      "evals/output/fixtures/metrics.json",
+      "evals/output/fixtures/search_config.json",
+      "evals/output/schema.json"
+    ],
+    "adversarial": [],
+    "baseline": "without_skill"
+  },
+  "risk": {
+    "output_risk": "low",
+    "execution_risk": "medium",
+    "trust_boundary": "team"
+  },
+  "governance": {
+    "owner": "mianbaofang",
+    "maturity": "production",
+    "review_cadence": "per-release",
+    "review_due": ""
+  },
+  "targets": [
+    "openai",
+    "agent-skills",
+    "generic"
+  ],
+  "source_files": [
+    "SKILL.md",
+    "manifest.json",
+    "agents/interface.yaml"
+  ]
+}

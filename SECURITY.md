@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The current public release line, `v0.3.x`, receives security fixes while this project is actively maintained. Older `v0.2.x` installations should upgrade to the published `v0.3.0` release when practical.
+The current public release line, `v0.3.x`, receives security fixes while this project is actively maintained. Older `v0.2.x` installations should upgrade to the published `v0.3.1` release when practical.
 
 ## Reporting A Vulnerability
 
